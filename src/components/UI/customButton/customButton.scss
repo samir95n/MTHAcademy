@@ -1,0 +1,26 @@
+.customButton {
+  width: 100%;
+  background: #ff9a03;
+  padding: 7px 16px;
+  border-radius: 5px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  outline: none;
+  border: none;
+  display: block;
+  cursor: pointer;
+  height: 50px;
+  &:hover {
+    background: #f7b552;
+    transition: background 0.2s ease;
+  }
+  &:disabled {
+    background-color: #a6a6a6 !important;
+  }
+}
