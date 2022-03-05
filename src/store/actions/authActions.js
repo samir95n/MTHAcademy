@@ -39,17 +39,6 @@ export function logout() {
   };
 }
 
-export function register(username, email, password) {
-  return (dispatch) => {
-    iaxios
-      .post("/auth/register/", { username, email, password })
-      .then((response) => {
-        const { username, token, id } = response.data;
-        ls.setItems({ username, token, userId: id });
-        dispatch(setAuthParams({ token, username, userId: id }));
-      });
-  };
-}
 
 // get auth data from local storage and set as auth params
 export function checkAuth() {
