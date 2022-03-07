@@ -1,15 +1,15 @@
 .footer {
   background-color: #f2f1d3;
-  padding: 22px 5px;
+  padding: 21px 5px 20px 5px;
   .pagination {
-    max-width: 318px;
+    max-width: 268px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     .paginationItem {
       position: relative;
-      width: 61px;
-      height: 61px;
+      width: 51px;
+      height: 51px;
       border: 6px solid #a6a6a6;
       box-sizing: border-box;
       border-radius: 100%;
@@ -17,7 +17,7 @@
       display: flex;
       justify-content: center;
       span {
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 22px;
@@ -26,12 +26,12 @@
         color: #a6a6a6;
       }
       &:before {
-        content: '';
+        content: "";
         height: 6px;
-        width: 70px;
+        width: 62px;
         position: absolute;
         background: #a6a6a6;
-        left: -150%;
+        left: -162%;
       }
       &:first-child:before {
         display: none;
@@ -43,11 +43,16 @@
         }
 
         &:before {
-          content: '';
+          content: "";
           background: #ff9a03;
         }
-        &.done {
-          background-color: #ff9a03;
+      }
+      &.activeDone {
+        background-color: #ff9a03;
+        border-color: #ff9a03;
+        &:before {
+          content: "";
+          background: #ff9a03;
         }
       }
     }

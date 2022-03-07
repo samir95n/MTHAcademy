@@ -1,13 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import authReducer from './store/reducers/authReducer';
-import examReducer from './store/reducers/examReducer';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import authReducer from "./store/reducers/authReducer";
+import examReducer from "./store/reducers/examReducer";
 
 // combine reducers on one rootReducer
 const rootReducer = combineReducers({
@@ -20,7 +21,7 @@ let store;
 if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
   store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk)),
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk))
   );
 else store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -32,7 +33,7 @@ ReactDOM.render(
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

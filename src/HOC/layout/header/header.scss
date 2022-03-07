@@ -1,6 +1,11 @@
+@import "../../../media.scss";
+
 .header {
   background: #100a30;
-  padding: 12px 50px;
+  padding: 6px 50px;
+  @include media("max", "md") {
+    padding: 6px 10px;
+  }
   .logoBlock {
     width: 80px;
     height: 80px;

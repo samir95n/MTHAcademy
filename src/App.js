@@ -1,15 +1,15 @@
-import { useEffect, useMemo } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useMemo } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 //import classes from './App.module.scss';
 // import Appbar from './components/Navigation/Appbar/Appbar';
 // import Sidebar from './components/Navigation/Sidebar/Sidebar';
 // import Topbar from './components/Navigation/Topbar/Topbar';
 // import Dashboard from './containers/Dashboard/Dashboard';
 // import Detail from './containers/Detail/Detail';
-import Auth from './containers/auth/Auth';
-import Home from './containers/home/Home';
-import { connect } from 'react-redux';
-import { checkAuth } from './store/actions/authActions';
+import Auth from "./containers/auth/Auth";
+import Content from "./containers/Content";
+import { connect } from "react-redux";
+import { checkAuth } from "./store/actions/authActions";
 
 function App(props) {
   useEffect(() => {
@@ -20,7 +20,7 @@ function App(props) {
 
   const routes = useMemo(() => {
     if (props.token || props.token === false) {
-      return <Home />;
+      return <Content />;
     } else {
       return (
         <Routes>
@@ -31,7 +31,7 @@ function App(props) {
     }
   }, [props.token]);
 
-  return <div>{routes}</div>;
+  return routes;
 }
 
 function mapStateToProps(state) {

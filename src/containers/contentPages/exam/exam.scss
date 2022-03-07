@@ -1,0 +1,31 @@
+.examContainer {
+  margin-bottom: 44px;
+  .imageBlock {
+    max-width: 747px;
+    img {
+      width: 100%;
+    }
+  }
+  .utilitiesBlock {
+    .utilitiesBlockItem {
+      margin-bottom: 25px;
+      .flexBlock {
+        display: flex;
+        align-items: center;
+      }
+      .timer {
+        margin-left: 30px;
+      }
+      .utilitiesBlockText {
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #010004;
+        margin: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

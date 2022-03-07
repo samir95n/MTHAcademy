@@ -1,0 +1,45 @@
+.startContainer {
+  margin-bottom: 44px;
+  .startTextBlock {
+    .startTextItem {
+      margin-bottom: 30px;
+      .startTextHead {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 33px;
+        color: #010004;
+        margin: 0;
+        margin-bottom: 8px;
+      }
+      .startTextParagraph {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        color: #010004;
+        margin: 0;
+        margin-bottom: 8px;
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+        span {
+          color: #ff9a03;
+        }
+      }
+    }
+  }
+}
+.rightSide {
+  display: flex;
+  flex-wrap: wrap;
+  .buttonBlock {
+    justify-content: end;
+    align-items: end;
+    display: flex;
+    width: 205px;
+    margin: 0 0 0 auto;
+  }
+}
