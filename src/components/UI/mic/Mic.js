@@ -1,6 +1,6 @@
 import React from "react";
 import "./mic.scss";
-export default function Mic({ time = 0 }) {
+export default function Mic({ time = 1 }) {
   const [timer, setTimer] = React.useState(time);
   const dangerTime = Math.round(time / 2 / 2 / 2);
   React.useEffect(() => {

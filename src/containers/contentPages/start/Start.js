@@ -1,23 +1,25 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import HeaderText from "../../../components/UI/headerText/HeaderText";
-import CustomButton from "../../../components/UI/customButton/CustomButton";
+import React from 'react';
+import { Grid } from '@mui/material';
+import HeaderText from '../../../components/UI/headerText/HeaderText';
+import CustomButton from '../../../components/UI/customButton/CustomButton';
+import { useDispatch } from 'react-redux';
 
-import "./start.scss";
+import './start.scss';
 
 export default function Start() {
-  const startExam = () => {};
+  const startExam = () => {
+    //useDispatch()
+  };
   return (
     <>
-      <HeaderText text={"Part 1"} />
+      <HeaderText text={'Part 1'} />
       <Grid container spacing={0} className="startContainer">
         <Grid item md={9} xs={12}>
           <div className="startTextBlock">
             <div className="startTextItem">
               <h4 className="startTextHead">Questions Overview:</h4>
               <p className="startTextParagraph">
-                In this part of the speaking exam firstly you will be asked to
-                describe a picture;
+                In this part of the speaking exam firstly you will be asked to describe a picture;
               </p>
               <p className="startTextParagraph">
                 Then you will be asked two questions about the picture.
@@ -26,8 +28,7 @@ export default function Start() {
             <div className="startTextItem">
               <h4 className="startTextHead">Time management:</h4>
               <p className="startTextParagraph">
-                You will have <span>one minute</span> for getting acquainted
-                with each question;
+                You will have <span>one minute</span> for getting acquainted with each question;
               </p>
               <p className="startTextParagraph">
                 You will have <span>one minute</span> for each response.
@@ -46,7 +47,7 @@ export default function Start() {
         </Grid>
         <Grid item md={3} xs={12} className="rightSide">
           <div className="buttonBlock">
-            <CustomButton name={"Start exam"} onClick={startExam} />
+            <CustomButton name={'Next'} onClick={startExam} />
           </div>
         </Grid>
       </Grid>
