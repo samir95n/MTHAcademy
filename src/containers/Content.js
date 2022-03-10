@@ -11,7 +11,7 @@ import Exam from "./contentPages/exam/Exam";
 import Finish from "./contentPages/finish/Finish";
 
 export default function Content() {
-  const currrentPage = useSelector((state) => state.exam.currentPage.pageName);
+  const currrentPage = useSelector((state) => state.pagination.currentPage.pageName);
   return (
     <>
       <ContentLayout>

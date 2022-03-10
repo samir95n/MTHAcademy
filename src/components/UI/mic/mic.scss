@@ -6,13 +6,12 @@
   align-items: center;
   justify-content: center;
   .micMask {
-    background-image: url("../../../assets/mic.svg");
+    background-image: url('../../../assets/mic.svg');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-position: center center;
+    border-radius: 100%;
     margin: 0;
     position: relative;
-    width: 35px;
-    height: 35px;
     z-index: 10;
   }
 }
@@ -79,4 +78,4 @@
   }
 }
 
-@include microphone(".micItem");
+@include microphone('.micItem');

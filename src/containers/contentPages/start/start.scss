@@ -1,3 +1,5 @@
+@import "../../../media.scss";
+
 .startContainer {
   margin-bottom: 44px;
   .startTextBlock {
@@ -41,5 +43,8 @@
     display: flex;
     width: 205px;
     margin: 0 0 0 auto;
+    @include media("max", "md") {
+      margin: 0 !important;
+    }
   }
 }

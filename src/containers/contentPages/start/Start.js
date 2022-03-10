@@ -3,12 +3,13 @@ import { Grid } from '@mui/material';
 import HeaderText from '../../../components/UI/headerText/HeaderText';
 import CustomButton from '../../../components/UI/customButton/CustomButton';
 import { useDispatch } from 'react-redux';
-
+import { SET_CANGE_MAIN_PAGE } from '../../../store/actions/actionTypes';
 import './start.scss';
 
 export default function Start() {
+  const dispatch = useDispatch();
   const startExam = () => {
-    //useDispatch()
+    dispatch({ type: SET_CANGE_MAIN_PAGE, payload: 'exam' });
   };
   return (
     <>

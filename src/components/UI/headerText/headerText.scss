@@ -1,5 +1,7 @@
+@import '../../../media.scss';
+
 .containerHeader {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 30px;
@@ -7,4 +9,12 @@
   margin: 0;
   margin-bottom: 20px;
   color: #100a30;
+  @include media('max', 'md') {
+    font-size: 25px;
+    line-height: 35px;
+  }
+  @include media('max', 'sm') {
+    font-size: 20px;
+    line-height: 30px;
+  }
 }

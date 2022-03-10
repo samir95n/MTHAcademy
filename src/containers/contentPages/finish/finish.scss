@@ -1,0 +1,32 @@
+.finishContainer {
+  max-width: 445px;
+  margin: 0 auto;
+  padding: 0 0;
+  .finishBlock {
+    .finishImage {
+      max-width: 257px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      img {
+        width: 100%;
+      }
+    }
+    .finishText {
+      margin-bottom: 20px;
+      p {
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 27px;
+        line-height: 32px;
+        color: #100a30;
+        margin: 0 !important;
+        text-align: center;
+      }
+    }
+    .finishButton {
+      max-width: 205px;
+      margin: 0 auto;
+    }
+  }
+}

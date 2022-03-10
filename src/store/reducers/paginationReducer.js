@@ -1,4 +1,8 @@
-import { SET_CANGE_MAIN_PAGE, SET_CANGE_EXAM_PART } from '../actions/actionTypes';
+import {
+  SET_CANGE_MAIN_PAGE,
+  SET_CANGE_EXAM_PART,
+  SET_CANGE_SUB_PAGE_NUMBER,
+} from '../actions/actionTypes';
 
 const initialState = {
   currentPage: {
@@ -6,21 +10,8 @@ const initialState = {
     subPage: 1,
   },
   subPageNumber: 1,
-  selectedItemType: '',
-  loading: false,
-  totalSize: null,
-  totalSizeLimit: null,
-  folders: [],
-  files: [],
 };
 
-const setPage = (state, action) => {
-  return { ...state, page: state.page++ };
-};
-
-const setLoading = (state, action) => {
-  return { ...state, loading: action.loadingValue };
-};
 const setCangePage = (state, action) => {
   return {
     ...state,
@@ -34,6 +25,11 @@ const setExamPart = (state, action) => {
       pageName: state.currentPage.pageName,
       subPage: state.currentPage.subPage + action.payload,
     },
+  };
+};
+const setSubPage = (state, action) => {
+  return {
+    ...state,
     subPageNumber: state.subPageNumber + action.payload,
   };
 };
@@ -44,6 +40,8 @@ function examReducer(state = initialState, action) {
       return setCangePage(state, action);
     case SET_CANGE_EXAM_PART:
       return setExamPart(state, action);
+    case SET_CANGE_SUB_PAGE_NUMBER:
+      return setSubPage(state, action);
     default:
       return state;
   }
