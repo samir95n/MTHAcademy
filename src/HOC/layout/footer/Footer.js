@@ -13,7 +13,7 @@ export default function Footer() {
           className={`paginationItem ${subPageNumber > index ? 'activeDone' : ''} ${
             subPageNumber == index ? 'active' : ''
           } `}>
-          <span>{subPageNumber > index ? icon : index}</span>
+          {subPageNumber > index ? icon : <span>{index}</span>}
         </div>,
       );
     }
