@@ -38,86 +38,29 @@
     }
   }
 }
-
-@mixin timer($item, $color, $hover: running) {
-  #{$item},
-  #{$item} * {
-    box-sizing: border-box;
-  }
-
-  #{$item} .pie {
-    width: 50%;
-    height: 100%;
-    transform-origin: 100% 50%;
-    position: absolute;
-    background: $color;
-  }
-
-  #{$item} .spinner {
-    border-radius: 100% 0 0 100% / 50% 0 0 50%;
-    z-index: 20;
-    border-right: none;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-play-state: running;
-    animation-name: rota;
-  }
-
-  #{$item}:hover .spinner,
-  #{$item}:hover .filler,
-  #{$item}:hover .mask {
-    animation-play-state: $hover;
-  }
-
-  #{$item} .filler {
-    border-radius: 0 100% 100% 0 / 0 50% 50% 0;
-    left: 50%;
-    opacity: 0;
-    z-index: 10;
-    animation-timing-function: steps(1);
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: reverse;
-    animation-play-state: running;
-    animation-name: opa;
-    border-left: none;
-  }
-
-  #{$item} .mask {
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    background: inherit;
-    opacity: 1;
-    z-index: 30;
-    animation-timing-function: steps(1);
-    animation-delay: 0s;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    animation-play-state: running;
-    animation-name: opa;
-  }
-
-  @keyframes rota {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes opa {
-    0% {
-      opacity: 1;
-    }
-    50%,
-    100% {
-      opacity: 0;
-    }
-  }
+.spinner {
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  z-index: 20;
+  border-right: none;
 }
-
-@include timer(".clockMask", #31ff1f);
+.pie {
+  width: 50%;
+  height: 100%;
+  transform-origin: 100% 50%;
+  position: absolute;
+  background: #31ff1f;
+}
+.filler {
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  left: 50%;
+  opacity: 0;
+  z-index: 10;
+}
+.mask {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: inherit;
+  opacity: 1;
+  z-index: 30;
+}

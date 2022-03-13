@@ -1,14 +1,14 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from "react";
 //import classes from './App.module.scss';
 // import Appbar from './components/Navigation/Appbar/Appbar';
 // import Sidebar from './components/Navigation/Sidebar/Sidebar';
 // import Topbar from './components/Navigation/Topbar/Topbar';
 // import Dashboard from './containers/Dashboard/Dashboard';
 // import Detail from './containers/Detail/Detail';
-import Auth from './containers/auth/Auth';
-import Content from './containers/Content';
-import { connect } from 'react-redux';
-import { checkAuth } from './store/actions/authActions';
+import Auth from "./containers/auth/Auth";
+import Content from "./containers/Content";
+import { connect } from "react-redux";
+import { checkAuth } from "./store/actions/authActions";
 
 function App(props) {
   useEffect(() => {

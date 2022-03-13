@@ -1,30 +1,42 @@
-import { SET_CANGE_MAIN_PAGE, SET_CANGE_EXAM_PART } from '../actions/actionTypes';
+import {
+  ADD_QUESTİON,
+  SET_TIMER,
+  RESET_TIMER,
+  SET_RESET_TIMER,
+} from "../actions/actionTypes";
 
 const initialState = {
-  currentPage: {
-    pageName: 'start',
-    subPage: 1,
+  title: "",
+  image: "",
+  time: null,
+  list: {
+    for: [],
+    against: [],
   },
-  subPageNumber: 1,
-  selectedItemType: '',
-  loading: false,
-  totalSize: null,
-  totalSizeLimit: null,
-  folders: [],
-  files: [],
+  timer: null,
+  resetTimer: false,
 };
 
-const setPage = (state, action) => {
-  return { ...state, page: state.page++ };
+const addQuestion = (state, action) => {
+  return {
+    ...state,
+    title: action.title,
+    time: action.timer,
+    image: action.photo,
+    timer: action.timer,
+  };
 };
 
-const setLoading = (state, action) => {
+const setResetTimer = (state, action) => {
   return { ...state, loading: action.loadingValue };
 };
 const setCangePage = (state, action) => {
   return {
     ...state,
-    currentPage: { subPage: state.currentPage.subPage, pageName: action.payload },
+    currentPage: {
+      subPage: state.currentPage.subPage,
+      pageName: action.payload,
+    },
   };
 };
 const setExamPart = (state, action) => {
@@ -40,10 +52,14 @@ const setExamPart = (state, action) => {
 
 function examReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_CANGE_MAIN_PAGE:
-      return setCangePage(state, action);
-    case SET_CANGE_EXAM_PART:
-      return setExamPart(state, action);
+    case ADD_QUESTİON:
+      return addQuestion(state, action);
+    case SET_TIMER:
+      return { ...state, timer: state.timer - action.payload };
+    case RESET_TIMER:
+      return { ...state, timer: action.payload };
+    case SET_RESET_TIMER:
+      return { ...state, resetTimer: action.payload };
     default:
       return state;
   }

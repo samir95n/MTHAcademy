@@ -1,34 +1,40 @@
 import React from "react";
 import "./clock.scss";
-export default function Clock({ time = 20 }) {
-  const [timer, setTimer] = React.useState(time);
-  const dangerTime = Math.round(time / 2 / 2 / 2);
-  React.useEffect(() => {
-    if (timer >= 1) {
-      const setTimeOut = setInterval(() => setTimer((prev) => prev - 1), 1000);
-      return () => clearInterval(setTimeOut);
-    }
-  });
-  console.log(timer);
+export default function Clock({ time = 0, timer = 0 }) {
+  const rotateDeg = 360 / time;
+
   return (
     <div className="clockItem">
       <div className="clockMask">
         <div
           className="pie spinner"
           style={{
-            animationDuration: `${time}s`,
-            backgroundColor: dangerTime >= timer ? "red" : "",
+            transform: `rotate(-${rotateDeg * timer}deg)`,
+            backgroundColor: `${rotateDeg * timer < 45 ? "red" : ""}`,
           }}
         ></div>
         <div
           className="pie filler"
           style={{
-            animationDuration: `${time}s`,
-            backgroundColor: dangerTime >= timer ? "red" : "",
+            opacity: `${rotateDeg * timer < 180 ? "1" : "0"}`,
+            backgroundColor: `${rotateDeg * timer < 45 ? "red" : ""}`,
           }}
         ></div>
-        <div className="mask" style={{ animationDuration: `${time}s` }}></div>
+        <div
+          className="mask"
+          style={
+            time && {
+              opacity: `${rotateDeg * timer > 180 ? "1" : "0"}`,
+              // backgroundColor: dangerTime
+              //   ? dangerTime >= timer
+              //     ? "red"
+              //     : ""
+              //   : "",
+            }
+          }
+        ></div>
       </div>
+
       <div className="clock"></div>
     </div>
   );

@@ -1,21 +1,24 @@
 import {
   SET_CANGE_MAIN_PAGE,
   SET_CANGE_EXAM_PART,
-  SET_CANGE_SUB_PAGE_NUMBER,
-} from '../actions/actionTypes';
+  SET_CANGE_CURRENT_PART,
+} from "../actions/actionTypes";
 
 const initialState = {
   currentPage: {
-    pageName: 'start',
+    pageName: "start",
     subPage: 1,
   },
-  subPageNumber: 1,
+  currentPart: 1,
 };
 
 const setCangePage = (state, action) => {
   return {
     ...state,
-    currentPage: { subPage: state.currentPage.subPage, pageName: action.payload },
+    currentPage: {
+      subPage: state.currentPage.subPage,
+      pageName: action.payload,
+    },
   };
 };
 const setExamPart = (state, action) => {
@@ -27,10 +30,10 @@ const setExamPart = (state, action) => {
     },
   };
 };
-const setSubPage = (state, action) => {
+const setCurrentPart = (state, action) => {
   return {
     ...state,
-    subPageNumber: state.subPageNumber + action.payload,
+    currentPart: state.currentPart + action.payload,
   };
 };
 
@@ -40,8 +43,8 @@ function examReducer(state = initialState, action) {
       return setCangePage(state, action);
     case SET_CANGE_EXAM_PART:
       return setExamPart(state, action);
-    case SET_CANGE_SUB_PAGE_NUMBER:
-      return setSubPage(state, action);
+    case SET_CANGE_CURRENT_PART:
+      return setCurrentPart(state, action);
     default:
       return state;
   }

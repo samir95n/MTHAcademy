@@ -1,7 +1,7 @@
 import { LocalStorageAuthUtil } from "./utils";
 import iaxios from "./../../iaxios";
 
-import { SET_TOKEN } from "./actionTypes";
+import { SET_TOKEN, ADD_QUESTİON } from "./actionTypes";
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -21,12 +21,15 @@ function setAuthParams(authData) {
   };
 }
 
-export function login(input, password) {
+export function getQuestion(id) {
   return (dispatch) => {
-    iaxios.post("/users/", { input, password }).then((response) => {
-      const { username, token, id } = response.data;
-      ls.setItems({ username, token, userId: id });
-      dispatch(setAuthParams({ token, username, userId: id }));
+    iaxios.get(`/examsPart1/${id}`).then((response) => {
+      const data = response.data;
+      //ls.setItems({ username, token, userId: id });
+      dispatch({
+        ...data,
+        type: ADD_QUESTİON,
+      });
     });
   };
 }

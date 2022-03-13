@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
-import { startRecording, saveRecording } from './recorder-controls';
+import { useState, useEffect } from "react";
+import { startRecording, saveRecording } from "./recorder-controls";
 
 const initialState = {
-  recordingMinutes: 0,
-  recordingSeconds: 0,
+  recordingTime: 0,
   initRecording: false,
   mediaStream: null,
   mediaRecorder: null,
@@ -14,38 +13,27 @@ export default function useRecorder() {
   const [recorderState, setRecorderState] = useState(initialState);
 
   useEffect(() => {
-    const MAX_RECORDER_TIME = 5;
+    const MAX_RECORDER_TIME = 600;
     let recordingInterval = null;
 
     if (recorderState.initRecording)
       recordingInterval = setInterval(() => {
         setRecorderState((prevState) => {
-          if (
-            prevState.recordingMinutes === MAX_RECORDER_TIME &&
-            prevState.recordingSeconds === 0
-          ) {
+          if (prevState.recordingTime === MAX_RECORDER_TIME) {
             clearInterval(recordingInterval);
             return prevState;
           }
 
-          if (prevState.recordingSeconds >= 0 && prevState.recordingSeconds < 59)
-            return {
-              ...prevState,
-              recordingSeconds: prevState.recordingSeconds + 1,
-            };
-
-          if (prevState.recordingSeconds === 59)
-            return {
-              ...prevState,
-              recordingMinutes: prevState.recordingMinutes + 1,
-              recordingSeconds: 0,
-            };
+          return {
+            ...prevState,
+            recordingTime: prevState.recordingTime + 1,
+          };
         });
       }, 1000);
     else clearInterval(recordingInterval);
 
     return () => clearInterval(recordingInterval);
-  });
+  }, [recorderState]);
 
   useEffect(() => {
     if (recorderState.mediaStream)
@@ -61,7 +49,7 @@ export default function useRecorder() {
     const recorder = recorderState.mediaRecorder;
     let chunks = [];
 
-    if (recorder && recorder.state === 'inactive') {
+    if (recorder && recorder.state === "inactive") {
       recorder.start();
 
       recorder.ondataavailable = (e) => {
@@ -69,7 +57,7 @@ export default function useRecorder() {
       };
 
       recorder.onstop = () => {
-        const blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' });
+        const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
         chunks = [];
 
         setRecorderState((prevState) => {
@@ -84,7 +72,8 @@ export default function useRecorder() {
     }
 
     return () => {
-      if (recorder) recorder.stream.getAudioTracks().forEach((track) => track.stop());
+      if (recorder)
+        recorder.stream.getAudioTracks().forEach((track) => track.stop());
     };
   }, [recorderState.mediaRecorder]);
 
