@@ -1,9 +1,11 @@
-@import '../../../media.scss';
+@import "../../../media.scss";
 
 .examContainer {
   margin-bottom: 44px;
   .imageBlock {
     max-width: 747px;
+    max-height: 452px;
+    overflow: hidden;
     img {
       width: 100%;
     }
@@ -24,7 +26,7 @@
           text-align: center;
           padding: 13px 0 10px 0;
           span {
-            font-family: 'Poppins', sans-serif;
+            font-family: "Poppins", sans-serif;
             font-style: normal;
             font-weight: 500;
             font-size: 26px;
@@ -37,14 +39,14 @@
           ul {
             margin: 0;
             li {
-              font-family: 'Poppins', sans-serif;
+              font-family: "Poppins", sans-serif;
               font-style: normal;
               font-weight: normal;
               font-size: 16px;
               line-height: 24px;
               color: #010004;
               margin-bottom: 12px;
-              &:last-child{
+              &:last-child {
                 margin-bottom: 0 !important;
               }
             }
@@ -64,7 +66,7 @@
         margin-left: 30px;
       }
       .utilitiesBlockText {
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
@@ -78,7 +80,7 @@
   .rightSide {
     padding-left: 10px;
     padding-top: 65px;
-    @include media('max', 'md') {
+    @include media("max", "md") {
       padding-left: 0px !important;
       padding-top: 0 !important;
       flex-direction: column !important;

@@ -11,6 +11,8 @@ export const SET_TIMER = "SET_TIMER";
 export const SET_RESET_TIMER = "SET_RESET_TIMER";
 export const RESET_TIMER = "RESET_TIMER";
 
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+
 export const SET_FILES = "SET_FILES";
 export const SET_FOLDERS = "SET_FOLDERS";
 export const ADD_FOLDER = "ADD_FOLDER";

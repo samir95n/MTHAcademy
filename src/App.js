@@ -7,6 +7,7 @@ import { useEffect, useMemo } from "react";
 // import Detail from './containers/Detail/Detail';
 import Auth from "./containers/auth/Auth";
 import Content from "./containers/Content";
+import Admin from "./admin";
 import { connect } from "react-redux";
 import { checkAuth } from "./store/actions/authActions";
 
@@ -18,6 +19,7 @@ function App(props) {
   }, [props.onCheckAuth]);
 
   const routes = useMemo(() => {
+    return <Admin />;
     if (props.token || props.token === false) {
       return <Content />;
     } else {

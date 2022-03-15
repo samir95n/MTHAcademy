@@ -13,7 +13,7 @@ export default function ContentLayout(props) {
           {props.children}
         </Container>
       </div>
-      <Footer />
+      <Footer isVisablePagination={props.isVisablePagination} />
     </div>
   );
 }

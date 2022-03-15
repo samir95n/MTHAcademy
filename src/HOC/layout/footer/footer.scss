@@ -1,6 +1,8 @@
 .footer {
   background-color: #f2f1d3;
   padding: 21px 5px 20px 5px;
+  min-height: 92px;
+  box-sizing: border-box;
   .pagination {
     max-width: 268px;
     margin: 0 auto;

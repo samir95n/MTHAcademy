@@ -1,0 +1,49 @@
+@import "../../../media.scss";
+
+.navBlock {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  @include media("max", "sm") {
+    margin-bottom: 20px;
+  }
+  .navRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .navItem {
+      border: 1px solid #ff9a03;
+      width: 20%;
+      box-sizing: border-box;
+      cursor: pointer;
+      text-align: center;
+      padding: 10px;
+      transition: all 0.3s ease;
+      @include media("max", "sm") {
+        padding: 5px;
+      }
+      span {
+        color: #ff9a03;
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+        text-transform: capitalize;
+        transition: all 0.3s ease;
+        @include media("max", "sm") {
+          font-size: 13px;
+        }
+      }
+      &.active,
+      &:hover {
+        background-color: #ff9a03 !important;
+        transition: all 0.3s ease;
+        span {
+          color: #ffffff;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
+}

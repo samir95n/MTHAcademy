@@ -2,7 +2,7 @@ import React from "react";
 import "./footer.scss";
 import { useSelector, connect } from "react-redux";
 
-function Footer({ currentPart }) {
+function Footer({ currentPart, isVisablePagination = true }) {
   const getPageNumber = React.useMemo(() => {
     let elements = [];
     for (let index = 1; index <= 3; index++) {
@@ -21,7 +21,7 @@ function Footer({ currentPart }) {
   }, [currentPart]);
   return (
     <div className="footer">
-      <div className="pagination">{getPageNumber}</div>
+      {isVisablePagination && <div className="pagination">{getPageNumber}</div>}
     </div>
   );
 }
