@@ -1,0 +1,46 @@
+.answersPage {
+  margin-bottom: 20px;
+  .answerTable {
+    max-width: 1000px;
+    margin: 0 auto;
+    table {
+      width: 100%;
+      thead {
+        tr {
+          th {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 17px;
+            color: #888888;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 0 5px;
+            padding-bottom: 10px;
+            // max-width: 20%;
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 22px;
+            color: #010004;
+            padding: 0 5px;
+            span {
+              display: block;
+              text-align: center;
+              &.answersIcon {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
