@@ -1,14 +1,63 @@
-import { useEffect, useMemo } from "react";
-import { connect } from "react-redux";
+import { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import { Container, TextField } from '@mui/material';
+import CustomButton from '../../../components/UI/customButton/CustomButton';
 
-import { SET_CURRENT_PAGE } from "../../../store/actions/actionTypes";
+import { SET_CURRENT_PAGE } from '../../../store/actions/actionTypes';
 
-import "./style.scss";
+import './style.scss';
 
 function Settings(props) {
   return (
-    <div>
-      <p>fdffd</p>
+    <div className="settingsPage">
+      <div className="settingsBlock">
+        <div className="settingsForm">
+          <h2 className="settingsGreeting">Edit Your Login and Password</h2>
+          <div className="settingsItem">
+            <p className="settingsP">Login</p>
+            <TextField
+              className="settingsInput"
+              placeholder="Enter User Name"
+              variant="outlined"
+              //onChange={(event) => setInput(event.target.value)}
+              // onKeyPress={handleKeyPress}
+              inputProps={{
+                style: {
+                  fontSize: 16,
+                  height: 50,
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
+                },
+              }}
+            />
+          </div>
+          <div className="settingsItem">
+            <p className="settingsP">Password</p>
+            <TextField
+              className="settingsInput"
+              placeholder="Enter password"
+              variant="outlined"
+              // value={password}
+              // onChange={(event) => setPassowrd(event.target.value)}
+              // onKeyPress={handleKeyPress}
+              inputProps={{
+                style: {
+                  fontSize: 16,
+                  height: 50,
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
+                },
+              }}
+            />
+          </div>
+        </div>
+        <div className="settingsBtn">
+          <CustomButton
+            name={'Edit'}
+            //onClick={buttonClickHandler}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -20,8 +69,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) =>
-      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    onChangeCurrentPage: (pageName) => dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
   };
 }
 

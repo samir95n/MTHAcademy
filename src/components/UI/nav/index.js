@@ -1,15 +1,15 @@
-import { useEffect, useMemo } from "react";
-import "./style.scss";
-const pageName = ["user", "quetions", "answers", "settings", "logout"];
+import { useEffect, useMemo } from 'react';
+import './style.scss';
+const pageName = ['user', 'quetions', 'answers', 'settings', 'logout'];
 function Nav(props) {
   return (
     <div className="navBlock">
       <div className="navRow">
-        {pageName.map((item) => (
+        {pageName.map((item, index) => (
           <div
-            className={`navItem ${props.active == item ? "active" : ""}`}
-            onClick={() => props.onClick(item)}
-          >
+            key={index}
+            className={`navItem ${props.active == item ? 'active' : ''}`}
+            onClick={() => props.onClick(item)}>
             <span>{item}</span>
           </div>
         ))}

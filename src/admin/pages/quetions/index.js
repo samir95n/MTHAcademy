@@ -1,14 +1,18 @@
-import { useEffect, useMemo } from "react";
-import { connect } from "react-redux";
+import { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import CustomButton from '../../../components/UI/customButton/CustomButton';
 
-import { SET_CURRENT_PAGE } from "../../../store/actions/actionTypes";
+import { SET_CURRENT_PAGE } from '../../../store/actions/actionTypes';
 
-import "./style.scss";
+import QuetionsList from './QuetionsList';
+import CreateQuestions from './CreateQuestions';
+
+import './style.scss';
 
 function Quetions(props) {
   return (
-    <div>
-      <p>Quetions</p>
+    <div className="questionPage">
+      <QuetionsList />
     </div>
   );
 }
@@ -20,8 +24,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) =>
-      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    onChangeCurrentPage: (pageName) => dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
   };
 }
 

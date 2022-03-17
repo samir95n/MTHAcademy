@@ -17,9 +17,9 @@ function Answers(props) {
               <th>id</th>
               <th>Name</th>
               <th>Exam date</th>
-              <th>Question block</th>
-              <th>answers</th>
-              <th>delete</th>
+              <th className="answerTableCenter">Question block</th>
+              <th className="answerTableCenter">answers</th>
+              <th className="answerTableCenter">delete</th>
             </tr>
           </thead>
           <tbody>

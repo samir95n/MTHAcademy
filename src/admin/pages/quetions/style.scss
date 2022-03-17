@@ -1,0 +1,45 @@
+.questionPage {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  .quetionsList {
+    .quetionsListBlock {
+      .quetionsListRow {
+        .questionsItem {
+          border: 1px solid  #336b88;
+          display: flex;
+          justify-content: center;
+          min-height: 110px;
+          padding: 5px;
+          border-radius: 20px;
+          align-items: center;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          .questionsItemName {
+            font-family: 'Poppins', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 36px;
+            text-align: center;
+            color: #336b88;
+            transition: all 0.3s ease;
+          }
+          .questionsItemIcon {
+            display: none;
+          }
+          &:hover {
+            transition: all 0.3s ease;
+            background-color: #00000057;
+            .questionsItemName {
+              display: none;
+            }
+            .questionsItemIcon {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
