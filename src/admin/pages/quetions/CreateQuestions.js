@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { Container, TextField } from '@mui/material';
+import { Container, TextField, Grid } from '@mui/material';
 import { Fab, Button } from '@material-ui/core';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 
@@ -17,45 +17,185 @@ function CreateQuestions(props) {
       <div className="createQuestionsForm">
         <div className="createQuestionsPart">
           <h6 className="createQuestionsPartHead">Part-1</h6>
-          <div className="createQuestion">
-            <h6 className="createQuestionsPartHead">Question-1</h6>
-            <div className="createQuestionsInputBlock">
-              <div className="createQuestionsInputItem">
-                <p className="createQuestionP">Title</p>
-                <TextField
-                  className="ааа"
-                  placeholder="Enter Time"
-                  variant="outlined"
-                  rows={4}
-                  //onChange={(event) => setInput(event.target.value)}
-                  // onKeyPress={handleKeyPress}
-                  inputProps={{
-                    style: {
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      padding: '0 12px',
-                    },
-                  }}
-                />
-              </div>
-              <div className="createQuestionsInputItem">
-                <p className="createQuestionP">Photo (747X452)</p>
-                <div className="addPhotoBtn">
-                  <label htmlFor="upload-photo">
-                    <input
-                      style={{ display: 'none' }}
-                      id="upload-photo"
-                      name="upload-photo"
-                      type="file"
-                    />
-                    <Fab color="primary" size="small" component="span" aria-label="add">
-                      <AddPhotoAlternateIcon />
-                    </Fab>
-                  </label>
+          <Grid container spacing={1} className="createQuestionRow">
+            <Grid item md={6} xs={12} className="createQuestionItem">
+              <h6 className="createQuestionItemHead">Question-1</h6>
+              <div className="createQuestionsInputBlock">
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Title"
+                    variant="outlined"
+                    rows={2}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Image (747X452)</p>
+                  <div className="addPhotoBtn">
+                    <label htmlFor="upload-photo">
+                      <input
+                        style={{ display: 'none' }}
+                        id="upload-photo"
+                        name="upload-photo"
+                        type="file"
+                      />
+                      <Fab color="primary" size="small" component="span" aria-label="add">
+                        <AddPhotoAlternateIcon />
+                      </Fab>
+                    </label>
+                  </div>
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Timer</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Time"
+                    variant="outlined"
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        height: 50,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
                 </div>
               </div>
-            </div>
-          </div>
+            </Grid>
+            <Grid item md={6} xs={12} className="createQuestionItem">
+              <h6 className="createQuestionItemHead">Description-1</h6>
+              <div className="createQuestionsInputBlock">
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Title"
+                    variant="outlined"
+                    rows={2}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Text"
+                    variant="outlined"
+                    rows={4}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Title"
+                    variant="outlined"
+                    rows={2}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Text"
+                    variant="outlined"
+                    rows={6}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Title"
+                    variant="outlined"
+                    rows={2}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+                <div className="createQuestionsInputItem">
+                  <p className="createQuestionP">Title</p>
+                  <TextField
+                    className="createQuestionInput"
+                    placeholder="Enter Text"
+                    variant="outlined"
+                    rows={6}
+                    multiline
+                    //onChange={(event) => setInput(event.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    inputProps={{
+                      style: {
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        padding: '0 12px',
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+            </Grid>
+          </Grid>
         </div>
       </div>
     </div>
