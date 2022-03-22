@@ -1,0 +1,138 @@
+.createQuestions {
+  h5.createQuestionsHead {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+    color: #100a30;
+    margin: 0;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .createQuestionsNav {
+    margin-bottom: 20px;
+    .createQuestionsNavBlock {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .createQuestionsNavItem {
+        display: flex;
+        justify-content: center;
+        flex: 1 1;
+        min-height: 45px;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #100a30;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        span {
+          color: #100a30;
+          font-family: "Poppins", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 20px;
+          text-transform: uppercase;
+          transition: all 0.3s ease;
+        }
+        &.active,
+        &:hover {
+          background-color: #100a30;
+          transition: all 0.3s ease;
+          span {
+            color: #ffffff;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+    }
+  }
+  .createQuestionsForm {
+    .createQuestionsPart {
+      border: 1px solid #100a30;
+      padding: 10px;
+      .createQuestionsPartHead {
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 23px;
+        line-height: 30px;
+        color: #ffffff;
+        margin: 0;
+        margin-bottom: 20px;
+        background-color: #100a30;
+        text-align: center;
+        padding: 10px;
+      }
+      .createQuestionRow {
+        .createQuestionItem {
+          border-right: 1px solid #100a30;
+          padding-right: 10px;
+          &:last-child {
+            border-right: none;
+          }
+          .createQuestionItemHead {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 19px;
+            line-height: 25px;
+            color: #100a30;
+            margin: 0;
+            margin-bottom: 20px;
+          }
+          .createQuestionsInputBlock {
+            border-bottom: 1px solid #100a30;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+            &:last-child {
+              border-bottom: none;
+              margin-bottom: 0;
+              padding-bottom: 0;
+            }
+            .createQuestionsInputItem {
+              margin-bottom: 10px;
+              .createQuestionP {
+                font-family: "Poppins", sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 17px;
+                line-height: 30px;
+                color: #111111;
+                margin: 0;
+                margin-bottom: 14px;
+                text-transform: capitalize;
+              }
+              .createQuestionInput {
+                width: 100%;
+              }
+            }
+          }
+          .timerSelect {
+            max-width: 100px;
+            select.timerSelectItem {
+              font-family: "Poppins", sans-serif;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 24px;
+              display: flex;
+              align-items: center;
+              color: #100a30;
+              height: 50px;
+              width: 100%;
+              padding: 5px 10px;
+              border-radius: 4px;
+              option {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

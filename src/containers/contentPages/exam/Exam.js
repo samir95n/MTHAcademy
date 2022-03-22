@@ -145,7 +145,6 @@ function Exam(props) {
                   </p>
                   <div className="flexBlock">
                     <Mic recording={initRecording} />
-                    <Timer timer={recordingTime} />
                   </div>
                 </div>
                 <div className=" utilitiesBlockItem pauseBlock">

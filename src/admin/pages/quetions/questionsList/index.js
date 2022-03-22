@@ -1,24 +1,30 @@
-import { useEffect, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { Grid } from '@mui/material';
-import { Edit } from '@material-ui/icons';
+import { useEffect, useMemo } from "react";
+import { connect } from "react-redux";
+import { Grid } from "@mui/material";
+import { Edit } from "@material-ui/icons";
 
-import CustomButton from '../../../components/UI/customButton/CustomButton';
+import CustomButton from "../../../../components/UI/customButton/CustomButton";
 
-import { SET_CURRENT_PAGE } from '../../../store/actions/actionTypes';
+import { SET_CURRENT_PAGE } from "../../../../store/actions/actionTypes";
 
-import './style.scss';
+import "./style.scss";
 
 function QuetionsList(props) {
   return (
     <div className="quetionsList">
+      <div className="quetionsListButton">
+        <CustomButton
+          name={"Create Blok"}
+          //onClick={buttonClickHandler}
+        />
+      </div>
       <div className="quetionsListBlock">
         <Grid container spacing={2} className="quetionsListRow">
           <Grid item md={2} xs={6}>
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -26,7 +32,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -34,7 +40,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -42,7 +48,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -50,7 +56,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -58,7 +64,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -66,7 +72,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -74,7 +80,7 @@ function QuetionsList(props) {
             <div className="questionsItem">
               <span className="questionsItemName">Block 1</span>
               <span className="questionsItemIcon">
-                <Edit style={{ color: '#336b88', fontSize: '40px' }} />
+                <Edit style={{ color: "#336b88", fontSize: "40px" }} />
               </span>
             </div>
           </Grid>
@@ -91,7 +97,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) => dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    onChangeCurrentPage: (pageName) =>
+      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
   };
 }
 

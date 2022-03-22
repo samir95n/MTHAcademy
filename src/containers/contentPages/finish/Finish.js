@@ -1,8 +1,8 @@
-import React from 'react';
-import { Grid } from '@mui/material';
-import './finish.scss';
-import CustomButton from '../../../components/UI/customButton/CustomButton';
-import finishImage from '../../../assets/finish.svg';
+import React from "react";
+import { Grid } from "@mui/material";
+import "./finish.scss";
+import CustomButton from "../../../components/UI/customButton/CustomButton";
+import finishImage from "../../../assets/finish.png";
 
 export default function Finish() {
   return (
@@ -16,7 +16,7 @@ export default function Finish() {
             <p>You have completed the exam!</p>
           </div>
           <div className="finishButton">
-            <CustomButton name={'Finish'} />
+            <CustomButton name={"Finish"} />
           </div>
         </div>
       </div>
