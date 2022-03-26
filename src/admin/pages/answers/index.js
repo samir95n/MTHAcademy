@@ -1,13 +1,15 @@
-import { useEffect, useMemo } from 'react';
-import { connect } from 'react-redux';
+import { useEffect, useMemo } from "react";
+import { connect } from "react-redux";
 
-import { AssignmentTurnedIn, Delete } from '@material-ui/icons';
+import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 
-import { SET_CURRENT_PAGE } from '../../../store/actions/actionTypes';
+import { SET_CURRENT_PAGE } from "../../../store/actions/actionTypes";
+import AnswersList from "./answersList";
 
-import './style.scss';
+import "./style.scss";
 
 function Answers(props) {
+  return <AnswersList />;
   return (
     <div className="answersPage">
       <div className="answerTable">
@@ -32,12 +34,14 @@ function Answers(props) {
               </td>
               <td>
                 <span className="answersIcon">
-                  <AssignmentTurnedIn style={{ color: '#006ade', fontSize: '22px' }} />
+                  <AssignmentTurnedIn
+                    style={{ color: "#006ade", fontSize: "22px" }}
+                  />
                 </span>
               </td>
               <td>
                 <span className="answersIcon">
-                  <Delete style={{ color: 'red', fontSize: '22px' }} />
+                  <Delete style={{ color: "red", fontSize: "22px" }} />
                 </span>
               </td>
             </tr>
@@ -50,12 +54,14 @@ function Answers(props) {
               </td>
               <td>
                 <span className="answersIcon">
-                  <AssignmentTurnedIn style={{ color: '#006ade', fontSize: '22px' }} />
+                  <AssignmentTurnedIn
+                    style={{ color: "#006ade", fontSize: "22px" }}
+                  />
                 </span>
               </td>
               <td>
                 <span className="answersIcon">
-                  <Delete style={{ color: 'red', fontSize: '22px' }} />
+                  <Delete style={{ color: "red", fontSize: "22px" }} />
                 </span>
               </td>
             </tr>
@@ -68,12 +74,14 @@ function Answers(props) {
               </td>
               <td>
                 <span className="answersIcon">
-                  <AssignmentTurnedIn style={{ color: '#006ade', fontSize: '22px' }} />
+                  <AssignmentTurnedIn
+                    style={{ color: "#006ade", fontSize: "22px" }}
+                  />
                 </span>
               </td>
               <td>
                 <span className="answersIcon">
-                  <Delete style={{ color: 'red', fontSize: '22px' }} />
+                  <Delete style={{ color: "red", fontSize: "22px" }} />
                 </span>
               </td>
             </tr>
@@ -86,12 +94,14 @@ function Answers(props) {
               </td>
               <td>
                 <span className="answersIcon">
-                  <AssignmentTurnedIn style={{ color: '#006ade', fontSize: '22px' }} />
+                  <AssignmentTurnedIn
+                    style={{ color: "#006ade", fontSize: "22px" }}
+                  />
                 </span>
               </td>
               <td>
                 <span className="answersIcon">
-                  <Delete style={{ color: 'red', fontSize: '22px' }} />
+                  <Delete style={{ color: "red", fontSize: "22px" }} />
                 </span>
               </td>
             </tr>
@@ -104,12 +114,14 @@ function Answers(props) {
               </td>
               <td>
                 <span className="answersIcon">
-                  <AssignmentTurnedIn style={{ color: '#006ade', fontSize: '22px' }} />
+                  <AssignmentTurnedIn
+                    style={{ color: "#006ade", fontSize: "22px" }}
+                  />
                 </span>
               </td>
               <td>
                 <span className="answersIcon">
-                  <Delete style={{ color: 'red', fontSize: '22px' }} />
+                  <Delete style={{ color: "red", fontSize: "22px" }} />
                 </span>
               </td>
             </tr>
@@ -127,7 +139,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) => dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    onChangeCurrentPage: (pageName) =>
+      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
   };
 }
 

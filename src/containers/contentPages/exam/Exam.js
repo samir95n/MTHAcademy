@@ -21,7 +21,7 @@ import {
 } from "../../../store/actions/actionTypes";
 
 import "./exam.scss";
-//import image from "../../../assets/girl.png";
+import image from "../../../assets/girl.png";
 
 const callBeep = () => {
   let myAudio = new Audio(BeepSound);
@@ -73,7 +73,7 @@ function Exam(props) {
             <>
               <HeaderText text={"1. Describe the picture."} />
               <div className="imageBlock">
-                <img src={props.image} alt="exam_image" />
+                <img src={image} alt="exam_image" />
               </div>
             </>
           )}

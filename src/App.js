@@ -19,7 +19,7 @@ function App(props) {
   }, [props.onCheckAuth]);
 
   const routes = useMemo(() => {
-    // return <Admin />;
+    return <Admin />;
     if (props.token || props.token === false) {
       return <Content />;
     } else {

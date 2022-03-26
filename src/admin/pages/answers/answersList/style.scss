@@ -1,0 +1,96 @@
+.answersList {
+  .answersListDate {
+    background: #f2f1d3;
+    padding: 16px 19px;
+    margin-bottom: 28px;
+    .answersDateText {
+      font-family: "Poppins", sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      align-items: center;
+      color: #100a30;
+      margin-right: 12px;
+    }
+    .answersDateInfo {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.05em;
+      font-family: "Poppins", sans-serif;
+      color: #010004;
+    }
+  }
+  .answersListHeader {
+    margin-bottom: 20px;
+    h3 {
+      font-family: "Poppins", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      color: #100a30;
+      text-align: center;
+      margin: 0;
+    }
+  }
+  .answersListNav {
+    margin-bottom: 30px;
+  }
+  .answersListBlock {
+    .answersPart {
+      .answersVoiceItem {
+        margin-bottom: 35px;
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+        p {
+          font-family: "Poppins", sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 27px;
+          align-items: center;
+          color: #010004;
+          margin: 0;
+          margin-bottom: 8px;
+        }
+        .answersVoice {
+          max-width: 470px;
+          audio {
+            width: 100%;
+            height: 54px;
+            &::-webkit-media-controls-enclosure {
+              border-radius: 11px !important;
+            }
+            &::-webkit-media-controls-panel {
+              background-color: #100a30;
+            }
+            &::-webkit-media-controls-time-remaining-display,
+            &::-webkit-media-controls-current-time-display {
+              color: #fff;
+              text-shadow: none !important;
+            }
+            &::-webkit-media-controls-timeline {
+              padding: 0;
+              background: #fff;
+              margin-left: 10px;
+              margin-right: 10px;
+            }
+            &::-webkit-media-controls-play-button,
+            &::-webkit-media-controls-mute-button {
+              background-color: #fff;
+            }
+            & .-internal-media-controls-overflow-button {
+              background-color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}
