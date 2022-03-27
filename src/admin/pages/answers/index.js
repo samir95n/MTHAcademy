@@ -9,7 +9,7 @@ import AnswersList from "./answersList";
 import "./style.scss";
 
 function Answers(props) {
-  return <AnswersList />;
+  //return <AnswersList />;
   return (
     <div className="answersPage">
       <div className="answerTable">
@@ -19,7 +19,7 @@ function Answers(props) {
               <th>id</th>
               <th>Name</th>
               <th>Exam date</th>
-              <th className="answerTableCenter">Question block</th>
+              <th className="answerTableCenter">Question blok</th>
               <th className="answerTableCenter">answers</th>
               <th className="answerTableCenter">delete</th>
             </tr>
@@ -28,7 +28,7 @@ function Answers(props) {
             <tr>
               <td>1</td>
               <td>Anar Ibrahimov</td>
-              <td>03.03.2022</td>
+              <td>03.04.2022</td>
               <td>
                 <span>2</span>
               </td>
@@ -48,9 +48,9 @@ function Answers(props) {
             <tr>
               <td>2</td>
               <td>Senan Ibrahimov</td>
-              <td>03.03.2022</td>
+              <td>03.05.2022</td>
               <td>
-                <span>2</span>
+                <span>3</span>
               </td>
               <td>
                 <span className="answersIcon">
@@ -68,9 +68,9 @@ function Answers(props) {
             <tr>
               <td>3</td>
               <td>Ivan Ibrahimov</td>
-              <td>03.03.2022</td>
+              <td>03.06.2022</td>
               <td>
-                <span>2</span>
+                <span>4</span>
               </td>
               <td>
                 <span className="answersIcon">
@@ -88,9 +88,9 @@ function Answers(props) {
             <tr>
               <td>4</td>
               <td>Cavad Ibrahimov</td>
-              <td>03.03.2022</td>
+              <td>03.07.2022</td>
               <td>
-                <span>2</span>
+                <span>5</span>
               </td>
               <td>
                 <span className="answersIcon">
@@ -108,9 +108,9 @@ function Answers(props) {
             <tr>
               <td>5</td>
               <td>Alex Ibrahimov</td>
-              <td>03.03.2022</td>
+              <td>03.08.2022</td>
               <td>
-                <span>2</span>
+                <span>6</span>
               </td>
               <td>
                 <span className="answersIcon">

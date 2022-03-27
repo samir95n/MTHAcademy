@@ -28,7 +28,7 @@ function AnswersList(props) {
       <div className="answersListBlock">
         <div className="answersPart">
           <div className="answersVoiceItem">
-            <p>Part 1, Answer 1</p>
+            <p>Answer 1</p>
             <div className="answersVoice">
               <audio
                 controls
@@ -37,7 +37,7 @@ function AnswersList(props) {
             </div>
           </div>
           <div className="answersVoiceItem">
-            <p>Part 2, Answer 2</p>
+            <p>Answer 2</p>
             <div className="answersVoice">
               <audio
                 controls
@@ -46,7 +46,7 @@ function AnswersList(props) {
             </div>
           </div>
           <div className="answersVoiceItem">
-            <p>Part 3, Answer 3</p>
+            <p>Answer 3</p>
             <div className="answersVoice">
               <audio
                 controls

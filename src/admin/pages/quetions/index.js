@@ -12,7 +12,7 @@ import "./style.scss";
 function Quetions(props) {
   return (
     <div className="questionPage">
-      <CreateQuestions />
+      <QuetionsList />
     </div>
   );
 }

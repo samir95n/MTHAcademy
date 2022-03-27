@@ -29,6 +29,9 @@ function CreateQuestions(props) {
         {props.currentPart == 2 && <Part2 timer={time} />}
         {props.currentPart == 3 && <Part3 timer={time} />}
       </div>
+      <div>
+        <CustomButton name={"Create"} />
+      </div>
     </div>
   );
 }

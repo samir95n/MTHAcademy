@@ -80,7 +80,7 @@ function Exam(props) {
           {props.currrentSubPage == 2 && (
             <HeaderText
               text={
-                "2.  What are benefits and challange and benefits of a work from gome lifestyle? "
+                "3.  What are benefits and challange and benefits of a work from gome lifestyle? "
               }
             />
           )}
@@ -88,7 +88,7 @@ function Exam(props) {
             <>
               <HeaderText
                 text={
-                  "3.  Universities and traditional degrees are not relevant in age of online courses. "
+                  "1.  Universities and traditional degrees are not relevant in age of online courses. "
                 }
               />
               <div className="listsBlock">
