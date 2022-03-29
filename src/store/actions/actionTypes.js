@@ -14,7 +14,8 @@ export const RESET_TIMER = "RESET_TIMER";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_QUESTION_PART = "SET_QUESTION_PART";
 
-export const SET_FILES = "SET_FILES";
+export const SET_AUTH_ERROR = "SET_AUTH_ERROR";
+
 export const SET_FOLDERS = "SET_FOLDERS";
 export const ADD_FOLDER = "ADD_FOLDER";
 export const ADD_FILE = "ADD_FILE";

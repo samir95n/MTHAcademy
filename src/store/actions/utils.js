@@ -1,10 +1,12 @@
 export class LocalStorageAuthUtil {
   // get auth informations from local storage and return it with object
   getItems() {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-    const userId = localStorage.getItem('userId');
-    return { token, username, userId };
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+    const userId = localStorage.getItem("userId");
+    const isAdmin = localStorage.getItem("isAdmin");
+
+    return { token, username, userId, isAdmin };
   }
 
   // delete items from local storage which name passed as argument

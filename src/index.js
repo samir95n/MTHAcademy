@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import authReducer from "./store/reducers/authReducer";
 import examReducer from "./store/reducers/examReducer";
 import adminReducer from "./store/reducers/adminReducer";
+import errorsReducer from "./store/reducers/errorsReducer";
 
 import paginationReducer from "./store/reducers/paginationReducer";
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   exam: examReducer,
   admin: adminReducer,
   pagination: paginationReducer,
+  errors: errorsReducer,
 });
 
 // if browser has redux dev tools extension (for track redux actions) then aplly it as middleware and create store

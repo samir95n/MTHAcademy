@@ -1,7 +1,7 @@
 import { LocalStorageAuthUtil } from "./utils";
 import iaxios from "./../../iaxios";
 
-import { SET_TOKEN } from "./actionTypes";
+import { SET_TOKEN, SET_AUTH_ERROR } from "./actionTypes";
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -23,11 +23,28 @@ function setAuthParams(authData) {
 
 export function login(input, password) {
   return (dispatch) => {
-    iaxios.post("/users/", { input, password }).then((response) => {
-      const { username, token, id } = response.data;
-      ls.setItems({ username, token, userId: id });
-      dispatch(setAuthParams({ token, username, userId: id }));
-    });
+    iaxios
+      .get(`/api/auth/login?username=${input}&password=${password}`)
+      .then((response) => {
+        const { user, access_token } = response.data.data;
+        ls.setItems({
+          token: access_token,
+          username: user.username,
+          userId: user.id,
+          isAdmin: user.is_admin,
+        });
+        dispatch(
+          setAuthParams({
+            token: access_token,
+            username: user.username,
+            userId: user.id,
+            isAdmin: user.is_admin,
+          })
+        );
+      })
+      .catch((err) => {
+        dispatch({ type: SET_AUTH_ERROR, payload: true });
+      });
   };
 }
 
@@ -35,7 +52,7 @@ export function logout() {
   return (dispatch) => {
     dispatch(setAuthParams(null));
     iaxios.post("/auth/logout/");
-    ls.removeItems("username", "token", "userId");
+    ls.removeItems("username", "token", "userId", "isAdmin");
   };
 }
 

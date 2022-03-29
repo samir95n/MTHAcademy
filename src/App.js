@@ -19,9 +19,14 @@ function App(props) {
   }, [props.onCheckAuth]);
 
   const routes = useMemo(() => {
-    return <Admin />;
     if (props.token || props.token === false) {
-      return <Content />;
+      console.log("dddddd", props.isAdmin);
+      props.isAdmin && console.log("dffffffffffffffffffff");
+      if (props.isAdmin) {
+        return <Admin />;
+      } else {
+        return <Content />;
+      }
     } else {
       return <Auth />;
     }
@@ -33,6 +38,7 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     token: state.auth.token,
+    isAdmin: state.auth.isAdmin,
   };
 }
 

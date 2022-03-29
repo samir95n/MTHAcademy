@@ -1,13 +1,20 @@
-import { SET_TOKEN } from '../actions/actionTypes';
+import { SET_TOKEN } from "../actions/actionTypes";
 
 const initialState = {
   token: false,
-  username: '',
+  username: "",
   userId: null,
+  isAdmin: 0,
 };
 
 const setAuthParams = (state, action) => {
-  return { ...state, token: action.token, username: action.username, userId: action.userId };
+  return {
+    ...state,
+    token: action.token,
+    username: action.username,
+    userId: action.userId,
+    isAdmin: action.isAdmin,
+  };
 };
 
 function authReducer(state = initialState, action) {

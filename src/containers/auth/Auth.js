@@ -23,6 +23,7 @@ function Auth(props) {
     },
     [buttonClickHandler]
   );
+  console.log("eee", props.error);
   return (
     <Container maxWidth="sm" className="authContainer" sx={{ p: 0 }}>
       <div className="authBlock">
@@ -73,11 +74,16 @@ function Auth(props) {
           <CustomButton name={"Sign In"} onClick={buttonClickHandler} />
         </div>
         <div className="authError">
-          <p>Incorrect username or password</p>
+          {props.error && <p>Incorrect username or password</p>}
         </div>
       </div>
     </Container>
   );
+}
+function mapStateToProps(state) {
+  return {
+    error: state.errors.authError,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -86,4 +92,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
