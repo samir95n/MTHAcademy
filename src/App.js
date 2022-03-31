@@ -10,7 +10,7 @@ import Content from "./containers/Content";
 import Admin from "./admin";
 import { connect } from "react-redux";
 import { checkAuth } from "./store/actions/authActions";
-
+import Loader from "./components/UI/loader/Loader";
 function App(props) {
   useEffect(() => {
     // check local storage for auth informations such as token, username, and userId when app start
@@ -32,13 +32,19 @@ function App(props) {
     }
   }, [props.token]);
 
-  return routes;
+  return (
+    <>
+      {routes}
+      {props.loader && <Loader />}
+    </>
+  );
 }
 
 function mapStateToProps(state) {
   return {
     token: state.auth.token,
     isAdmin: state.auth.isAdmin,
+    loader: state.errors.loader,
   };
 }
 

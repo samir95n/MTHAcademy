@@ -1,7 +1,7 @@
 import { LocalStorageAuthUtil } from "./utils";
 import iaxios from "./../../iaxios";
 
-import { SET_TOKEN, SET_AUTH_ERROR } from "./actionTypes";
+import { SET_TOKEN, SET_AUTH_ERROR, SET_LOADER } from "./actionTypes";
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -23,6 +23,7 @@ function setAuthParams(authData) {
 
 export function login(input, password) {
   return (dispatch) => {
+    dispatch({ type: SET_LOADER, payload: true });
     iaxios
       .get(`/api/auth/login?username=${input}&password=${password}`)
       .then((response) => {
@@ -41,9 +42,11 @@ export function login(input, password) {
             isAdmin: user.is_admin,
           })
         );
+        dispatch({ type: SET_LOADER, payload: false });
       })
       .catch((err) => {
         dispatch({ type: SET_AUTH_ERROR, payload: true });
+        dispatch({ type: SET_LOADER, payload: false });
       });
   };
 }
