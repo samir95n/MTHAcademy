@@ -5,8 +5,9 @@ export class LocalStorageAuthUtil {
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId");
     const isAdmin = localStorage.getItem("isAdmin");
+    const blockId = localStorage.getItem("blockId");
 
-    return { token, username, userId, isAdmin };
+    return { token, username, userId, isAdmin, blockId };
   }
 
   // delete items from local storage which name passed as argument

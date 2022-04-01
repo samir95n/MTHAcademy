@@ -27,19 +27,21 @@ export function login(input, password) {
     iaxios
       .get(`/api/auth/login?username=${input}&password=${password}`)
       .then((response) => {
-        const { user, access_token } = response.data.data;
+        const { user } = response.data.data;
         ls.setItems({
-          token: access_token,
+          token: user.api_token,
           username: user.username,
           userId: user.id,
           isAdmin: user.is_admin,
+          blockId: user.block,
         });
         dispatch(
           setAuthParams({
-            token: access_token,
+            token: user.api_token,
             username: user.username,
             userId: user.id,
             isAdmin: user.is_admin,
+            blockId: user.block,
           })
         );
         dispatch({ type: SET_LOADER, payload: false });

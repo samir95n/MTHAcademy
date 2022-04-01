@@ -6,7 +6,7 @@ export const SET_CANGE_MAIN_PAGE = "SET_CANGE_MAIN_PAGE";
 export const SET_CANGE_EXAM_PART = "SET_CANGE_EXAM_PART";
 export const SET_CANGE_CURRENT_PART = "SET_CANGE_CURRENT_PART";
 
-export const ADD_QUESTİON = "ADD_QUESTİON";
+export const SET_BLOCK = "SET_BLOCK";
 export const SET_TIMER = "SET_TIMER";
 export const SET_RESET_TIMER = "SET_RESET_TIMER";
 export const RESET_TIMER = "RESET_TIMER";

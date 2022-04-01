@@ -5,6 +5,7 @@ const initialState = {
   username: "",
   userId: null,
   isAdmin: 0,
+  blockId: null,
 };
 
 const setAuthParams = (state, action) => {

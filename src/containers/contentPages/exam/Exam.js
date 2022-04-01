@@ -8,7 +8,7 @@ import Pause from "../../../components/UI/pause/Pause";
 import BeepSound from "../../../assets/beepSound.wav";
 
 import useRecorder from "../../../handler/useRecorder";
-import { getQuestion } from "../../../store/actions/examActions";
+//import { getQuestion } from "../../../store/actions/examActions";
 
 import { connect } from "react-redux";
 import {
@@ -180,7 +180,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGetQuestion: (id) => dispatch(getQuestion(id)),
+    //onGetQuestion: (id) => dispatch(getQuestion(id)),
     timerOn: (id) => dispatch({ type: SET_TIMER, payload: 1 }),
     resetTimeToggle: (resetTimeState) =>
       dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),

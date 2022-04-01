@@ -1,5 +1,5 @@
 import {
-  ADD_QUESTİON,
+  SET_BLOCK,
   SET_TIMER,
   RESET_TIMER,
   SET_RESET_TIMER,
@@ -17,7 +17,7 @@ const initialState = {
   resetTimer: false,
 };
 
-const addQuestion = (state, action) => {
+const setBlock = (state, action) => {
   return {
     ...state,
     title: action.title,
@@ -52,8 +52,8 @@ const setExamPart = (state, action) => {
 
 function examReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_QUESTİON:
-      return addQuestion(state, action);
+    case SET_BLOCK:
+      return setBlock(state, action);
     case SET_TIMER:
       return { ...state, timer: state.timer - action.payload };
     case RESET_TIMER:
