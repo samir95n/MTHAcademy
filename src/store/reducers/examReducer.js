@@ -6,24 +6,24 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-  title: "",
-  image: "",
-  time: null,
-  list: {
-    for: [],
-    against: [],
-  },
-  timer: null,
-  resetTimer: false,
+  part1: [],
+  questions1: [],
+  part2: [],
+  questions2: [],
+  part3: [],
+  questions3: [],
 };
 
 const setBlock = (state, action) => {
+  console.log(action, "ffdfdfdf");
   return {
     ...state,
-    title: action.title,
-    time: action.timer,
-    image: action.photo,
-    timer: action.timer,
+    part1: action["part1.descriptions"],
+    questions1: action["part1.questions"],
+    part2: action.part2_descriptions,
+    questions2: action.part2_questions,
+    part3: action.part3_descriptions,
+    questions3: action.part3_questions,
   };
 };
 

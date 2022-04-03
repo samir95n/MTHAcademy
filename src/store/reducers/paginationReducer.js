@@ -7,9 +7,9 @@ import {
 const initialState = {
   currentPage: {
     pageName: "start",
-    subPage: 1,
   },
   currentPart: 1,
+  question: 0,
 };
 
 const setCangePage = (state, action) => {

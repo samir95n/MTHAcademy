@@ -23,74 +23,66 @@ import {
 import "./exam.scss";
 import image from "../../../assets/girl.png";
 
-const callBeep = () => {
-  let myAudio = new Audio(BeepSound);
-  myAudio.play();
+const callBeep = async () => {
+  let myAudio = await new Audio(BeepSound);
+  if (myAudio) {
+    myAudio.play();
+  }
 };
 
 function Exam(props) {
   // recording
+  const [timerCount, setTimerCount] = React.useState(props.question.timer);
+  const [resetTimer, setResetTimer] = React.useState(false);
+
   const { recorderState, ...handlers } = useRecorder();
   const { recordingTime, initRecording, audio } = recorderState;
   const { startRecording, saveRecording, cancelRecording } = handlers;
 
   React.useEffect(() => {
-    // check local storage for auth informations such as token, username, and userId when app start
-    props.onGetQuestion(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.onGetQuestion]);
-
-  React.useEffect(() => {
-    if (props.timer > 0) {
-      const setIntervalVal = setInterval(() => props.timerOn(), 1000);
+    if (timerCount > 0) {
+      const setIntervalVal = setInterval(
+        () => setTimerCount((prev) => prev - 1),
+        1000
+      );
       return () => clearInterval(setIntervalVal);
     }
-    if (props.timer === 0) {
-      if (props.resetTimer) {
+    if (timerCount === 0) {
+      if (resetTimer) {
         saveRecording();
       }
-      props.resetTimeToggle(!props.resetTimer);
+      setResetTimer(true);
     }
-  }, [props.timer]);
+  }, [timerCount]);
   React.useEffect(() => {
-    if (props.resetTimer) {
+    if (resetTimer) {
       const setTimeOut = setTimeout(() => {
-        callBeep();
-        props.onResetTime(props.time);
+        //callBeep();
+        setTimerCount(props.question.timer);
         startRecording();
       }, 3000);
       return () => clearTimeout(setTimeOut);
     }
-  }, [props.resetTimer]);
+  }, [resetTimer]);
 
   console.log(audio, "recordtime");
-
+  //return <p>fddfdf</p>;
   return (
     <>
+      <HeaderText
+        text={`${props.currrentQuestion + 1}. ${props.question.title} `}
+      />
       <Grid container spacing={0} className="examContainer">
         <Grid item md={9} xs={12}>
-          {props.currrentSubPage == 1 && (
+          {props.currrentQuestion == 0 && props.currentPart === 1 && (
             <>
-              <HeaderText text={"1. Describe the picture."} />
               <div className="imageBlock">
                 <img src={image} alt="exam_image" />
               </div>
             </>
           )}
-          {props.currrentSubPage == 2 && (
-            <HeaderText
-              text={
-                "3.  What are benefits and challange and benefits of a work from gome lifestyle? "
-              }
-            />
-          )}
-          {props.currrentSubPage == 3 && (
+          {props.currrentQuestion == 1 && props.currentPart === 2 && (
             <>
-              <HeaderText
-                text={
-                  "1.  Universities and traditional degrees are not relevant in age of online courses. "
-                }
-              />
               <div className="listsBlock">
                 <div className="listsRow">
                   <div className="listItem">
@@ -133,11 +125,11 @@ function Exam(props) {
           <div className="utilitiesBlock">
             <div className=" utilitiesBlockItem clockBlock">
               <div className="flexBlock">
-                <Clock time={props.time} timer={props.timer} />
-                {props.time && <Timer timer={props.timer} />}
+                <Clock time={props.question.timer} timer={timerCount} />
+                {props.question.timer && <Timer timer={timerCount} />}
               </div>
             </div>
-            {props.resetTimer && (
+            {resetTimer && (
               <>
                 <div className=" utilitiesBlockItem micBlock">
                   <p className="utilitiesBlockText">
@@ -170,7 +162,12 @@ function Exam(props) {
 }
 function mapStateToProps(state) {
   return {
-    currrentSubPage: state.pagination.currentPage.subPage,
+    currentPart: state.pagination.currentPart,
+    question:
+      state.exam[`questions${state.pagination.currentPart}`][
+        state.pagination.question
+      ],
+    currrentQuestion: state.pagination.question,
     time: state.exam.time,
     image: state.exam.image,
     timer: state.exam.timer,
@@ -181,9 +178,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     //onGetQuestion: (id) => dispatch(getQuestion(id)),
-    timerOn: (id) => dispatch({ type: SET_TIMER, payload: 1 }),
-    resetTimeToggle: (resetTimeState) =>
-      dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),
+    //timerOn: (id) => dispatch({ type: SET_TIMER, payload: 1 }),
+    // resetTimeToggle: (resetTimeState) =>
+    //   dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),
     onResetTime: (timeState) =>
       dispatch({ type: RESET_TIMER, payload: timeState }),
   };
