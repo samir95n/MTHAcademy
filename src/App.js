@@ -19,9 +19,7 @@ function App(props) {
   }, [props.onCheckAuth]);
 
   const routes = useMemo(() => {
-    if (props.token || props.token === false) {
-      console.log("dddddd", props.isAdmin);
-      props.isAdmin && console.log("dffffffffffffffffffff");
+    if (props.token) {
       if (props.isAdmin) {
         return <Admin />;
       } else {

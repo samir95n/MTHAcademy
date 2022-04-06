@@ -2,7 +2,6 @@ import React from "react";
 import "./clock.scss";
 export default function Clock({ time = 0, timer = 0 }) {
   const rotateDeg = 360 / time;
-
   return (
     <div className="clockItem">
       <div className="clockMask">
@@ -11,12 +10,13 @@ export default function Clock({ time = 0, timer = 0 }) {
           style={{
             transform: `rotate(-${rotateDeg * timer}deg)`,
             backgroundColor: `${rotateDeg * timer < 45 ? "red" : ""}`,
+            visibility: `${rotateDeg * timer == 360 ? "hidden" : "visible"}`,
           }}
         ></div>
         <div
           className="pie filler"
           style={{
-            opacity: `${rotateDeg * timer < 180 ? "1" : "0"}`,
+            opacity: `${rotateDeg * timer <= 180 ? "1" : "0"}`,
             backgroundColor: `${rotateDeg * timer < 45 ? "red" : ""}`,
           }}
         ></div>
@@ -24,7 +24,7 @@ export default function Clock({ time = 0, timer = 0 }) {
           className="mask"
           style={
             time && {
-              opacity: `${rotateDeg * timer > 180 ? "1" : "0"}`,
+              opacity: `${rotateDeg * timer >= 180 ? "1" : "0"}`,
               // backgroundColor: dangerTime
               //   ? dangerTime >= timer
               //     ? "red"

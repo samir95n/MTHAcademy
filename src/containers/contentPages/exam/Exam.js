@@ -8,7 +8,7 @@ import Pause from "../../../components/UI/pause/Pause";
 import BeepSound from "../../../assets/beepSound.wav";
 
 import useRecorder from "../../../handler/useRecorder";
-//import { getQuestion } from "../../../store/actions/examActions";
+import { sendAudio } from "../../../store/actions/examActions";
 
 import { connect } from "react-redux";
 import {
@@ -64,8 +64,12 @@ function Exam(props) {
       return () => clearTimeout(setTimeOut);
     }
   }, [resetTimer]);
-
-  console.log(audio, "recordtime");
+  React.useEffect(() => {
+    if (audio) {
+      props.sendAudio(audio, props.currentPart, props.question.id);
+    }
+  }, [audio]);
+  // console.log(audio, "recordtime");
   //return <p>fddfdf</p>;
   return (
     <>
@@ -180,9 +184,11 @@ function mapDispatchToProps(dispatch) {
     //onGetQuestion: (id) => dispatch(getQuestion(id)),
     //timerOn: (id) => dispatch({ type: SET_TIMER, payload: 1 }),
     // resetTimeToggle: (resetTimeState) =>
-    //   dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),
+    // dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),
     onResetTime: (timeState) =>
       dispatch({ type: RESET_TIMER, payload: timeState }),
+    sendAudio: (audio, partId, questionId) =>
+      sendAudio(audio, partId, questionId),
   };
 }
 

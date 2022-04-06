@@ -25,3 +25,16 @@ export function getBlock(id) {
       });
   };
 }
+export async function sendAudio(audiofile, partId, questionId) {
+  const userData = ls.getItems();
+  const formData = await new FormData();
+  await formData.append("file", audiofile);
+  console.log("aaa", formData, audiofile);
+  iaxios.post(`/api/store_answer`, {
+    headers: {
+      "Api-Token": `${userData.token}`,
+      "Content-Type": "multipart/form-data",
+    },
+    data: { formData, [`part${partId}_id`]: questionId },
+  });
+}

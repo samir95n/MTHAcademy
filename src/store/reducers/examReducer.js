@@ -18,8 +18,8 @@ const setBlock = (state, action) => {
   console.log(action, "ffdfdfdf");
   return {
     ...state,
-    part1: action["part1.descriptions"],
-    questions1: action["part1.questions"],
+    part1: action.part1_descriptions,
+    questions1: action.part1_questions,
     part2: action.part2_descriptions,
     questions2: action.part2_questions,
     part3: action.part3_descriptions,
