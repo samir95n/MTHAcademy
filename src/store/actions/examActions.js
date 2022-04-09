@@ -1,7 +1,7 @@
-import { LocalStorageAuthUtil } from "./utils";
-import iaxios from "./../../iaxios";
+import { LocalStorageAuthUtil } from './utils';
+import iaxios from './../../iaxios';
 
-import { SET_TOKEN, SET_BLOCK, SET_LOADER } from "./actionTypes";
+import { SET_TOKEN, SET_BLOCK, SET_LOADER } from './actionTypes';
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -12,7 +12,7 @@ export function getBlock(id) {
     const userData = ls.getItems();
     iaxios
       .get(`/api/get_block?id=${userData.blockId}`, {
-        headers: { "Api-Token": `${userData.token}` },
+        headers: { 'Api-Token': `${userData.token}` },
       })
       .then((response) => {
         const data = response.data;
@@ -37,19 +37,15 @@ const blobToBase64 = (blob) => {
 export function sendAudio(audiofile, partId, questionId) {
   const userData = ls.getItems();
 
-  blobToBase64(audiofile).then((base64Data) => {
-    const file = "data:audio/webm;base64," + base64Data;
-
-    let audioFile = new File([file], "recording.mp3");
-    const formData = new FormData();
-    formData.append("audio", audioFile);
-    formData.append([`part${partId}_id`], JSON.stringify(questionId));
-    console.log("hhhh", file, "ggg", audioFile);
-    return iaxios.post("/api/store_answer", formData, {
-      headers: {
-        "Api-Token": `${userData.token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+  let audioFile = new File([audiofile], 'recording.mp3');
+  const formData = new FormData();
+  formData.append('audio', audioFile);
+  formData.append([`part${partId}_id`], JSON.stringify(questionId));
+  //console.log('hhhh', audioFile.size, 'ggg', audiofile.size);
+  return iaxios.post('/api/store_answer', formData, {
+    headers: {
+      'Api-Token': `${userData.token}`,
+      'Content-Type': 'multipart/form-data',
+    },
   });
 }
