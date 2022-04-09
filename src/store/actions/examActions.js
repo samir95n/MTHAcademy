@@ -25,16 +25,31 @@ export function getBlock(id) {
       });
   };
 }
-export async function sendAudio(audiofile, partId, questionId) {
+const blobToBase64 = (blob) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(blob);
+  return new Promise((resolve) => {
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+  });
+};
+export function sendAudio(audiofile, partId, questionId) {
   const userData = ls.getItems();
-  const formData = await new FormData();
-  await formData.append("file", audiofile);
-  console.log("aaa", formData, audiofile);
-  iaxios.post(`/api/store_answer`, {
-    headers: {
-      "Api-Token": `${userData.token}`,
-      "Content-Type": "multipart/form-data",
-    },
-    data: { formData, [`part${partId}_id`]: questionId },
+
+  blobToBase64(audiofile).then((base64Data) => {
+    const file = "data:audio/webm;base64," + base64Data;
+
+    let audioFile = new File([file], "recording.mp3");
+    const formData = new FormData();
+    formData.append("audio", audioFile);
+    formData.append([`part${partId}_id`], JSON.stringify(questionId));
+    console.log("hhhh", file, "ggg", audioFile);
+    return iaxios.post("/api/store_answer", formData, {
+      headers: {
+        "Api-Token": `${userData.token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
   });
 }
