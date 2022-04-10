@@ -54,10 +54,18 @@ export function login(input, password) {
 }
 
 export function logout() {
+  console.log("logOUT");
+  const userData = ls.getItems();
   return (dispatch) => {
+    console.log("logOUT2");
     dispatch(setAuthParams(null));
-    iaxios.post("/auth/logout/");
+    iaxios.get("/api/auth/logout", {
+      headers: {
+        "Api-Token": `${userData.token}`,
+      },
+    });
     ls.removeItems("username", "token", "userId", "isAdmin");
+    console.log("logOUT3");
   };
 }
 

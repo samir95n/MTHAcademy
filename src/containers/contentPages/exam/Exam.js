@@ -5,7 +5,7 @@ import Clock from "../../../components/UI/clock/Clock";
 import Timer from "../../../components/UI/timer/Timer";
 import Mic from "../../../components/UI/mic/Mic";
 import Pause from "../../../components/UI/pause/Pause";
-import BeepSound from "../../../assets/beepSound.wav";
+import BeepSound from "../../../assets/beep.mp3";
 
 import useRecorder from "../../../handler/useRecorder";
 import { sendAudio } from "../../../store/actions/examActions";
@@ -18,27 +18,26 @@ import {
   SET_TIMER,
   SET_RESET_TIMER,
   RESET_TIMER,
+  SET_QUESTION,
 } from "../../../store/actions/actionTypes";
 
 import "./exam.scss";
 import image from "../../../assets/girl.png";
 
-const callBeep = async () => {
-  let myAudio = await new Audio(BeepSound);
-  if (myAudio) {
-    myAudio.play();
-  }
+const callBeep = () => {
+  let myAudio = new Audio(BeepSound);
+  myAudio.volume = 0.03;
+  myAudio.play();
 };
 
 function Exam(props) {
   // recording
-  const [timerCount, setTimerCount] = React.useState(props.question.timer);
+  const [timerCount, setTimerCount] = React.useState(null);
   const [resetTimer, setResetTimer] = React.useState(false);
 
   const { recorderState, ...handlers } = useRecorder();
   const { recordingTime, initRecording, audio } = recorderState;
   const { startRecording, saveRecording, cancelRecording } = handlers;
-
   React.useEffect(() => {
     if (timerCount > 0) {
       const setIntervalVal = setInterval(
@@ -55,9 +54,12 @@ function Exam(props) {
     }
   }, [timerCount]);
   React.useEffect(() => {
+    setTimerCount(props.question.timer);
+  }, [props.question]);
+  React.useEffect(() => {
     if (resetTimer) {
       const setTimeOut = setTimeout(() => {
-        //callBeep();
+        callBeep();
         setTimerCount(props.question.timer);
         startRecording();
       }, 3000);
@@ -66,11 +68,18 @@ function Exam(props) {
   }, [resetTimer]);
   React.useEffect(() => {
     if (audio) {
-      props.sendAudio(audio, props.currentPart, props.question.id);
+      sendAudio(audio, props.currentPart, props.question.id);
+      nextQuestion();
     }
   }, [audio]);
   // console.log(audio, "recordtime");
   //return <p>fddfdf</p>;
+
+  const nextQuestion = () => {
+    cancelRecording();
+    setResetTimer(false);
+    props.changeQuestion();
+  };
   return (
     <>
       <HeaderText
@@ -78,45 +87,38 @@ function Exam(props) {
       />
       <Grid container spacing={0} className="examContainer">
         <Grid item md={9} xs={12}>
-          {props.currrentQuestion == 0 && props.currentPart === 1 && (
+          {props.currrentQuestion === 0 && props.currentPart === 1 && (
             <>
               <div className="imageBlock">
                 <img src={image} alt="exam_image" />
               </div>
             </>
           )}
-          {props.currrentQuestion == 1 && props.currentPart === 2 && (
+          {props.currrentQuestion === 0 && props.currentPart === 2 && (
             <>
               <div className="listsBlock">
                 <div className="listsRow">
                   <div className="listItem">
                     <div className="listHead">
-                      <span>For</span>
+                      <span>{props.question.title1}</span>
                     </div>
                     <div className="listBody">
                       <ul>
-                        <li>
-                          Online courses are easily accessible and flexible
-                        </li>
-                        <li>
-                          Online courses give students more autonomy and control
-                          over their education
-                        </li>
-                        <li>They create a room for real life learning.</li>
+                        {props.question.text1.split(".").map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
                       </ul>
                     </div>
                   </div>
                   <div className="listItem">
                     <div className="listHead">
-                      <span>Against</span>
+                      <span>{props.question.title2}</span>
                     </div>
                     <div className="listBody">
                       <ul>
-                        <li>Traditional education is more result oriented</li>
-                        <li>
-                          Online classes require a great deal of self-discipline
-                        </li>
-                        <li>They often result in reduced social interaction</li>
+                        {props.question.text2.split(".").map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -149,15 +151,15 @@ function Exam(props) {
                   </p>
                   <div className="flexBlock">
                     <Pause
+                      disabled={!initRecording}
                       onClick={() => {
-                        //saveRecording();
+                        saveRecording();
                       }}
                     />
                   </div>
                 </div>
               </>
             )}
-            {audio && <audio controls src={audio}></audio>}
           </div>
         </Grid>
       </Grid>
@@ -187,8 +189,7 @@ function mapDispatchToProps(dispatch) {
     // dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),
     onResetTime: (timeState) =>
       dispatch({ type: RESET_TIMER, payload: timeState }),
-    sendAudio: (audio, partId, questionId) =>
-      sendAudio(audio, partId, questionId),
+    changeQuestion: () => dispatch({ type: SET_QUESTION }),
   };
 }
 

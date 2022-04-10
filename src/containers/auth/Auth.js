@@ -55,6 +55,7 @@ function Auth(props) {
             <TextField
               className="authInput"
               placeholder="Enter password"
+              type="password"
               variant="outlined"
               value={password}
               onChange={(event) => setPassowrd(event.target.value)}
