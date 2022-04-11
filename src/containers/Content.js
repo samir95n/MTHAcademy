@@ -12,7 +12,7 @@ import Finish from "./contentPages/finish/Finish";
 
 function Content(props) {
   React.useEffect(() => {
-    props.getBlock();
+    props.getBlock(props.blockId);
   }, []);
   return (
     <>
@@ -27,12 +27,13 @@ function Content(props) {
 function mapStateToProps(state) {
   return {
     currrentPage: state.pagination.currentPage.pageName,
+    blockId: state.auth.blockId,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBlock: () => dispatch(getBlock()),
+    getBlock: (blockId) => dispatch(getBlock(blockId)),
   };
 }
 

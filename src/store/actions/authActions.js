@@ -11,9 +11,9 @@ function setAuthParams(authData) {
   // With this way we wont need pass token for each request.
   // if authData doesn't exist then delete default header of iaxios
   if (authData && authData.token) {
-    iaxios.defaults.headers.common["Authorization"] = `Token ${authData.token}`;
+    iaxios.defaults.headers.common["Api-Token"] = authData.token;
   } else if (authData === null) {
-    delete iaxios.defaults.headers.common["Authorization"];
+    delete iaxios.defaults.headers.common["Api-Token"];
   }
   return {
     ...authData,
@@ -30,18 +30,14 @@ export function login(input, password) {
         const { user } = response.data.data;
         ls.setItems({
           token: user.api_token,
-          username: user.username,
-          userId: user.id,
-          isAdmin: user.is_admin,
-          blockId: user.block,
         });
         dispatch(
           setAuthParams({
             token: user.api_token,
             username: user.username,
             userId: user.id,
-            isAdmin: user.is_admin,
-            blockId: user.block,
+            role: user.role,
+            blockId: user.block_id,
           })
         );
         dispatch({ type: SET_LOADER, payload: false });
@@ -54,27 +50,49 @@ export function login(input, password) {
 }
 
 export function logout() {
-  console.log("logOUT");
   const userData = ls.getItems();
   return (dispatch) => {
-    console.log("logOUT2");
     dispatch(setAuthParams(null));
     iaxios.get("/api/auth/logout", {
       headers: {
         "Api-Token": `${userData.token}`,
       },
     });
-    ls.removeItems("username", "token", "userId", "isAdmin");
-    console.log("logOUT3");
+    ls.removeItems("token");
   };
 }
-
+export function checkByToken(Apitoken) {
+  return (dispatch) => {
+    dispatch({ type: SET_LOADER, payload: true });
+    iaxios
+      .get("/api/auth/check_user", {
+        headers: { "Api-Token": Apitoken },
+      })
+      .then((response) => {
+        const { user } = response.data;
+        dispatch(
+          setAuthParams({
+            token: user[0].api_token,
+            username: user[0].username,
+            userId: user[0].id,
+            role: user[0].role,
+            blockId: user[0].block_id,
+          })
+        );
+        dispatch({ type: SET_LOADER, payload: false });
+      })
+      .catch((err) => {
+        dispatch({ type: SET_AUTH_ERROR, payload: true });
+        dispatch({ type: SET_LOADER, payload: false });
+      });
+  };
+}
 // get auth data from local storage and set as auth params
 export function checkAuth() {
   return (dispatch) => {
     const authData = ls.getItems();
     if (authData.token) {
-      dispatch(setAuthParams(authData));
+      dispatch(checkByToken(authData.token));
     } else {
       dispatch(setAuthParams(null));
     }

@@ -1,15 +1,19 @@
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 
 import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 
 import { SET_QUESTION_PART } from "../../../../store/actions/actionTypes";
+import { getAnswers } from "../../../../store/actions/adminActions";
+
 import PartNav from "../../../../components/UI/partNav";
 
 import "./style.scss";
 
 function AnswersList(props) {
-  console.log(props.currentPart);
+  React.useEffect(() => {
+    props.getAnswer(props.studentId);
+  }, []);
   return (
     <div className="answersList">
       <div className="answersListDate">
@@ -62,13 +66,13 @@ function AnswersList(props) {
 function mapStateToProps(state) {
   return {
     currentPart: state.admin.currentPart,
+    studentId: state.admin.selectedStudent,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeQuestionPart: (partNumber) =>
-      dispatch({ type: SET_QUESTION_PART, payload: partNumber }),
+    getAnswer: (id) => dispatch(getAnswers(id)),
   };
 }
 

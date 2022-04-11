@@ -16,5 +16,11 @@ export const SET_QUESTION_PART = "SET_QUESTION_PART";
 export const SET_QUESTION = "SET_QUESTION";
 export const SET_INITIAL = "SET_INITIAL";
 
+export const SET_INITIAL_PAGE_BY_ROLE = "SET_INITIAL_PAGE_BY_ROLE";
+export const SET_INITIAL_STATE = "SET_INITIAL_STATE";
+export const SET_STUDENTS = "SET_STUDENTS";
+export const SET_STUDENTS_ID = "SET_STUDENTS_ID";
+export const SET_ANSWER = "SET_ANSWER";
+
 export const SET_AUTH_ERROR = "SET_AUTH_ERROR";
 export const SET_LOADER = "SET_LOADER";

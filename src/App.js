@@ -20,15 +20,19 @@ function App(props) {
 
   const routes = useMemo(() => {
     if (props.token) {
-      if (props.isAdmin) {
+      if (
+        props.role == "teacher" ||
+        props.role == "admin" ||
+        props.role == "operator"
+      ) {
         return <Admin />;
-      } else {
+      } else if (props.role == "student") {
         return <Content />;
       }
     } else {
       return <Auth />;
     }
-  }, [props.token]);
+  }, [props.token, props.role]);
 
   return (
     <>
@@ -41,7 +45,7 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     token: state.auth.token,
-    isAdmin: state.auth.isAdmin,
+    role: state.auth.role,
     loader: state.errors.loader,
   };
 }

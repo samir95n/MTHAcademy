@@ -4,7 +4,7 @@ const initialState = {
   token: false,
   username: "",
   userId: null,
-  isAdmin: 0,
+  role: null,
   blockId: null,
 };
 
@@ -14,7 +14,8 @@ const setAuthParams = (state, action) => {
     token: action.token,
     username: action.username,
     userId: action.userId,
-    isAdmin: action.isAdmin,
+    role: action.role,
+    blockId: action.blockId,
   };
 };
 
