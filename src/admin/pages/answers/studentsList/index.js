@@ -3,58 +3,57 @@ import React from "react";
 import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { SET_STUDENTS_ID } from "../../../../store/actions/actionTypes";
-
+import Table from "../../../../components/UI/table/Table";
 function StudentsList(props) {
   //console.log(props.currentPart);
+  const tHead = React.useMemo(() => {
+    const head = [
+      { name: "id", class: "" },
+      { name: "Name", class: "" },
+      { name: "Exam date", class: "" },
+      { name: "teacher", class: "" },
+      { name: "Question blok", class: "answerTableCenter" },
+      { name: "answers", class: "answerTableCenter" },
+      { name: "delete", class: "answerTableCenter" },
+    ];
+    return head.filter(
+      (item) => !(props.role !== "admin" && item.name === "teacher")
+    );
+  }, []);
+  const tBody = React.useMemo(() => {
+    const body = props.students?.map((item, index) => {
+      return [
+        ++index,
+        item.name + " " + item.surname,
+        item.exam_date ? item.exam_date?.split(" ")[0] : "-",
+        item.teacher_name + " " + item.teacher_surname,
+        <span>{item.block_id}</span>,
+        <span
+          className="answersIcon"
+          onClick={() => {
+            props.getAnswer(item.id);
+            props.setPage("answers");
+          }}
+        >
+          <AssignmentTurnedIn style={{ color: "#006ade", fontSize: "22px" }} />
+        </span>,
+        <span className="answersIcon">
+          <Delete style={{ color: "red", fontSize: "22px" }} />
+        </span>,
+      ];
+    });
+    if (props.role !== "admin") {
+      return body?.map((item) => {
+        item.splice(3, 1);
+        return item;
+      });
+    }
+    return body;
+  }, [props.students]);
   return (
     <div className="answersPage">
       <div className="answerTable">
-        <table>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>Exam date</th>
-              {props.role === "admin" && <th>teacher</th>}
-              <th className="answerTableCenter">Question blok</th>
-              <th className="answerTableCenter">answers</th>
-              <th className="answerTableCenter">delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {props.students?.map((item, index) => (
-              <tr key={index}>
-                <td>{++index}</td>
-                <td>{item.name + " " + item.surname}</td>
-                <td>{item.exam_date ? item.exam_date?.split(" ")[0] : "-"}</td>
-                {props.role === "admin" && (
-                  <td>{item.teacher_name + " " + item.teacher_surname}</td>
-                )}
-                <td>
-                  <span>{item.block_id}</span>
-                </td>
-                <td>
-                  <span
-                    className="answersIcon"
-                    onClick={() => {
-                      props.getAnswer(item.id);
-                      props.setPage("answers");
-                    }}
-                  >
-                    <AssignmentTurnedIn
-                      style={{ color: "#006ade", fontSize: "22px" }}
-                    />
-                  </span>
-                </td>
-                <td>
-                  <span className="answersIcon">
-                    <Delete style={{ color: "red", fontSize: "22px" }} />
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table thead={tHead} tbody={tBody} />
       </div>
     </div>
   );

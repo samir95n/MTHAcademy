@@ -1,143 +1,58 @@
-import { useEffect, useMemo } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Container, TextField } from "@mui/material";
+import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
+
+import CreateUser from "./createUser";
+import UsersTable from "./usersTable";
 import CustomButton from "../../../components/UI/customButton/CustomButton";
 
-import { SET_CURRENT_PAGE } from "../../../store/actions/actionTypes";
+import { getTeachers, getOperators } from "../../../store/actions/adminActions";
 
 import "./style.scss";
 
 function Users(props) {
+  const [page, setPage] = React.useState("table");
+  React.useEffect(() => {
+    props.teachers || props.getTeachers();
+    (props.role === "admin" && props.operators) || props.getOperators();
+  }, []);
+
   return (
-    <div className="settingsPage">
-      <div className="settingsBlock">
-        <div className="settingsForm">
-          <h2 className="settingsGreeting">Create User</h2>
-          <div className="settingsItem">
-            <p className="settingsP">Name</p>
-            <TextField
-              className="settingsInput"
-              placeholder="Enter User Name"
-              variant="outlined"
-              //onChange={(event) => setInput(event.target.value)}
-              // onKeyPress={handleKeyPress}
-              inputProps={{
-                style: {
-                  fontSize: 16,
-                  height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
-                },
-              }}
-            />
-          </div>
-          <div className="settingsItem">
-            <p className="settingsP">Surname</p>
-            <TextField
-              className="settingsInput"
-              placeholder="Enter User Surname"
-              variant="outlined"
-              //onChange={(event) => setInput(event.target.value)}
-              // onKeyPress={handleKeyPress}
-              inputProps={{
-                style: {
-                  fontSize: 16,
-                  height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
-                },
-              }}
-            />
-          </div>
-          <div className="settingsItem">
-            <p className="settingsP">Mail</p>
-            <TextField
-              className="settingsInput"
-              placeholder="Enter User Mail"
-              variant="outlined"
-              //onChange={(event) => setInput(event.target.value)}
-              // onKeyPress={handleKeyPress}
-              inputProps={{
-                style: {
-                  fontSize: 16,
-                  height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
-                },
-              }}
-            />
-          </div>
-          <div className="settingsItem">
-            <p className="settingsP">Login</p>
-            <TextField
-              className="settingsInput"
-              placeholder="Enter User Login"
-              variant="outlined"
-              //onChange={(event) => setInput(event.target.value)}
-              // onKeyPress={handleKeyPress}
-              inputProps={{
-                style: {
-                  fontSize: 16,
-                  height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
-                },
-              }}
-            />
-          </div>
-          <div className="settingsItem">
-            <p className="settingsP">Password</p>
-            <TextField
-              className="settingsInput"
-              placeholder="Enter password"
-              variant="outlined"
-              // value={password}
-              // onChange={(event) => setPassowrd(event.target.value)}
-              // onKeyPress={handleKeyPress}
-              inputProps={{
-                style: {
-                  fontSize: 16,
-                  height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
-                },
-              }}
-            />
-          </div>
-          <div className="settingsItem">
-            <p className="settingsP">Choose Blok</p>
-            <div className="settingsItemSelect">
-              <select className="settingsItemSelectItem">
-                {blocks.map((blok) => (
-                  <option value={blok}>{blok}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="settingsBtn">
-          <CustomButton
-            name={"Create"}
-            //onClick={buttonClickHandler}
-          />
-        </div>
+    <div className="usersPage">
+      <div className="usersPageBtn">
+        <CustomButton
+          name={page === "table" ? "Create User" : "< Back"}
+          onClick={() =>
+            setPage((prev) => (prev === "table" ? "create" : "table"))
+          }
+        />
       </div>
+      {page === "table" && (
+        <UsersTable
+          teachers={props.teachers}
+          operators={props.role === "admin" ? props.operators : null}
+        />
+      )}
+      {page === "create" && <CreateUser />}
     </div>
   );
 }
+
 function mapStateToProps(state) {
   return {
-    currentPage: state.admin.currentPage,
+    teachers: state.admin.teachers,
+    operators: state.admin.operators,
+    role: state.auth.role,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) =>
-      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    getTeachers: () => dispatch(getTeachers()),
+    getOperators: () => dispatch(getOperators()),
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);
 
-const blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

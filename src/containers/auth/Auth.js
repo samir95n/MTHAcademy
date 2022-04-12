@@ -17,7 +17,7 @@ function Auth(props) {
 
   const handleKeyPress = React.useCallback(
     (event) => {
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && input.length > 3 && password.length > 3) {
         buttonClickHandler();
       }
     },
@@ -38,6 +38,7 @@ function Auth(props) {
               className="authInput"
               placeholder="Enter User Name"
               variant="outlined"
+              value={input}
               onChange={(event) => setInput(event.target.value)}
               onKeyPress={handleKeyPress}
               inputProps={{
@@ -72,7 +73,11 @@ function Auth(props) {
           </div>
         </div>
         <div className="authBtn">
-          <CustomButton name={"Sign In"} onClick={buttonClickHandler} />
+          <CustomButton
+            name={"Sign In"}
+            onClick={buttonClickHandler}
+            disabled={!(input.length > 3 && password.length > 3)}
+          />
         </div>
         <div className="authError">
           {props.error && <p>Incorrect username or password</p>}

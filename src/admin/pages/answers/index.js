@@ -30,7 +30,6 @@ function Answers(props) {
 }
 function mapStateToProps(state) {
   return {
-    currentPage: state.admin.currentPage,
     students: state.admin.students,
     role: state.auth.role,
   };

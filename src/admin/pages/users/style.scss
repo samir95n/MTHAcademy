@@ -1,16 +1,9 @@
-.settingsItemSelect {
-  .settingsItemSelectItem {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    color: #100a30;
-    height: 50px;
-    width: 100%;
-    padding: 5px 10px;
-    border-radius: 4px;
+.usersPage {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  .usersPageBtn {
+    max-width: 250px;
+    margin-bottom: 30px;
   }
 }
