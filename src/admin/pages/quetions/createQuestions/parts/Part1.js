@@ -6,7 +6,22 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 import "../style.scss";
 
-function Part1(props) {
+function Part1({ question, timer, setQuestion }) {
+  const addValueHandle = (e, type, input, number) => {
+    const target = e.target.value;
+    setQuestion((prev) => {
+      const newArr = prev.part1[type].map((item) => {
+        if (item[`${type}_number`] === number) {
+          return { ...item, [input]: target };
+        }
+        return item;
+      });
+      return {
+        ...prev,
+        part1: { ...prev.part1, [type]: newArr },
+      };
+    });
+  };
   return (
     <div className="createQuestionsPart">
       <h6 className="createQuestionsPartHead">Part-1</h6>
@@ -22,7 +37,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={2}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
+                value={question.question[0].title}
+                onChange={(e) => addValueHandle(e, "question", "title", 1)}
                 // onKeyPress={handleKeyPress}
                 inputProps={{
                   style: {
@@ -57,8 +73,13 @@ function Part1(props) {
             <div className="createQuestionsInputItem">
               <p className="createQuestionP">Timer</p>
               <div className="timerSelect">
-                <select className="timerSelectItem">
-                  {props.timer.map((minutes) => (
+                <select
+                  className="timerSelectItem"
+                  defaultValue={question.question[0].timer}
+                  onChange={(e) => addValueHandle(e, "question", "timer", 1)}
+                >
+                  <option></option>
+                  {timer.map((minutes) => (
                     <option value={minutes}>{minutes}</option>
                   ))}
                 </select>
@@ -75,8 +96,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={2}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.question[1].title}
+                onChange={(e) => addValueHandle(e, "question", "title", 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -89,8 +110,13 @@ function Part1(props) {
             <div className="createQuestionsInputItem">
               <p className="createQuestionP">Timer</p>
               <div className="timerSelect">
-                <select className="timerSelectItem">
-                  {props.timer.map((minutes) => (
+                <select
+                  className="timerSelectItem"
+                  defaultValue={question.question[1].timer}
+                  onChange={(e) => addValueHandle(e, "question", "timer", 2)}
+                >
+                  <option></option>
+                  {timer.map((minutes) => (
                     <option value={minutes}>{minutes}</option>
                   ))}
                 </select>
@@ -107,8 +133,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={2}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.question[2].title}
+                onChange={(e) => addValueHandle(e, "question", "title", 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -121,8 +147,13 @@ function Part1(props) {
             <div className="createQuestionsInputItem">
               <p className="createQuestionP">Timer</p>
               <div className="timerSelect">
-                <select className="timerSelectItem">
-                  {props.timer.map((minutes) => (
+                <select
+                  className="timerSelectItem"
+                  defaultValue={question.question[2].timer}
+                  onChange={(e) => addValueHandle(e, "question", "timer", 3)}
+                >
+                  <option></option>
+                  {timer.map((minutes) => (
                     <option value={minutes}>{minutes}</option>
                   ))}
                 </select>
@@ -141,8 +172,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={2}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.description[0].title}
+                onChange={(e) => addValueHandle(e, "description", "title", 1)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -160,8 +191,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={4}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.description[0].text}
+                onChange={(e) => addValueHandle(e, "description", "text", 1)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -179,8 +210,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={2}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.description[1].title}
+                onChange={(e) => addValueHandle(e, "description", "title", 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -198,8 +229,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={6}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.description[1].text}
+                onChange={(e) => addValueHandle(e, "description", "text", 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -217,8 +248,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={2}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.description[2].title}
+                onChange={(e) => addValueHandle(e, "description", "title", 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
@@ -236,8 +267,8 @@ function Part1(props) {
                 variant="outlined"
                 rows={6}
                 multiline
-                //onChange={(event) => setInput(event.target.value)}
-                // onKeyPress={handleKeyPress}
+                value={question.description[2].text}
+                onChange={(e) => addValueHandle(e, "description", "text", 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,

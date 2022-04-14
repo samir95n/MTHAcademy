@@ -7,15 +7,19 @@ import {
   SET_OPERATORS,
   SET_STUDENTS_ID,
   SET_ANSWER,
+  SET_ALL_BLOCK,
+  UPDATE_USERS,
 } from "../actions/actionTypes";
 
 const initialState = {
   currentPage: "answers",
   students: null,
+  totalPages: null,
   teachers: null,
   operators: null,
   selectedStudent: null,
   answers: null,
+  allBlock: [],
 };
 
 const setCurrentPage = (state, action) => {
@@ -33,7 +37,8 @@ const setPageByRole = (state, action) => {
 const setStudents = (state, action) => {
   return {
     ...state,
-    students: action.payload,
+    students: action.payload.data,
+    totalPages: action.payload.last_page,
   };
 };
 const setTeacher = (state, action) => {
@@ -48,6 +53,21 @@ const setOperators = (state, action) => {
     operators: action.payload,
   };
 };
+const updateUsers = (state, action) => {
+  const users = state[action.type];
+  if (users.length <= 1) {
+    return {
+      ...state,
+      [action.type]: null,
+    };
+  } else {
+    const newUser = users.filter((item) => item.id !== action.id);
+    return {
+      ...state,
+      [action.type]: newUser,
+    };
+  }
+};
 
 function adminReducer(state = initialState, action) {
   switch (action.type) {
@@ -61,10 +81,14 @@ function adminReducer(state = initialState, action) {
       return setTeacher(state, action);
     case SET_OPERATORS:
       return setOperators(state, action);
+    case UPDATE_USERS:
+      return updateUsers(state, action.payload);
     case SET_STUDENTS_ID:
       return { ...state, selectedStudent: action.payload };
     case SET_ANSWER:
       return { ...state, answers: action.payload };
+    case SET_ALL_BLOCK:
+      return { ...state, allBlock: action.payload };
     case SET_INITIAL_STATE:
       return { ...initialState };
     default:

@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 
+import "./style.scss";
+
 import ContentLayout from "../HOC/layout/contentLayout/ContentLayout";
 import Nav from "../components/UI/nav";
 import {
@@ -14,7 +16,6 @@ import Users from "./pages/users";
 import Quetions from "./pages/quetions";
 import Answers from "./pages/answers";
 import Settings from "./pages/settings";
-
 function Admin(props) {
   React.useEffect(() => {
     if (props.role === "operator") props.checkPageByRole("quetions");

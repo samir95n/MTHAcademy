@@ -6,11 +6,11 @@ import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 import Table from "../../../../components/UI/table/Table";
 import CustomButton from "../../../../components/UI/customButton/CustomButton";
 
-import { SET_CURRENT_PAGE } from "../../../../store/actions/actionTypes";
+import { deleteUser } from "../../../../store/actions/adminActions";
 
 import "./style.scss";
 
-function UsersTable({ teachers, operators, role }) {
+function UsersTable({ teachers, operators, role, deleteUserHandle }) {
   const thead = React.useMemo(() => {
     return [
       { name: "id", class: "" },
@@ -26,7 +26,10 @@ function UsersTable({ teachers, operators, role }) {
         item.name,
         item.surname,
         <span className="answersIcon">
-          <Delete style={{ color: "red", fontSize: "22px" }} />
+          <Delete
+            style={{ color: "red", fontSize: "22px" }}
+            onClick={() => deleteUserHandle(item.id, "teachers")}
+          />
         </span>,
       ];
     });
@@ -38,7 +41,10 @@ function UsersTable({ teachers, operators, role }) {
         item.name,
         item.surname,
         <span className="answersIcon">
-          <Delete style={{ color: "red", fontSize: "22px" }} />
+          <Delete
+            style={{ color: "red", fontSize: "22px" }}
+            onClick={() => deleteUserHandle(item.id, "operators")}
+          />
         </span>,
       ];
     });
@@ -68,11 +74,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) =>
-      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    deleteUserHandle: (id, type) => dispatch(deleteUser(id, type)),
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersTable);
-
-const blocks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

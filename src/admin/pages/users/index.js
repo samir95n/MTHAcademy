@@ -13,13 +13,13 @@ import "./style.scss";
 function Users(props) {
   const [page, setPage] = React.useState("table");
   React.useEffect(() => {
-    props.teachers || props.getTeachers();
-    (props.role === "admin" && props.operators) || props.getOperators();
-  }, []);
+    props.getTeachers();
+    props.role === "admin" && props.getOperators();
+  }, [page]);
 
   return (
     <div className="usersPage">
-      <div className="usersPageBtn">
+      <div className="adminBtn">
         <CustomButton
           name={page === "table" ? "Create User" : "< Back"}
           onClick={() =>
@@ -27,13 +27,16 @@ function Users(props) {
           }
         />
       </div>
-      {page === "table" && (
-        <UsersTable
+      {page === "table" && props.role === "admin" && (
+        <UsersTable teachers={props.teachers} operators={props.operators} />
+      )}
+      {page === "create" && (
+        <CreateUser
           teachers={props.teachers}
-          operators={props.role === "admin" ? props.operators : null}
+          role={props.role}
+          setPage={setPage}
         />
       )}
-      {page === "create" && <CreateUser />}
     </div>
   );
 }

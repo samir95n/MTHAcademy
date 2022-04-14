@@ -2,9 +2,19 @@ import React from "react";
 
 import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 import { connect } from "react-redux";
+
+import { getStudents } from "../../../../store/actions/adminActions";
 import { SET_STUDENTS_ID } from "../../../../store/actions/actionTypes";
+
 import Table from "../../../../components/UI/table/Table";
+import { Pagination } from "@mui/material";
+import "./style.scss";
+
 function StudentsList(props) {
+  const [page, setPage] = React.useState(1);
+  React.useEffect(() => {
+    props.getStudents(page);
+  }, [page]);
   //console.log(props.currentPart);
   const tHead = React.useMemo(() => {
     const head = [
@@ -23,7 +33,7 @@ function StudentsList(props) {
   const tBody = React.useMemo(() => {
     const body = props.students?.map((item, index) => {
       return [
-        ++index,
+        (page - 1) * 10 + 1 + index,
         item.name + " " + item.surname,
         item.exam_date ? item.exam_date?.split(" ")[0] : "-",
         item.teacher_name + " " + item.teacher_surname,
@@ -50,24 +60,37 @@ function StudentsList(props) {
     }
     return body;
   }, [props.students]);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+  console.log("page", page);
   return (
     <div className="answersPage">
       <div className="answerTable">
         <Table thead={tHead} tbody={tBody} />
+      </div>
+      <div className="paginationBlock">
+        <Pagination
+          count={props.totalPages}
+          page={page}
+          onChange={handleChange}
+        />
       </div>
     </div>
   );
 }
 function mapStateToProps(state) {
   return {
-    currentPart: state.admin.currentPart,
+    students: state.admin.students,
+    totalPages: state.admin.totalPages,
+    role: state.auth.role,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getAnswer: (id) => dispatch({ type: SET_STUDENTS_ID, payload: id }),
+    getStudents: (page) => dispatch(getStudents(page)),
   };
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(StudentsList);

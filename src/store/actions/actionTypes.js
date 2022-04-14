@@ -23,6 +23,8 @@ export const SET_TEACHERS = "SET_TEACHERS";
 export const SET_OPERATORS = "SET_OPERATORS";
 export const SET_STUDENTS_ID = "SET_STUDENTS_ID";
 export const SET_ANSWER = "SET_ANSWER";
+export const SET_ALL_BLOCK = "SET_ALL_BLOCK";
+export const UPDATE_USERS = "UPDATE_USERS";
 
 export const SET_AUTH_ERROR = "SET_AUTH_ERROR";
 export const SET_LOADER = "SET_LOADER";
