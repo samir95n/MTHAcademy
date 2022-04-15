@@ -13,7 +13,7 @@ function Answers(props) {
   return (
     <>
       {page === "students" && <StudentsList setPage={setPage} />}
-      {page === "answers" && <AnswersList />}
+      {page === "answers" && <AnswersList setPage={setPage} />}
     </>
   );
 }

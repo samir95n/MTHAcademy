@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import {
   getStudents,
   deleteUser,
+  getAnswers,
 } from "../../../../store/actions/adminActions";
 import { SET_STUDENTS_ID } from "../../../../store/actions/actionTypes";
 
@@ -119,7 +120,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAnswer: (id) => dispatch({ type: SET_STUDENTS_ID, payload: id }),
+    getAnswer: (id) => dispatch(getAnswers(id)),
     getStudents: (page, rowsPerPage) =>
       dispatch(getStudents(page, rowsPerPage)),
     deleteUserHandle: (id, type) => dispatch(deleteUser(id, type)),

@@ -18,8 +18,12 @@ function CreateQuestions(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
   const [question, setQuestion] = React.useState(initialState);
   const [image, setImage] = React.useState(null);
-  console.log("question", question);
-
+  console.log("question", props.updatedBlock, question, initialState);
+  React.useEffect(() => {
+    if (props.updatedBlock) {
+      setQuestion(props.updatedBlock.block);
+    }
+  }, [props.updatedBlock]);
   const checkPart1 =
     question.part1.question.some(
       (item) => item.title.length < 5 || !item.timer
@@ -29,25 +33,27 @@ function CreateQuestions(props) {
     );
 
   const checkPart2 =
-    question.part2.question.title.length < 5 ||
-    question.part2.question.title1.length < 5 ||
-    question.part2.question.text1.length < 5 ||
-    question.part2.question.title2.length < 5 ||
-    question.part2.question.text2.length < 5 ||
-    !question.part2.question.timer ||
-    question.part2.description.some(
+    // question.part2.question.title.length < 5 ||
+    // question.part2.question.title1.length < 5 ||
+    // question.part2.question.text1.length < 5 ||
+    // question.part2.question.title2.length < 5 ||
+    // question.part2.question.text2.length < 5 ||
+    // !question.part2.question.timer ||
+    question.part2.description?.some(
       (item) => item.title.length < 5 || item.text.length < 5
     );
   const checkPart3 =
-    question.part3.question.title.length < 5 ||
-    !question.part3.question.timer ||
+    // question.part3.question.title.length < 5 ||
+    // !question.part3.question.timer ||
     question.part3.description.some(
       (item) => item.title.length < 5 || item.text.length < 5
     );
 
   return (
     <div className="createQuestions">
-      <h5 className="createQuestionsHead">Create Blok</h5>
+      <h5 className="createQuestionsHead">
+        {props.page === "update" ? "Update" : "Create"} Blok
+      </h5>
       <div className="createQuestionsNav">
         <PartNav onClick={setCurrentPart} active={currentPart} />
       </div>
@@ -79,10 +85,7 @@ function CreateQuestions(props) {
         <CustomButton
           name={"Create"}
           disabled={checkPart1 || checkPart2 || checkPart3 || !image}
-          onClick={() => {
-            props.saveHandle(question, image);
-            props.setPage("list");
-          }}
+          onClick={() => props.saveHandle(question, image)}
         />
       </div>
     </div>
@@ -90,7 +93,18 @@ function CreateQuestions(props) {
 }
 
 export default connect(null, null)(CreateQuestions);
-const time = [30, 60, 90, 120, 150, 180, 210, 240, 270, 300];
+const time = [
+  { value: 60, name: 1 },
+  { value: 120, name: 2 },
+  { value: 180, name: 3 },
+  { value: 240, name: 4 },
+  { value: 300, name: 5 },
+  { value: 360, name: 6 },
+  { value: 420, name: 7 },
+  { value: 480, name: 8 },
+  { value: 540, name: 9 },
+  { value: 600, name: 10 },
+];
 const initialState = {
   part1: {
     question: [

@@ -4,6 +4,7 @@ import CustomButton from "../../../components/UI/customButton/CustomButton";
 
 import {
   createBlock,
+  updateBlock,
   getBlock,
   deleteBlock,
 } from "../../../store/actions/adminActions";
@@ -15,9 +16,18 @@ import "./style.scss";
 
 function Quetions(props) {
   const [page, setPage] = React.useState("list");
-  const [selectedBlock, setSelectedBlock] = React.useState(null);
-  console.log("selectedBlock", selectedBlock);
-
+  const createQuestionHandle = (question, image) => {
+    createBlock(question, image);
+    setPage("list");
+  };
+  const updateQuestionHandle = (question, image) => {
+    createBlock(props.updatedBlock.id, question, image);
+    setPage("list");
+  };
+  const getBlockHandle = (id) => {
+    props.getBlock(id);
+    setPage("update");
+  };
   return (
     <div className="questionPage">
       <div className="adminBtn">
@@ -30,27 +40,33 @@ function Quetions(props) {
       </div>
       {page === "list" && (
         <QuetionsList
-          setSelectedBlock={setSelectedBlock}
-          getBlock={props.getBlock}
+          getBlock={getBlockHandle}
           deleteBlock={props.deleteBlock}
         />
       )}
       {page === "create" && (
-        <CreateQuestions setPage={setPage} saveHandle={createBlock} />
+        <CreateQuestions saveHandle={createQuestionHandle} />
       )}
-      {page === "update" && <CreateQuestions setPage={setPage} />}
+      {page === "update" && (
+        <CreateQuestions
+          saveHandle={updateQuestionHandle}
+          page={page}
+          updatedBlock={props.updatedBlock}
+        />
+      )}
     </div>
   );
 }
 function mapStateToProps(state) {
   return {
-    currentPage: state.admin.currentPage,
+    updatedBlock: state.admin.updatedBlock,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     createBlock: (block, img) => dispatch(createBlock(block, img)),
+    updateBlock: (id, block, img) => dispatch(updateBlock(id, block, img)),
     getBlock: (id) => dispatch(getBlock(id)),
     deleteBlock: (id) => dispatch(deleteBlock(id)),
   };

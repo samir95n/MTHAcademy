@@ -11,6 +11,7 @@ import {
   UPDATE_USERS,
   ADD_BLOCK,
   DELETE_BLOCK,
+  GET_BLOCK,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   selectedStudent: null,
   answers: null,
   allBlock: [],
+  updatedBlock: null,
 };
 
 const setCurrentPage = (state, action) => {
@@ -72,7 +74,19 @@ const updateUsers = (state, action) => {
     };
   }
 };
-
+const getBlock = (state, action) => {
+  return {
+    ...state,
+    updatedBlock: {
+      block: {
+        part1: action.data.part1,
+        part2: action.data.part2,
+        part3: action.data.part3,
+      },
+      id: action.id,
+    },
+  };
+};
 function adminReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_PAGE:
@@ -98,6 +112,8 @@ function adminReducer(state = initialState, action) {
         ...state,
         allBlock: [...state.allBlock, { id: action.payload }],
       };
+    case GET_BLOCK:
+      return getBlock(state, action.payload);
     case DELETE_BLOCK:
       return updateUsers(state, { type: "allBlock", id: action.payload });
     case SET_INITIAL_STATE:

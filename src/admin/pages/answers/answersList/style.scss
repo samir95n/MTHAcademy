@@ -1,4 +1,8 @@
 .answersList {
+  .answersListBtn {
+    max-width: 250px;
+    margin-bottom: 20px;
+  }
   .answersListDate {
     background: #f2f1d3;
     padding: 16px 19px;
@@ -42,6 +46,7 @@
     margin-bottom: 30px;
   }
   .answersListBlock {
+    margin-bottom: 20px;
     .answersPart {
       .answersVoiceItem {
         margin-bottom: 35px;

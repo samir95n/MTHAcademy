@@ -12,17 +12,6 @@ function QuetionsList(props) {
     props.getAllBlocks();
   }, []);
   // console.log("allBlock", props.allBlock);
-  const selectBlockHandle = (item) => {
-    props.setSelectedBlock((prev) => {
-      if (!prev) {
-        return item;
-      }
-      if (item.id != prev.id) {
-        return item;
-      }
-      return prev;
-    });
-  };
   return (
     <div className="quetionsList">
       <div className="quetionsListBlock">

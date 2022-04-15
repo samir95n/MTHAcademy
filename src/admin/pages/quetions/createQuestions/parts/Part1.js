@@ -80,8 +80,10 @@ function Part1({ question, timer, setQuestion, setImage }) {
                   onChange={(e) => addValueHandle(e, "question", "timer", 1)}
                 >
                   <option></option>
-                  {timer.map((minutes) => (
-                    <option value={minutes}>{minutes}</option>
+                  {timer.map((minutes, index) => (
+                    <option key={index} value={minutes.value}>
+                      {minutes.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -117,8 +119,10 @@ function Part1({ question, timer, setQuestion, setImage }) {
                   onChange={(e) => addValueHandle(e, "question", "timer", 2)}
                 >
                   <option></option>
-                  {timer.map((minutes) => (
-                    <option value={minutes}>{minutes}</option>
+                  {timer.map((minutes, index) => (
+                    <option key={index} value={minutes.value}>
+                      {minutes.name}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -154,8 +158,10 @@ function Part1({ question, timer, setQuestion, setImage }) {
                   onChange={(e) => addValueHandle(e, "question", "timer", 3)}
                 >
                   <option></option>
-                  {timer.map((minutes) => (
-                    <option value={minutes}>{minutes}</option>
+                  {timer.map((minutes, index) => (
+                    <option key={index} value={minutes.value}>
+                      {minutes.name}
+                    </option>
                   ))}
                 </select>
               </div>

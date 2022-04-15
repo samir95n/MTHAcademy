@@ -69,8 +69,10 @@ function Part3({ question, timer, setQuestion }) {
                   onChange={(e) => questionHandle(e, "timer")}
                 >
                   <option></option>
-                  {timer.map((minutes) => (
-                    <option value={minutes}>{minutes}</option>
+                  {timer.map((minutes, index) => (
+                    <option index={index} value={minutes.value}>
+                      {minutes.name}
+                    </option>
                   ))}
                 </select>
               </div>

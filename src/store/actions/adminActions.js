@@ -84,7 +84,7 @@ export function getAnswers(id) {
     iaxios
       .get(`/api/get_answer?user_id=${id}`)
       .then((response) => {
-        const data = response.data.students;
+        const data = response.data;
         //ls.setItems({ username, token, userId: id });
         dispatch({
           type: SET_ANSWER,
@@ -141,15 +141,12 @@ export function getBlock(id) {
     iaxios
       .get(`/api/get_block?id=${id}`)
       .then((response) => {
-        console.log(response.data.block);
-        console.log(response);
-
-        const data = response.data.block;
-        // //ls.setItems({ username, token, userId: id });s
-        // dispatch({
-        //   type: GET_BLOCK,
-        //   payload: data,
-        // });
+        const data = response.data;
+        //ls.setItems({ username, token, userId: id });s
+        dispatch({
+          type: GET_BLOCK,
+          payload: { data: data, id: id },
+        });
         dispatch({ type: SET_LOADER, payload: false });
       })
       .catch((err) => {
@@ -225,6 +222,27 @@ export function createBlock(block, image) {
           // console.log("response.block_id", response);
           dispatch({ type: ADD_BLOCK, payload: response.data.block_id });
           addImage(image, response.data.block_id);
+        }
+        dispatch({ type: SET_LOADER, payload: false });
+      })
+      .catch((err) => {
+        //dispatch({ type: SET_AUTH_ERROR, payload: true });
+        dispatch({ type: SET_LOADER, payload: false });
+      });
+  };
+}
+export function updateBlock(id, block, image) {
+  const body = JSON.stringify(block);
+  return (dispatch) => {
+    // let body = JSON.stringify(newUser);
+    dispatch({ type: SET_LOADER, payload: true });
+    iaxios
+      .put(`/api/edit_block?id=${id}`, block)
+      .then((response) => {
+        if (response.data.status) {
+          // console.log("response.block_id", response);
+          //dispatch({ type: ADD_BLOCK, payload: response.data.block_id });
+          image && addImage(image, id);
         }
         dispatch({ type: SET_LOADER, payload: false });
       })
