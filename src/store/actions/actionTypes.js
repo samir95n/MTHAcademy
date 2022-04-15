@@ -25,6 +25,9 @@ export const SET_STUDENTS_ID = "SET_STUDENTS_ID";
 export const SET_ANSWER = "SET_ANSWER";
 export const SET_ALL_BLOCK = "SET_ALL_BLOCK";
 export const UPDATE_USERS = "UPDATE_USERS";
+export const ADD_BLOCK = "ADD_BLOCK";
+export const GET_BLOCK = "GET_BLOCK";
+export const DELETE_BLOCK = "DELETE_BLOCK";
 
 export const SET_AUTH_ERROR = "SET_AUTH_ERROR";
 export const SET_LOADER = "SET_LOADER";

@@ -2,7 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import CustomButton from "../../../components/UI/customButton/CustomButton";
 
-import { SET_CURRENT_PAGE } from "../../../store/actions/actionTypes";
+import {
+  createBlock,
+  getBlock,
+  deleteBlock,
+} from "../../../store/actions/adminActions";
 
 import CreateQuestions from "./createQuestions";
 import QuetionsList from "./questionsList";
@@ -11,6 +15,8 @@ import "./style.scss";
 
 function Quetions(props) {
   const [page, setPage] = React.useState("list");
+  const [selectedBlock, setSelectedBlock] = React.useState(null);
+  console.log("selectedBlock", selectedBlock);
 
   return (
     <div className="questionPage">
@@ -22,8 +28,17 @@ function Quetions(props) {
           }
         />
       </div>
-      {page === "list" && <QuetionsList />}
-      {page === "create" && <CreateQuestions />}
+      {page === "list" && (
+        <QuetionsList
+          setSelectedBlock={setSelectedBlock}
+          getBlock={props.getBlock}
+          deleteBlock={props.deleteBlock}
+        />
+      )}
+      {page === "create" && (
+        <CreateQuestions setPage={setPage} saveHandle={createBlock} />
+      )}
+      {page === "update" && <CreateQuestions setPage={setPage} />}
     </div>
   );
 }
@@ -35,8 +50,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) =>
-      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    createBlock: (block, img) => dispatch(createBlock(block, img)),
+    getBlock: (id) => dispatch(getBlock(id)),
+    deleteBlock: (id) => dispatch(deleteBlock(id)),
   };
 }
 

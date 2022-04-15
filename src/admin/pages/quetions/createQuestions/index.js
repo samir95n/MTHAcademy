@@ -7,7 +7,7 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import CustomButton from "../../../../components/UI/customButton/CustomButton";
 import PartNav from "../../../../components/UI/partNav";
 
-import { SET_QUESTION_PART } from "../../../../store/actions/actionTypes";
+// import { createBlock } from "../../../../store/actions/adminActions";
 import Part1 from "./parts/Part1";
 import Part2 from "./parts/Part2";
 import Part3 from "./parts/Part3";
@@ -17,6 +17,7 @@ import "./style.scss";
 function CreateQuestions(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
   const [question, setQuestion] = React.useState(initialState);
+  const [image, setImage] = React.useState(null);
   console.log("question", question);
 
   const checkPart1 =
@@ -43,6 +44,7 @@ function CreateQuestions(props) {
     question.part3.description.some(
       (item) => item.title.length < 5 || item.text.length < 5
     );
+
   return (
     <div className="createQuestions">
       <h5 className="createQuestionsHead">Create Blok</h5>
@@ -55,6 +57,7 @@ function CreateQuestions(props) {
             timer={time}
             question={question.part1}
             setQuestion={setQuestion}
+            setImage={setImage}
           />
         )}
         {currentPart == 2 && (
@@ -75,33 +78,25 @@ function CreateQuestions(props) {
       <div className="createQuestionsBtn">
         <CustomButton
           name={"Create"}
-          disabled={checkPart1 || checkPart2 || checkPart3}
+          disabled={checkPart1 || checkPart2 || checkPart3 || !image}
+          onClick={() => {
+            props.saveHandle(question, image);
+            props.setPage("list");
+          }}
         />
       </div>
     </div>
   );
 }
-function mapStateToProps(state) {
-  return {
-    currentPart: state.admin.currentPart,
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onChangeQuestionPart: (partNumber) =>
-      dispatch({ type: SET_QUESTION_PART, payload: partNumber }),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestions);
+export default connect(null, null)(CreateQuestions);
 const time = [30, 60, 90, 120, 150, 180, 210, 240, 270, 300];
 const initialState = {
   part1: {
     question: [
       { title: "", timer: null, question_number: 1 },
       { title: "", timer: null, question_number: 2 },
-      { title: "", picture: "", timer: null, question_number: 3 },
+      { title: "", timer: null, question_number: 3 },
     ],
     description: [
       {

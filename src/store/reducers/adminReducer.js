@@ -9,12 +9,15 @@ import {
   SET_ANSWER,
   SET_ALL_BLOCK,
   UPDATE_USERS,
+  ADD_BLOCK,
+  DELETE_BLOCK,
 } from "../actions/actionTypes";
 
 const initialState = {
   currentPage: "answers",
   students: null,
   totalPages: null,
+  totalItems: null,
   teachers: null,
   operators: null,
   selectedStudent: null,
@@ -39,6 +42,7 @@ const setStudents = (state, action) => {
     ...state,
     students: action.payload.data,
     totalPages: action.payload.last_page,
+    totalItems: action.payload.total,
   };
 };
 const setTeacher = (state, action) => {
@@ -89,6 +93,13 @@ function adminReducer(state = initialState, action) {
       return { ...state, answers: action.payload };
     case SET_ALL_BLOCK:
       return { ...state, allBlock: action.payload };
+    case ADD_BLOCK:
+      return {
+        ...state,
+        allBlock: [...state.allBlock, { id: action.payload }],
+      };
+    case DELETE_BLOCK:
+      return updateUsers(state, { type: "allBlock", id: action.payload });
     case SET_INITIAL_STATE:
       return { ...initialState };
     default:

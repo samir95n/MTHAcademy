@@ -2,8 +2,23 @@
   .answerTable {
   }
   .paginationBlock {
-    margin: 40px;
+    margin: 10px 0 0 0;
     display: flex;
     justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .paginationRow {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      max-width: 1000px;
+      align-items: center;
+      .MuiTablePagination-displayedRows,
+      .MuiTablePagination-actions {
+        display: none !important;
+      }
+    }
   }
 }

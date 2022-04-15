@@ -7,9 +7,16 @@
       display: block !important;
     }
     & > div {
+      padding: 0 20px;
       width: 100%;
+      border-right: 1px solid #100a30;
+      &:last-child {
+        border: none !important;
+      }
       @include media("max", "md") {
         margin-bottom: 20px;
+        border: none !important;
+        padding: 0 !important;
         &:last-child {
           margin-bottom: 0 !important;
         }

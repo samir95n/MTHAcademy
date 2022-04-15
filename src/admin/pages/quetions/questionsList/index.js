@@ -11,7 +11,18 @@ function QuetionsList(props) {
   React.useEffect(() => {
     props.getAllBlocks();
   }, []);
-
+  // console.log("allBlock", props.allBlock);
+  const selectBlockHandle = (item) => {
+    props.setSelectedBlock((prev) => {
+      if (!prev) {
+        return item;
+      }
+      if (item.id != prev.id) {
+        return item;
+      }
+      return prev;
+    });
+  };
   return (
     <div className="quetionsList">
       <div className="quetionsListBlock">
@@ -21,8 +32,14 @@ function QuetionsList(props) {
               <div className="questionsItem">
                 <span className="questionsItemName">Blok {item.id}</span>
                 <span className="questionsItemIcon">
-                  <Edit style={{ color: "#336b88", fontSize: "40px" }} />
-                  <Delete style={{ color: "red", fontSize: "40px" }} />
+                  <Edit
+                    style={{ color: "#336b88", fontSize: "40px" }}
+                    onClick={() => props.getBlock(item.id)}
+                  />
+                  <Delete
+                    style={{ color: "red", fontSize: "40px" }}
+                    onClick={() => props.deleteBlock(item.id)}
+                  />
                 </span>
               </div>
             </Grid>

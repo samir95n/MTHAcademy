@@ -1,7 +1,12 @@
 .answersPage {
   margin-bottom: 20px;
+  min-height: 60vh;
+  padding-bottom: 60px;
+  position: relative;
   .answerTable {
     max-width: 1000px;
     margin: 0 auto;
+  }
+  .paginationBlock {
   }
 }

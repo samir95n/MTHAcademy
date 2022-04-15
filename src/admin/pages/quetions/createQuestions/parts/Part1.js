@@ -6,7 +6,7 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 import "../style.scss";
 
-function Part1({ question, timer, setQuestion }) {
+function Part1({ question, timer, setQuestion, setImage }) {
   const addValueHandle = (e, type, input, number) => {
     const target = e.target.value;
     setQuestion((prev) => {
@@ -58,6 +58,7 @@ function Part1({ question, timer, setQuestion }) {
                     id="upload-photo"
                     name="upload-photo"
                     type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
                   />
                   <Fab
                     color="primary"

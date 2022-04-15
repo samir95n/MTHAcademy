@@ -3,19 +3,24 @@ import React from "react";
 import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 import { connect } from "react-redux";
 
-import { getStudents } from "../../../../store/actions/adminActions";
+import {
+  getStudents,
+  deleteUser,
+} from "../../../../store/actions/adminActions";
 import { SET_STUDENTS_ID } from "../../../../store/actions/actionTypes";
 
 import Table from "../../../../components/UI/table/Table";
-import { Pagination } from "@mui/material";
+import { Pagination, TablePagination } from "@mui/material";
 import "./style.scss";
 
 function StudentsList(props) {
   const [page, setPage] = React.useState(1);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
   React.useEffect(() => {
-    props.getStudents(page);
-  }, [page]);
-  //console.log(props.currentPart);
+    props.getStudents(page, rowsPerPage);
+  }, [page, rowsPerPage]);
+  console.log("props.currentPart", page, rowsPerPage);
   const tHead = React.useMemo(() => {
     const head = [
       { name: "id", class: "" },
@@ -33,7 +38,7 @@ function StudentsList(props) {
   const tBody = React.useMemo(() => {
     const body = props.students?.map((item, index) => {
       return [
-        (page - 1) * 10 + 1 + index,
+        (page - 1) * rowsPerPage + 1 + index,
         item.name + " " + item.surname,
         item.exam_date ? item.exam_date?.split(" ")[0] : "-",
         item.teacher_name + " " + item.teacher_surname,
@@ -41,13 +46,21 @@ function StudentsList(props) {
         <span
           className="answersIcon"
           onClick={() => {
-            props.getAnswer(item.id);
-            props.setPage("answers");
+            item.exam_date && props.getAnswer(item.id);
+            item.exam_date && props.setPage("answers");
           }}
         >
-          <AssignmentTurnedIn style={{ color: "#006ade", fontSize: "22px" }} />
+          <AssignmentTurnedIn
+            style={{
+              color: item.exam_date ? "#006ade" : "#585e64",
+              fontSize: "22px",
+            }}
+          />
         </span>,
-        <span className="answersIcon">
+        <span
+          className="answersIcon"
+          onClick={() => props.deleteUserHandle(item.id, "students")}
+        >
           <Delete style={{ color: "red", fontSize: "22px" }} />
         </span>,
       ];
@@ -63,18 +76,34 @@ function StudentsList(props) {
   const handleChange = (event, value) => {
     setPage(value);
   };
-  console.log("page", page);
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(1);
+  };
   return (
     <div className="answersPage">
       <div className="answerTable">
         <Table thead={tHead} tbody={tBody} />
       </div>
       <div className="paginationBlock">
-        <Pagination
-          count={props.totalPages}
-          page={page}
-          onChange={handleChange}
-        />
+        <div className="paginationRow">
+          <div className="paginationByRows">
+            <TablePagination
+              component="div"
+              count={props.totalItems}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </div>
+          <div className="paginationByPage">
+            <Pagination
+              count={props.totalPages}
+              page={page}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -83,6 +112,7 @@ function mapStateToProps(state) {
   return {
     students: state.admin.students,
     totalPages: state.admin.totalPages,
+    totalItems: state.admin.totalItems,
     role: state.auth.role,
   };
 }
@@ -90,7 +120,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getAnswer: (id) => dispatch({ type: SET_STUDENTS_ID, payload: id }),
-    getStudents: (page) => dispatch(getStudents(page)),
+    getStudents: (page, rowsPerPage) =>
+      dispatch(getStudents(page, rowsPerPage)),
+    deleteUserHandle: (id, type) => dispatch(deleteUser(id, type)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(StudentsList);
