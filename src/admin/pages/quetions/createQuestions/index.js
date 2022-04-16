@@ -1,59 +1,49 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Container, TextField, Grid } from "@mui/material";
-import { Fab } from "@material-ui/core";
-import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Container, TextField, Grid } from '@mui/material';
+import { Fab } from '@material-ui/core';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 
-import CustomButton from "../../../../components/UI/customButton/CustomButton";
-import PartNav from "../../../../components/UI/partNav";
+import CustomButton from '../../../../components/UI/customButton/CustomButton';
+import PartNav from '../../../../components/UI/partNav';
 
 // import { createBlock } from "../../../../store/actions/adminActions";
-import Part1 from "./parts/Part1";
-import Part2 from "./parts/Part2";
-import Part3 from "./parts/Part3";
+import Part1 from './parts/Part1';
+import Part2 from './parts/Part2';
+import Part3 from './parts/Part3';
 
-import "./style.scss";
+import './style.scss';
 
 function CreateQuestions(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
   const [question, setQuestion] = React.useState(initialState);
   const [image, setImage] = React.useState(null);
-  console.log("question", props.updatedBlock, question, initialState);
+  // console.log('question', props.updatedBlock, question, initialState);
   React.useEffect(() => {
     if (props.updatedBlock) {
       setQuestion(props.updatedBlock.block);
     }
   }, [props.updatedBlock]);
   const checkPart1 =
-    question.part1.question.some(
-      (item) => item.title.length < 5 || !item.timer
-    ) ||
-    question.part1.description.some(
-      (item) => item.title.length < 5 || item.text.length < 5
-    );
+    question.part1.question.some((item) => item.title.length < 5 || !item.timer) ||
+    question.part1.description.some((item) => item.title.length < 5 || item.text.length < 5);
 
   const checkPart2 =
-    // question.part2.question.title.length < 5 ||
-    // question.part2.question.title1.length < 5 ||
-    // question.part2.question.text1.length < 5 ||
-    // question.part2.question.title2.length < 5 ||
-    // question.part2.question.text2.length < 5 ||
-    // !question.part2.question.timer ||
-    question.part2.description?.some(
-      (item) => item.title.length < 5 || item.text.length < 5
-    );
+    question.part2.question.title.length < 5 ||
+    question.part2.question.title1.length < 3 ||
+    question.part2.question.text1.length < 5 ||
+    question.part2.question.title2.length < 3 ||
+    question.part2.question.text2.length < 5 ||
+    !question.part2.question.timer ||
+    question.part2.description?.some((item) => item.title.length < 5 || item.text.length < 5);
   const checkPart3 =
-    // question.part3.question.title.length < 5 ||
-    // !question.part3.question.timer ||
-    question.part3.description.some(
-      (item) => item.title.length < 5 || item.text.length < 5
-    );
+    question.part3.question.title.length < 5 ||
+    !question.part3.question.timer ||
+    question.part3.description.some((item) => item.title.length < 5 || item.text.length < 5);
 
   return (
     <div className="createQuestions">
-      <h5 className="createQuestionsHead">
-        {props.page === "update" ? "Update" : "Create"} Blok
-      </h5>
+      <h5 className="createQuestionsHead">{props.page === 'update' ? 'Update' : 'Create'} Blok</h5>
       <div className="createQuestionsNav">
         <PartNav onClick={setCurrentPart} active={currentPart} />
       </div>
@@ -64,27 +54,20 @@ function CreateQuestions(props) {
             question={question.part1}
             setQuestion={setQuestion}
             setImage={setImage}
+            page={props.page}
           />
         )}
         {currentPart == 2 && (
-          <Part2
-            timer={time}
-            question={question.part2}
-            setQuestion={setQuestion}
-          />
+          <Part2 timer={time} question={question.part2} setQuestion={setQuestion} />
         )}
         {currentPart == 3 && (
-          <Part3
-            timer={time}
-            question={question.part3}
-            setQuestion={setQuestion}
-          />
+          <Part3 timer={time} question={question.part3} setQuestion={setQuestion} />
         )}
       </div>
       <div className="createQuestionsBtn">
         <CustomButton
-          name={"Create"}
-          disabled={checkPart1 || checkPart2 || checkPart3 || !image}
+          name={props.page === 'update' ? 'Update' : 'Create'}
+          disabled={checkPart1 || checkPart2 || checkPart3 || (props.page !== 'update' && !image)}
           onClick={() => props.saveHandle(question, image)}
         />
       </div>
@@ -108,74 +91,74 @@ const time = [
 const initialState = {
   part1: {
     question: [
-      { title: "", timer: null, question_number: 1 },
-      { title: "", timer: null, question_number: 2 },
-      { title: "", timer: null, question_number: 3 },
+      { title: '', timer: null, question_number: 1 },
+      { title: '', timer: null, question_number: 2 },
+      { title: '', timer: null, question_number: 3 },
     ],
     description: [
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 1,
       },
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 2,
       },
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 3,
       },
     ],
   },
   part2: {
     question: {
-      title: "",
+      title: '',
       timer: null,
-      title1: "",
-      text1: "",
-      title2: "",
-      text2: "",
+      title1: '',
+      text1: '',
+      title2: '',
+      text2: '',
     },
     description: [
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 1,
       },
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 2,
       },
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 3,
       },
     ],
   },
   part3: {
     question: {
-      title: "",
+      title: '',
       timer: null,
     },
     description: [
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 1,
       },
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 2,
       },
       {
-        title: "",
-        text: "",
+        title: '',
+        text: '',
         description_number: 3,
       },
     ],

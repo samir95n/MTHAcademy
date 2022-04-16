@@ -1,5 +1,5 @@
-import { LocalStorageAuthUtil } from "./utils";
-import iaxios from "./../../iaxios";
+import { LocalStorageAuthUtil } from './utils';
+import iaxios from './../../iaxios';
 
 import {
   SET_STUDENTS,
@@ -12,7 +12,7 @@ import {
   ADD_BLOCK,
   GET_BLOCK,
   DELETE_BLOCK,
-} from "./actionTypes";
+} from './actionTypes';
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -42,7 +42,7 @@ export function getTeachers() {
   return (dispatch) => {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .get("/api/get_teachers")
+      .get('/api/get_teachers')
       .then((response) => {
         const data = response.data.teachers;
         //ls.setItems({ username, token, userId: id });
@@ -62,7 +62,7 @@ export function getOperators() {
   return (dispatch) => {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .get("/api/get_operators")
+      .get('/api/get_operators')
       .then((response) => {
         const data = response.data.operators;
         //ls.setItems({ username, token, userId: id });
@@ -118,7 +118,7 @@ export function getAllBlocks() {
   return (dispatch) => {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .get("/api/get_all_blocks")
+      .get('/api/get_all_blocks')
       .then((response) => {
         //console.log(response.data.block);
         const data = response.data.block;
@@ -184,7 +184,7 @@ export function createUser(newUser) {
     // let body = JSON.stringify(newUser);
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .post("/api/auth/register", formData)
+      .post('/api/auth/register', formData)
       .then((response) => {
         dispatch({ type: SET_LOADER, payload: false });
       })
@@ -213,10 +213,11 @@ export function deleteUser(id, type) {
 export function createBlock(block, image) {
   const body = JSON.stringify(block);
   return (dispatch) => {
+    console.log('bbbbbbbbbbbb');
     // let body = JSON.stringify(newUser);
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .post("/api/create_block", block)
+      .post('/api/create_block', block)
       .then((response) => {
         if (response.data.status) {
           // console.log("response.block_id", response);
@@ -232,8 +233,9 @@ export function createBlock(block, image) {
   };
 }
 export function updateBlock(id, block, image) {
-  const body = JSON.stringify(block);
+  //const body = JSON.stringify(block);
   return (dispatch) => {
+    console.log('nnnnnnnnnnnnnnmm');
     // let body = JSON.stringify(newUser);
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
@@ -254,7 +256,7 @@ export function updateBlock(id, block, image) {
 }
 export function addImage(image, id) {
   const formData = new FormData();
-  formData.append("image", image);
-  formData.append("block_id", JSON.stringify(id));
+  formData.append('image', image);
+  formData.append('block_id', JSON.stringify(id));
   iaxios.post(`/api/upload_img`, formData);
 }

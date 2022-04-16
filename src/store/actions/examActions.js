@@ -11,6 +11,7 @@ export function getBlock(blockId) {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios.get(`/api/get_block?id=${blockId}`).then((response) => {
       const data = response.data;
+      console.log(data,'ffdf')
       //ls.setItems({ username, token, userId: id });
       dispatch({
         ...data,

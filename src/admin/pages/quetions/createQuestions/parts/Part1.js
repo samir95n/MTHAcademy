@@ -1,12 +1,12 @@
-import { useEffect, useMemo } from "react";
-import { connect } from "react-redux";
-import { TextField, Grid } from "@mui/material";
-import { Fab } from "@material-ui/core";
-import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import { TextField, Grid } from '@mui/material';
+import { Fab } from '@material-ui/core';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 
-import "../style.scss";
+import '../style.scss';
 
-function Part1({ question, timer, setQuestion, setImage }) {
+function Part1({ question, timer, setQuestion, setImage, page }) {
   const addValueHandle = (e, type, input, number) => {
     const target = e.target.value;
     setQuestion((prev) => {
@@ -38,13 +38,13 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={2}
                 multiline
                 value={question.question[0].title}
-                onChange={(e) => addValueHandle(e, "question", "title", 1)}
+                onChange={(e) => addValueHandle(e, 'question', 'title', 1)}
                 // onKeyPress={handleKeyPress}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -54,21 +54,21 @@ function Part1({ question, timer, setQuestion, setImage }) {
               <div className="addPhotoBtn">
                 <label htmlFor="upload-photo">
                   <input
-                    style={{ display: "none" }}
+                    style={{ display: 'none' }}
                     id="upload-photo"
                     name="upload-photo"
                     type="file"
                     onChange={(e) => setImage(e.target.files[0])}
                   />
-                  <Fab
-                    color="primary"
-                    size="large"
-                    component="span"
-                    aria-label="add"
-                  >
+                  <Fab color="primary" size="large" component="span" aria-label="add">
                     <AddPhotoAlternateIcon />
                   </Fab>
                 </label>
+                {page === 'update' && (
+                  <div className="createQuestionImg">
+                    <img src={question}/>
+                  </div>
+                )}
               </div>
             </div>
             <div className="createQuestionsInputItem">
@@ -76,9 +76,8 @@ function Part1({ question, timer, setQuestion, setImage }) {
               <div className="timerSelect">
                 <select
                   className="timerSelectItem"
-                  defaultValue={question.question[0].timer}
-                  onChange={(e) => addValueHandle(e, "question", "timer", 1)}
-                >
+                  value={question.question[0].timer}
+                  onChange={(e) => addValueHandle(e, 'question', 'timer', 1)}>
                   <option></option>
                   {timer.map((minutes, index) => (
                     <option key={index} value={minutes.value}>
@@ -100,12 +99,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={2}
                 multiline
                 value={question.question[1].title}
-                onChange={(e) => addValueHandle(e, "question", "title", 2)}
+                onChange={(e) => addValueHandle(e, 'question', 'title', 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -115,9 +114,8 @@ function Part1({ question, timer, setQuestion, setImage }) {
               <div className="timerSelect">
                 <select
                   className="timerSelectItem"
-                  defaultValue={question.question[1].timer}
-                  onChange={(e) => addValueHandle(e, "question", "timer", 2)}
-                >
+                  value={question.question[1].timer}
+                  onChange={(e) => addValueHandle(e, 'question', 'timer', 2)}>
                   <option></option>
                   {timer.map((minutes, index) => (
                     <option key={index} value={minutes.value}>
@@ -139,12 +137,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={2}
                 multiline
                 value={question.question[2].title}
-                onChange={(e) => addValueHandle(e, "question", "title", 3)}
+                onChange={(e) => addValueHandle(e, 'question', 'title', 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -154,9 +152,8 @@ function Part1({ question, timer, setQuestion, setImage }) {
               <div className="timerSelect">
                 <select
                   className="timerSelectItem"
-                  defaultValue={question.question[2].timer}
-                  onChange={(e) => addValueHandle(e, "question", "timer", 3)}
-                >
+                  value={question.question[2].timer}
+                  onChange={(e) => addValueHandle(e, 'question', 'timer', 3)}>
                   <option></option>
                   {timer.map((minutes, index) => (
                     <option key={index} value={minutes.value}>
@@ -180,12 +177,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={2}
                 multiline
                 value={question.description[0].title}
-                onChange={(e) => addValueHandle(e, "description", "title", 1)}
+                onChange={(e) => addValueHandle(e, 'description', 'title', 1)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -199,12 +196,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={4}
                 multiline
                 value={question.description[0].text}
-                onChange={(e) => addValueHandle(e, "description", "text", 1)}
+                onChange={(e) => addValueHandle(e, 'description', 'text', 1)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -218,12 +215,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={2}
                 multiline
                 value={question.description[1].title}
-                onChange={(e) => addValueHandle(e, "description", "title", 2)}
+                onChange={(e) => addValueHandle(e, 'description', 'title', 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -237,12 +234,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={6}
                 multiline
                 value={question.description[1].text}
-                onChange={(e) => addValueHandle(e, "description", "text", 2)}
+                onChange={(e) => addValueHandle(e, 'description', 'text', 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -256,12 +253,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={2}
                 multiline
                 value={question.description[2].title}
-                onChange={(e) => addValueHandle(e, "description", "title", 3)}
+                onChange={(e) => addValueHandle(e, 'description', 'title', 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -275,12 +272,12 @@ function Part1({ question, timer, setQuestion, setImage }) {
                 rows={6}
                 multiline
                 value={question.description[2].text}
-                onChange={(e) => addValueHandle(e, "description", "text", 3)}
+                onChange={(e) => addValueHandle(e, 'description', 'text', 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />

@@ -1,9 +1,4 @@
-import {
-  SET_BLOCK,
-  SET_TIMER,
-  RESET_TIMER,
-  SET_RESET_TIMER,
-} from "../actions/actionTypes";
+import { SET_BLOCK, SET_TIMER, RESET_TIMER, SET_RESET_TIMER } from '../actions/actionTypes';
 
 const initialState = {
   part1: [],
@@ -15,15 +10,15 @@ const initialState = {
 };
 
 const setBlock = (state, action) => {
-  console.log(action, "ffdfdfdf");
+  console.log(action, 'ffdfdfdf');
   return {
     ...state,
-    part1: action.part1_descriptions,
-    questions1: action.part1_questions,
-    part2: action.part2_descriptions,
-    questions2: action.part2_questions,
-    part3: action.part3_descriptions,
-    questions3: action.part3_questions,
+    part1: action.part1.description,
+    questions1: action.part1.question,
+    part2: action.part2.description,
+    questions2: action.part2.question,
+    part3: action.part3.description,
+    questions3: action.part3.question,
   };
 };
 

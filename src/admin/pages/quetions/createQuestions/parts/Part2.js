@@ -65,7 +65,7 @@ function Part2({ question, timer, setQuestion }) {
               <div className="timerSelect">
                 <select
                   className="timerSelectItem"
-                  defaultValue={question.question.timer}
+                  value={question.question.timer}
                   onChange={(e) => questionHandle(e, "timer")}
                 >
                   <option></option>

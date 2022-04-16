@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Grid } from "@mui/material";
-import { Edit, Delete } from "@material-ui/icons";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Grid } from '@mui/material';
+import { Edit, Delete } from '@material-ui/icons';
 
-import { getAllBlocks } from "../../../../store/actions/adminActions";
+import { getAllBlocks } from '../../../../store/actions/adminActions';
 
-import "./style.scss";
+import './style.scss';
 
 function QuetionsList(props) {
   React.useEffect(() => {
@@ -22,11 +22,11 @@ function QuetionsList(props) {
                 <span className="questionsItemName">Blok {item.id}</span>
                 <span className="questionsItemIcon">
                   <Edit
-                    style={{ color: "#336b88", fontSize: "40px" }}
+                    style={{ color: '#336b88', fontSize: '33px', marginRight: '5px' }}
                     onClick={() => props.getBlock(item.id)}
                   />
                   <Delete
-                    style={{ color: "red", fontSize: "40px" }}
+                    style={{ color: 'red', fontSize: '33px' }}
                     onClick={() => props.deleteBlock(item.id)}
                   />
                 </span>

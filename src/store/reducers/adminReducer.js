@@ -12,10 +12,10 @@ import {
   ADD_BLOCK,
   DELETE_BLOCK,
   GET_BLOCK,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 const initialState = {
-  currentPage: "answers",
+  currentPage: 'answers',
   students: null,
   totalPages: null,
   totalItems: null,
@@ -80,8 +80,8 @@ const getBlock = (state, action) => {
     updatedBlock: {
       block: {
         part1: action.data.part1,
-        part2: action.data.part2,
-        part3: action.data.part3,
+        part2: { ...action.data.part2, question: { ...action.data.part2.question[0] } },
+        part3: { ...action.data.part3, question: { ...action.data.part3.question[0] } },
       },
       id: action.id,
     },
@@ -115,7 +115,7 @@ function adminReducer(state = initialState, action) {
     case GET_BLOCK:
       return getBlock(state, action.payload);
     case DELETE_BLOCK:
-      return updateUsers(state, { type: "allBlock", id: action.payload });
+      return updateUsers(state, { type: 'allBlock', id: action.payload });
     case SET_INITIAL_STATE:
       return { ...initialState };
     default:

@@ -1,10 +1,10 @@
-import { useEffect, useMemo } from "react";
-import { connect } from "react-redux";
-import { TextField, Grid } from "@mui/material";
-import { Fab } from "@material-ui/core";
-import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import { TextField, Grid } from '@mui/material';
+import { Fab } from '@material-ui/core';
+import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 
-import "../style.scss";
+import '../style.scss';
 
 function Part3({ question, timer, setQuestion }) {
   const descriptionHandle = (e, input, number) => {
@@ -50,12 +50,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={2}
                 multiline
                 value={question.question.title}
-                onChange={(e) => questionHandle(e, "title")}
+                onChange={(e) => questionHandle(e, 'title')}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -65,12 +65,11 @@ function Part3({ question, timer, setQuestion }) {
               <div className="timerSelect">
                 <select
                   className="timerSelectItem"
-                  defaultValue={question.question.timer}
-                  onChange={(e) => questionHandle(e, "timer")}
-                >
+                  value={question.question.timer}
+                  onChange={(e) => questionHandle(e, 'timer')}>
                   <option></option>
                   {timer.map((minutes, index) => (
-                    <option index={index} value={minutes.value}>
+                    <option key={index} value={minutes.value}>
                       {minutes.name}
                     </option>
                   ))}
@@ -91,12 +90,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={2}
                 multiline
                 value={question.description[0].title}
-                onChange={(e) => descriptionHandle(e, "title", 1)}
+                onChange={(e) => descriptionHandle(e, 'title', 1)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -110,12 +109,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={4}
                 multiline
                 value={question.description[0].text}
-                onChange={(e) => descriptionHandle(e, "text", 1)}
+                onChange={(e) => descriptionHandle(e, 'text', 1)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -129,12 +128,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={2}
                 multiline
                 value={question.description[1].title}
-                onChange={(e) => descriptionHandle(e, "title", 2)}
+                onChange={(e) => descriptionHandle(e, 'title', 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -148,12 +147,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={6}
                 multiline
                 value={question.description[1].text}
-                onChange={(e) => descriptionHandle(e, "text", 2)}
+                onChange={(e) => descriptionHandle(e, 'text', 2)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -167,12 +166,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={2}
                 multiline
                 value={question.description[2].title}
-                onChange={(e) => descriptionHandle(e, "title", 3)}
+                onChange={(e) => descriptionHandle(e, 'title', 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />
@@ -186,12 +185,12 @@ function Part3({ question, timer, setQuestion }) {
                 rows={6}
                 multiline
                 value={question.description[2].text}
-                onChange={(e) => descriptionHandle(e, "text", 3)}
+                onChange={(e) => descriptionHandle(e, 'text', 3)}
                 inputProps={{
                   style: {
                     fontSize: 16,
-                    fontFamily: "Poppins",
-                    padding: "0 12px",
+                    fontFamily: 'Poppins',
+                    padding: '0 12px',
                   },
                 }}
               />

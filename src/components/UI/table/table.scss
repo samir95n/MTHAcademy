@@ -1,11 +1,11 @@
-@import "../../../media.scss";
+@import '../../../media.scss';
 
 table.customTable {
   width: 100%;
   thead {
     tr {
       th {
-        font-family: "Poppins", sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 13px;
@@ -16,7 +16,7 @@ table.customTable {
         padding: 0 5px;
         padding-bottom: 10px;
         // max-width: 20%;
-        @include media("max", "sm") {
+        @include media('max', 'sm') {
           font-size: 8px !important;
           line-height: 10px !important;
         }
@@ -29,16 +29,18 @@ table.customTable {
   tbody {
     tr {
       td {
-        font-family: "Poppins", sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 22px;
         color: #010004;
         padding: 0 5px;
-        @include media("max", "sm") {
+        max-width: 200px;
+        @include media('max', 'sm') {
           font-size: 8px !important;
           line-height: 9px !important;
+          max-width: 150px;
         }
         span {
           display: block;
