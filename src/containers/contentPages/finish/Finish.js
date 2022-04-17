@@ -11,7 +11,6 @@ import finishImage from "../../../assets/finish.png";
 function Finish(props) {
   const logOutHandle = () => {
     props.logout();
-    props.setInitial();
   };
   return (
     <>
@@ -34,7 +33,6 @@ function Finish(props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setInitial: () => dispatch({ type: SET_INITIAL }),
     logout: () => dispatch(logout()),
   };
 }

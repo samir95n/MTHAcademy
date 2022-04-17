@@ -1,4 +1,10 @@
-import { SET_BLOCK, SET_TIMER, RESET_TIMER, SET_RESET_TIMER } from '../actions/actionTypes';
+import {
+  SET_BLOCK,
+  SET_TIMER,
+  RESET_TIMER,
+  SET_RESET_TIMER,
+  SET_INITIAL_EXAM,
+} from "../actions/actionTypes";
 
 const initialState = {
   part1: [],
@@ -10,7 +16,7 @@ const initialState = {
 };
 
 const setBlock = (state, action) => {
-  console.log(action, 'ffdfdfdf');
+  console.log(action, "ffdfdfdf");
   return {
     ...state,
     part1: action.part1.description,
@@ -55,6 +61,8 @@ function examReducer(state = initialState, action) {
       return { ...state, timer: action.payload };
     case SET_RESET_TIMER:
       return { ...state, resetTimer: action.payload };
+    case SET_INITIAL_EXAM:
+      return { ...initialState };
     default:
       return state;
   }

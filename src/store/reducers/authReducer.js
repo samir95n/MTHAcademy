@@ -1,4 +1,4 @@
-import { SET_TOKEN } from "../actions/actionTypes";
+import { SET_INITIAL_AUTH, SET_TOKEN } from "../actions/actionTypes";
 
 const initialState = {
   token: false,
@@ -23,6 +23,8 @@ function authReducer(state = initialState, action) {
   switch (action.type) {
     case SET_TOKEN:
       return setAuthParams(state, action);
+    case SET_INITIAL_AUTH:
+      return { ...initialState };
     default:
       return state;
   }

@@ -73,6 +73,20 @@
               .createQuestionInput {
                 width: 100%;
               }
+              .addPhotoBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .createQuestionImg {
+                  margin-left: 5px;
+                  width: 200px;
+                  max-height: 300px;
+                  overflow: hidden;
+                  img {
+                    width: 100%;
+                  }
+                }
+              }
             }
           }
           .timerSelect {

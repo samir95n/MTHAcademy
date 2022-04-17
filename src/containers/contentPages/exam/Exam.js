@@ -90,7 +90,7 @@ function Exam(props) {
           {props.currrentQuestion === 0 && props.currentPart === 1 && (
             <>
               <div className="imageBlock">
-                <img src={image} alt="exam_image" />
+                <img src={props.question.photo_path} alt="exam_image" />
               </div>
             </>
           )}

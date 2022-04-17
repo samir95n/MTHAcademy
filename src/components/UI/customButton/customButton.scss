@@ -32,4 +32,11 @@
   &:disabled {
     background-color: #a6a6a6 !important;
   }
+  &.warning {
+    background-color: #d64242;
+    &:hover {
+      background-color: #c95656;
+      transition: background 0.2s ease;
+    }
+  }
 }

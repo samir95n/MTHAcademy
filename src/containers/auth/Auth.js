@@ -79,7 +79,7 @@ function Auth(props) {
             disabled={!(input.length > 3 && password.length > 3)}
           />
         </div>
-        <div className="authError">
+        <div className="errors">
           {props.error && <p>Incorrect username or password</p>}
         </div>
       </div>

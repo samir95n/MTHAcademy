@@ -1,25 +1,25 @@
-import React, { useEffect, useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useMemo } from "react";
+import { connect } from "react-redux";
 
-import PartNav from '../../../../components/UI/partNav';
-import CustomButton from '../../../../components/UI/customButton/CustomButton';
+import { SET_SUB_PAGE } from "../../../../store/actions/actionTypes";
+import PartNav from "../../../../components/UI/partNav";
+import CustomButton from "../../../../components/UI/customButton/CustomButton";
 
-import './style.scss';
+import "./style.scss";
 
 function AnswersList(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
-  const examDate = props.answers?.exam_date?.split(' ');
+  const examDate = props.answers?.exam_date?.split(" ");
   return (
     <div className="answersList">
       <div className="answersListBtn">
-        <CustomButton name="< Back" onClick={() => props.setPage('students')} />
+        <CustomButton name="< Back" onClick={() => props.setSubPage()} />
       </div>
       <div className="answersListDate">
         <span className="answersDateText">Exam started :</span>
         {examDate && (
           <span className="answersDateInfo">
             Date : {examDate[0] && examDate[0]}
-            Time : {examDate[1] && examDate[1]}
           </span>
         )}
       </div>
@@ -77,4 +77,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(AnswersList);
+function mapDispatchToProps(dispatch) {
+  return {
+    setSubPage: () => dispatch({ type: SET_SUB_PAGE, payload: 1 }),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AnswersList);

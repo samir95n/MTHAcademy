@@ -36,7 +36,16 @@ function CreateUser(props) {
   React.useEffect(() => {
     props.getAllBlocks();
   }, []);
-  console.log("mmm", user);
+
+  const checkMailHandle = (email) => {
+    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email.match(regexEmail)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const checkMail = checkMailHandle(user.email);
   return (
     <div className="settingsPage">
       <div className="settingsBlock">
@@ -143,7 +152,11 @@ function CreateUser(props) {
               >
                 <option></option>
                 {props.role == "admin" ? (
-                  reles.map((role) => <option value={role}>{role}</option>)
+                  reles.map((role, index) => (
+                    <option key={index} value={role}>
+                      {role}
+                    </option>
+                  ))
                 ) : (
                   <option value={"student"}>student</option>
                 )}
@@ -161,8 +174,8 @@ function CreateUser(props) {
                     onChange={(e) => onChangeInputs(e, "teacher_id")}
                   >
                     <option></option>
-                    {props.teachers?.map((teacher) => (
-                      <option value={teacher.id}>
+                    {props.teachers?.map((teacher, index) => (
+                      <option key={index} value={teacher.id}>
                         {teacher.name + " " + teacher.surname}
                       </option>
                     ))}
@@ -178,8 +191,10 @@ function CreateUser(props) {
                     onChange={(e) => onChangeInputs(e, "block_id")}
                   >
                     <option></option>
-                    {props.allBlock?.map((block) => (
-                      <option value={block.id}>{block.id}</option>
+                    {props.allBlock?.map((block, index) => (
+                      <option key={index} value={block.id}>
+                        {block.id}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -191,19 +206,22 @@ function CreateUser(props) {
           <CustomButton
             name={"Create"}
             disabled={
-              user.name.length < 4 ||
-              user.surname.length < 4 ||
-              user.email.length < 4 ||
-              user.username.length < 5 ||
+              user.name.length < 3 ||
+              user.surname.length < 3 ||
+              user.username.length < 4 ||
               user.password.length < 8 ||
+              !checkMail ||
               !user.role ||
               (user.role === "student" && (!user.teacher_id || !user.block_id))
             }
             onClick={() => {
               props.createUser(user);
-              props.setPage("table");
             }}
           />
+        </div>
+        <div className="errors">
+          {props.userError &&
+            props.userError.map((error, index) => <p key={index}>{error}</p>)}
         </div>
       </div>
     </div>
@@ -212,6 +230,7 @@ function CreateUser(props) {
 function mapStateToProps(state) {
   return {
     allBlock: state.admin.allBlock,
+    userError: state.errors.creatreUserError,
   };
 }
 

@@ -3,7 +3,7 @@ import {
   SET_CANGE_EXAM_PART,
   SET_CANGE_CURRENT_PART,
   SET_QUESTION,
-  SET_INITIAL,
+  SET_INITIAL_PAGE,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -70,7 +70,7 @@ function examReducer(state = initialState, action) {
       return setCurrentPart(state, action);
     case SET_QUESTION:
       return setQuestion(state);
-    case SET_INITIAL:
+    case SET_INITIAL_PAGE:
       return { ...initialState };
     default:
       return state;

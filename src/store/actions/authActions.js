@@ -1,7 +1,16 @@
 import { LocalStorageAuthUtil } from "./utils";
 import iaxios from "./../../iaxios";
 
-import { SET_TOKEN, SET_AUTH_ERROR, SET_LOADER } from "./actionTypes";
+import {
+  SET_TOKEN,
+  SET_AUTH_ERROR,
+  SET_LOADER,
+  SET_INITIAL_ADMIN,
+  SET_INITIAL_AUTH,
+  SET_INITIAL_ERROR,
+  SET_INITIAL_EXAM,
+  SET_INITIAL_PAGE,
+} from "./actionTypes";
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -53,6 +62,11 @@ export function logout() {
   const userData = ls.getItems();
   return (dispatch) => {
     dispatch(setAuthParams(null));
+    dispatch({ type: SET_INITIAL_ADMIN });
+    dispatch({ type: SET_INITIAL_AUTH });
+    dispatch({ type: SET_INITIAL_ERROR });
+    dispatch({ type: SET_INITIAL_EXAM });
+    dispatch({ type: SET_INITIAL_PAGE });
     iaxios.get("/api/auth/logout", {
       headers: {
         "Api-Token": `${userData.token}`,

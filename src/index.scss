@@ -12,3 +12,15 @@ body {
     height: 100vh !important;
   }
 }
+.errors {
+  p {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #dc0000;
+    margin: 0;
+  }
+}

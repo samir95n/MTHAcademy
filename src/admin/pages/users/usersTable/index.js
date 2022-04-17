@@ -6,16 +6,17 @@ import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
 import Table from "../../../../components/UI/table/Table";
 import CustomButton from "../../../../components/UI/customButton/CustomButton";
 
-import { deleteUser } from "../../../../store/actions/adminActions";
+import { SET_MODAL } from "../../../../store/actions/actionTypes";
 
 import "./style.scss";
 
-function UsersTable({ teachers, operators, role, deleteUserHandle }) {
+function UsersTable({ teachers, operators, role, setModal }) {
   const thead = React.useMemo(() => {
     return [
       { name: "id", class: "" },
       { name: "Name", class: "" },
       { name: "surname", class: "" },
+      { name: "Email", class: "" },
       { name: "delete", class: "answerTableCenter" },
     ];
   }, []);
@@ -25,10 +26,11 @@ function UsersTable({ teachers, operators, role, deleteUserHandle }) {
         ++index,
         item.name,
         item.surname,
+        item.email,
         <span className="answersIcon">
           <Delete
             style={{ color: "red", fontSize: "22px" }}
-            onClick={() => deleteUserHandle(item.id, "teachers")}
+            onClick={() => setModal(item.id, "teachers")}
           />
         </span>,
       ];
@@ -40,10 +42,11 @@ function UsersTable({ teachers, operators, role, deleteUserHandle }) {
         ++index,
         item.name,
         item.surname,
+        item.email,
         <span className="answersIcon">
           <Delete
             style={{ color: "red", fontSize: "22px" }}
-            onClick={() => deleteUserHandle(item.id, "operators")}
+            onClick={() => setModal(item.id, "operators")}
           />
         </span>,
       ];
@@ -74,7 +77,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteUserHandle: (id, type) => dispatch(deleteUser(id, type)),
+    setModal: (id, type) =>
+      dispatch({
+        type: SET_MODAL,
+        payload: { open: true, type: { id: id, type: type } },
+      }),
   };
 }
 

@@ -8,7 +8,7 @@ import "./start.scss";
 
 function Start(props) {
   React.useEffect(() => {
-    const setTimeoutVal = setTimeout(() => props.startExam(), 5000);
+    const setTimeoutVal = setTimeout(() => props.startExam(), 30000);
     return () => clearTimeout(setTimeoutVal);
   }, []);
   return (

@@ -6,36 +6,38 @@ import CreateUser from "./createUser";
 import UsersTable from "./usersTable";
 import CustomButton from "../../../components/UI/customButton/CustomButton";
 
+import {
+  SET_SUB_PAGE,
+  SET_INITIAL_ERROR,
+} from "../../../store/actions/actionTypes";
+
 import { getTeachers, getOperators } from "../../../store/actions/adminActions";
 
 import "./style.scss";
 
 function Users(props) {
-  const [page, setPage] = React.useState("table");
+  //const [page, setPage] = React.useState("table");
   React.useEffect(() => {
     props.getTeachers();
     props.role === "admin" && props.getOperators();
-  }, [page]);
+  }, [props.subPage]);
 
   return (
     <div className="usersPage">
       <div className="adminBtn">
         <CustomButton
-          name={page === "table" ? "Create User" : "< Back"}
-          onClick={() =>
-            setPage((prev) => (prev === "table" ? "create" : "table"))
-          }
+          name={props.subPage === 1 ? "Create User" : "< Back"}
+          onClick={() => {
+            props.setSubPage(props.subPage == 1 ? 2 : 1);
+            props.setInitialEror();
+          }}
         />
       </div>
-      {page === "table" && props.role === "admin" && (
+      {props.subPage === 1 && props.role === "admin" && (
         <UsersTable teachers={props.teachers} operators={props.operators} />
       )}
-      {page === "create" && (
-        <CreateUser
-          teachers={props.teachers}
-          role={props.role}
-          setPage={setPage}
-        />
+      {props.subPage === 2 && (
+        <CreateUser teachers={props.teachers} role={props.role} />
       )}
     </div>
   );
@@ -46,6 +48,7 @@ function mapStateToProps(state) {
     teachers: state.admin.teachers,
     operators: state.admin.operators,
     role: state.auth.role,
+    subPage: state.admin.subPage,
   };
 }
 
@@ -53,6 +56,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getTeachers: () => dispatch(getTeachers()),
     getOperators: () => dispatch(getOperators()),
+    setSubPage: (page) => dispatch({ type: SET_SUB_PAGE, payload: page }),
+    setInitialEror: () => dispatch({ type: SET_INITIAL_ERROR }),
   };
 }
 

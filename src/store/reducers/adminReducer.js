@@ -1,7 +1,7 @@
 import {
   SET_CURRENT_PAGE,
   SET_INITIAL_PAGE_BY_ROLE,
-  SET_INITIAL_STATE,
+  SET_INITIAL_ADMIN,
   SET_STUDENTS,
   SET_TEACHERS,
   SET_OPERATORS,
@@ -12,10 +12,14 @@ import {
   ADD_BLOCK,
   DELETE_BLOCK,
   GET_BLOCK,
-} from '../actions/actionTypes';
+  SET_SUB_PAGE,
+  ADD_USER_IN_TABLE,
+  SET_MODAL,
+} from "../actions/actionTypes";
 
 const initialState = {
-  currentPage: 'answers',
+  currentPage: "answers",
+  subPage: 1,
   students: null,
   totalPages: null,
   totalItems: null,
@@ -25,12 +29,14 @@ const initialState = {
   answers: null,
   allBlock: [],
   updatedBlock: null,
+  modal: { open: false, userType: null },
 };
 
 const setCurrentPage = (state, action) => {
   return {
     ...state,
     currentPage: action.payload,
+    subPage: 1,
   };
 };
 const setPageByRole = (state, action) => {
@@ -80,12 +86,24 @@ const getBlock = (state, action) => {
     updatedBlock: {
       block: {
         part1: action.data.part1,
-        part2: { ...action.data.part2, question: { ...action.data.part2.question[0] } },
-        part3: { ...action.data.part3, question: { ...action.data.part3.question[0] } },
+        part2: {
+          ...action.data.part2,
+          question: { ...action.data.part2.question[0] },
+        },
+        part3: {
+          ...action.data.part3,
+          question: { ...action.data.part3.question[0] },
+        },
       },
       id: action.id,
     },
   };
+};
+const addUser = (state, action) => {
+  return { ...state, subPage: 1 };
+};
+const setModal = (state, action) => {
+  return { ...state, modal: { open: action.open, userType: action.type } };
 };
 function adminReducer(state = initialState, action) {
   switch (action.type) {
@@ -115,9 +133,15 @@ function adminReducer(state = initialState, action) {
     case GET_BLOCK:
       return getBlock(state, action.payload);
     case DELETE_BLOCK:
-      return updateUsers(state, { type: 'allBlock', id: action.payload });
-    case SET_INITIAL_STATE:
+      return updateUsers(state, { type: "allBlock", id: action.payload });
+    case SET_INITIAL_ADMIN:
       return { ...initialState };
+    case SET_SUB_PAGE:
+      return { ...state, subPage: action.payload };
+    case ADD_USER_IN_TABLE:
+      return addUser(state, action.payload);
+    case SET_MODAL:
+      return setModal(state, action.payload);
     default:
       return state;
   }

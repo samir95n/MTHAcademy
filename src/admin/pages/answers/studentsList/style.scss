@@ -15,9 +15,25 @@
       justify-content: space-between;
       max-width: 1000px;
       align-items: center;
-      .MuiTablePagination-displayedRows,
-      .MuiTablePagination-actions {
-        display: none !important;
+      .paginationByRows {
+        .paginationByRowsItem {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          p {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 22px;
+            color: #010004;
+            margin: 0;
+          }
+          select {
+            margin-left: 10px;
+            padding: 5px 10px;
+          }
+        }
       }
     }
   }
