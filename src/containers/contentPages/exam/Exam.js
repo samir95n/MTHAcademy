@@ -22,7 +22,7 @@ import {
 } from "../../../store/actions/actionTypes";
 
 import "./exam.scss";
-import image from "../../../assets/girl.png";
+//import image from "../../../assets/girl.png";
 
 const callBeep = () => {
   let myAudio = new Audio(BeepSound);

@@ -6,7 +6,14 @@ import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 import "../style.scss";
 
-function Part1({ question, timer, setQuestion, setImage, isVisibledImage }) {
+function Part1({
+  question,
+  timer,
+  setQuestion,
+  setImage,
+  image,
+  isVisibledImage,
+}) {
   const addValueHandle = (e, type, input, number) => {
     const target = e.target.value;
     setQuestion((prev) => {
@@ -68,7 +75,9 @@ function Part1({ question, timer, setQuestion, setImage, isVisibledImage }) {
                   >
                     <AddPhotoAlternateIcon />
                   </Fab>
+                  <p>{image?.name}</p>
                 </label>
+
                 {isVisibledImage && (
                   <div className="createQuestionImg">
                     <img src={question.question[0].photo_path} />

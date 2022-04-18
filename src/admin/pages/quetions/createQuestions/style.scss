@@ -77,6 +77,12 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                label {
+                  max-width: 200px;
+                  p {
+                    word-wrap: break-word;
+                  }
+                }
                 .createQuestionImg {
                   margin-left: 5px;
                   width: 200px;

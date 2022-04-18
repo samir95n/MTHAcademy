@@ -48,7 +48,7 @@ function CreateQuestions(props) {
     question.part3.description.some(
       (item) => item.title.length < 1 || item.text.length < 1
     );
-
+  console.log("image", image);
   return (
     <div className="createQuestions">
       <h5 className="createQuestionsHead">
@@ -64,6 +64,7 @@ function CreateQuestions(props) {
             question={question.part1}
             setQuestion={setQuestion}
             setImage={setImage}
+            image={image}
             isVisibledImage={props.page === 3}
           />
         )}
