@@ -1,33 +1,28 @@
-import React from "react";
-import { connect } from "react-redux";
-import { TextField } from "@mui/material";
-import CustomButton from "../../../../components/UI/customButton/CustomButton";
+import React from 'react';
+import { connect } from 'react-redux';
+import { TextField } from '@mui/material';
+import CustomButton from '../../../../components/UI/customButton/CustomButton';
 
-import {
-  getAllBlocks,
-  createUser,
-} from "../../../../store/actions/adminActions";
+import { getAllBlocks, createUser } from '../../../../store/actions/adminActions';
 
-import "./style.scss";
+import './style.scss';
 
 function CreateUser(props) {
+  const [checkEmail, setCheckEmail] = React.useState(false);
   const [user, setUser] = React.useState({
-    name: "",
-    surname: "",
-    email: "",
-    username: "",
-    password: "",
-    role: "",
+    name: '',
+    surname: '',
+    email: '',
+    username: '',
+    password: '',
+    role: '',
     teacher_id: null,
     block_id: null,
   });
   const onChangeInputs = (e, type) => {
     let target = e.target.value;
     setUser((prev) => {
-      if (
-        type === "role" &&
-        (target === "operator" || target === "teacher" || !target)
-      ) {
+      if (type === 'role' && (target === 'operator' || target === 'teacher' || !target)) {
         return { ...prev, [type]: target, block_id: null, teacher_id: null };
       }
       return { ...prev, [type]: target };
@@ -58,14 +53,14 @@ function CreateUser(props) {
               placeholder="Enter User Name"
               variant="outlined"
               value={user.name}
-              onChange={(e) => onChangeInputs(e, "name")}
+              onChange={(e) => onChangeInputs(e, 'name')}
               // onKeyPress={handleKeyPress}
               inputProps={{
                 style: {
                   fontSize: 16,
                   height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
                 },
               }}
             />
@@ -77,31 +72,34 @@ function CreateUser(props) {
               placeholder="Enter User Surname"
               variant="outlined"
               value={user.surname}
-              onChange={(e) => onChangeInputs(e, "surname")}
+              onChange={(e) => onChangeInputs(e, 'surname')}
               inputProps={{
                 style: {
                   fontSize: 16,
                   height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
                 },
               }}
             />
           </div>
           <div className="settingsItem">
-            <p className="settingsP">Mail</p>
+            <p className="settingsP">
+              Mail {checkEmail && <span className="settingsSpanCheck">incorrect email</span>}
+            </p>
             <TextField
               className="settingsInput"
               placeholder="Enter User Mail"
               variant="outlined"
               value={user.email}
-              onChange={(e) => onChangeInputs(e, "email")}
+              onChange={(e) => onChangeInputs(e, 'email')}
+              onBlur={() => setCheckEmail(!checkMailHandle(user.email))}
               inputProps={{
                 style: {
                   fontSize: 16,
                   height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
                 },
               }}
             />
@@ -113,13 +111,13 @@ function CreateUser(props) {
               placeholder="Enter User Login"
               variant="outlined"
               value={user.username}
-              onChange={(e) => onChangeInputs(e, "username")}
+              onChange={(e) => onChangeInputs(e, 'username')}
               inputProps={{
                 style: {
                   fontSize: 16,
                   height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
                 },
               }}
             />
@@ -131,13 +129,13 @@ function CreateUser(props) {
               placeholder="Enter password"
               variant="outlined"
               value={user.password}
-              onChange={(e) => onChangeInputs(e, "password")}
+              onChange={(e) => onChangeInputs(e, 'password')}
               inputProps={{
                 style: {
                   fontSize: 16,
                   height: 50,
-                  fontFamily: "Poppins",
-                  padding: "0 12px",
+                  fontFamily: 'Poppins',
+                  padding: '0 12px',
                 },
               }}
             />
@@ -148,22 +146,21 @@ function CreateUser(props) {
               <select
                 className="settingsItemSelectItem"
                 defaultValue={user.role}
-                onChange={(e) => onChangeInputs(e, "role")}
-              >
+                onChange={(e) => onChangeInputs(e, 'role')}>
                 <option></option>
-                {props.role == "admin" ? (
+                {props.role == 'admin' ? (
                   reles.map((role, index) => (
                     <option key={index} value={role}>
                       {role}
                     </option>
                   ))
                 ) : (
-                  <option value={"student"}>student</option>
+                  <option value={'student'}>student</option>
                 )}
               </select>
             </div>
           </div>
-          {user.role === "student" && (
+          {user.role === 'student' && (
             <>
               <div className="settingsItem">
                 <p className="settingsP">Choose Teacher</p>
@@ -171,12 +168,11 @@ function CreateUser(props) {
                   <select
                     className="settingsItemSelectItem"
                     defaultValue={user.teacher_id}
-                    onChange={(e) => onChangeInputs(e, "teacher_id")}
-                  >
+                    onChange={(e) => onChangeInputs(e, 'teacher_id')}>
                     <option></option>
                     {props.teachers?.map((teacher, index) => (
                       <option key={index} value={teacher.id}>
-                        {teacher.name + " " + teacher.surname}
+                        {teacher.name + ' ' + teacher.surname}
                       </option>
                     ))}
                   </select>
@@ -188,8 +184,7 @@ function CreateUser(props) {
                   <select
                     className="settingsItemSelectItem"
                     defaultValue={user.block_id}
-                    onChange={(e) => onChangeInputs(e, "block_id")}
-                  >
+                    onChange={(e) => onChangeInputs(e, 'block_id')}>
                     <option></option>
                     {props.allBlock?.map((block, index) => (
                       <option key={index} value={block.id}>
@@ -204,7 +199,7 @@ function CreateUser(props) {
         </div>
         <div className="settingsBtn">
           <CustomButton
-            name={"Create"}
+            name={'Create'}
             disabled={
               user.name.length < 3 ||
               user.surname.length < 3 ||
@@ -212,7 +207,7 @@ function CreateUser(props) {
               user.password.length < 8 ||
               !checkMail ||
               !user.role ||
-              (user.role === "student" && (!user.teacher_id || !user.block_id))
+              (user.role === 'student' && (!user.teacher_id || !user.block_id))
             }
             onClick={() => {
               props.createUser(user);
@@ -220,8 +215,7 @@ function CreateUser(props) {
           />
         </div>
         <div className="errors">
-          {props.userError &&
-            props.userError.map((error, index) => <p key={index}>{error}</p>)}
+          {props.userError && props.userError.map((error, index) => <p key={index}>{error}</p>)}
         </div>
       </div>
     </div>
@@ -243,4 +237,4 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
 
-const reles = ["student", "operator", "teacher"];
+const reles = ['student', 'operator', 'teacher'];

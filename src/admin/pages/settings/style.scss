@@ -44,6 +44,15 @@
             line-height: 17px;
             //text-align: center;
           }
+          .settingsSpanCheck {
+            color: #d64242 !important;
+            font-size: 17px;
+            @include media('max', 'sm') {
+              font-size: 14px;
+              line-height: 16px;
+              //text-align: center;
+            }
+          }
         }
         .settingsInput {
           width: 100%;
