@@ -7,11 +7,11 @@ export default function Mic({ recording = false }) {
       <div className="micItem">
         <div
           className="micMask"
-          style={{
-            width: `${recording ? "35px" : "100%"}`,
-            height: `${recording ? "35px" : "100%"}`,
-            backgroundSize: `${recording ? "120%" : "100%"}`,
-          }}
+          // style={{
+          //   width: `${recording ? "100%" : "100%"}`,
+          //   height: `${recording ? "100%" : "100%"}`,
+          //   backgroundSize: `${recording ? "100%" : "100%"}`,
+          // }}
         ></div>
         <div
           className="firstCircle"
