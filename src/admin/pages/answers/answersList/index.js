@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { SET_SUB_PAGE } from "../../../../store/actions/actionTypes";
 import PartNav from "../../../../components/UI/partNav";
 import CustomButton from "../../../../components/UI/customButton/CustomButton";
+import sound from "../../../../assets/beep.mp3";
 
 import "./style.scss";
 
@@ -36,7 +37,12 @@ function AnswersList(props) {
               <div className="answersVoiceItem">
                 <p>Answer {++index}</p>
                 <div className="answersVoice">
-                  <audio controls src={item.answer}></audio>
+                  <audio
+                    controls
+                    src={
+                      "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
+                    }
+                  ></audio>
                 </div>
               </div>
             ))}

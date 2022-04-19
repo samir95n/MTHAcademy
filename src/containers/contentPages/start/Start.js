@@ -26,9 +26,6 @@ function Start(props) {
                       {paragraph}
                     </p>
                   ))}
-                  <p className="startTextParagraph">
-                    Then you will be asked two questions about the picture.
-                  </p>
                 </div>
               ))}
           </div>

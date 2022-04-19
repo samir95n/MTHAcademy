@@ -82,11 +82,11 @@ function Exam(props) {
   };
   return (
     <>
-      <HeaderText
-        text={`${props.currrentQuestion + 1}. ${props.question.title} `}
-      />
       <Grid container spacing={0} className="examContainer">
         <Grid item md={9} xs={12}>
+          <HeaderText
+            text={`${props.currrentQuestion + 1}. ${props.question.title} `}
+          />
           {props.currrentQuestion === 0 && props.currentPart === 1 && (
             <>
               <div className="imageBlock">
