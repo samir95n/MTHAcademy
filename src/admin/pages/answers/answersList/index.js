@@ -1,16 +1,16 @@
-import React, { useEffect, useMemo } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
 
-import { SET_SUB_PAGE } from "../../../../store/actions/actionTypes";
-import PartNav from "../../../../components/UI/partNav";
-import CustomButton from "../../../../components/UI/customButton/CustomButton";
-import sound from "../../../../assets/beep.mp3";
+import { SET_SUB_PAGE } from '../../../../store/actions/actionTypes';
+import PartNav from '../../../../components/UI/partNav';
+import CustomButton from '../../../../components/UI/customButton/CustomButton';
+import sound from '../../../../assets/beep.mp3';
 
-import "./style.scss";
+import './style.scss';
 
 function AnswersList(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
-  const examDate = props.answers?.exam_date?.split(" ");
+  const examDate = props.answers?.exam_date?.split(' ');
   return (
     <div className="answersList">
       <div className="answersListBtn">
@@ -18,11 +18,7 @@ function AnswersList(props) {
       </div>
       <div className="answersListDate">
         <span className="answersDateText">Exam started :</span>
-        {examDate && (
-          <span className="answersDateInfo">
-            Date : {examDate[0] && examDate[0]}
-          </span>
-        )}
+        {examDate && <span className="answersDateInfo">Date : {examDate[0] && examDate[0]}</span>}
       </div>
       <div className="answersListHeader">
         <h3>Recorded voice files</h3>
@@ -37,12 +33,7 @@ function AnswersList(props) {
               <div className="answersVoiceItem">
                 <p>Answer {++index}</p>
                 <div className="answersVoice">
-                  <audio
-                    controls
-                    src={
-                      "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"
-                    }
-                  ></audio>
+                  <audio controls preload="none" src={item.answer}></audio>
                 </div>
               </div>
             ))}

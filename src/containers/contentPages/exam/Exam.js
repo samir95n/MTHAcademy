@@ -1,16 +1,16 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import HeaderText from "../../../components/UI/headerText/HeaderText";
-import Clock from "../../../components/UI/clock/Clock";
-import Timer from "../../../components/UI/timer/Timer";
-import Mic from "../../../components/UI/mic/Mic";
-import Pause from "../../../components/UI/pause/Pause";
-import BeepSound from "../../../assets/beep.mp3";
+import React from 'react';
+import { Grid } from '@mui/material';
+import HeaderText from '../../../components/UI/headerText/HeaderText';
+import Clock from '../../../components/UI/clock/Clock';
+import Timer from '../../../components/UI/timer/Timer';
+import Mic from '../../../components/UI/mic/Mic';
+import Pause from '../../../components/UI/pause/Pause';
+import BeepSound from '../../../assets/beep.mp3';
 
-import useRecorder from "../../../handler/useRecorder";
-import { sendAudio } from "../../../store/actions/examActions";
+import useRecorder from '../../../handler/useRecorder';
+import { sendAudio } from '../../../store/actions/examActions';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   SET_CANGE_MAIN_PAGE,
   SET_CANGE_EXAM_PART,
@@ -19,15 +19,19 @@ import {
   SET_RESET_TIMER,
   RESET_TIMER,
   SET_QUESTION,
-} from "../../../store/actions/actionTypes";
+} from '../../../store/actions/actionTypes';
 
-import "./exam.scss";
+import './exam.scss';
 //import image from "../../../assets/girl.png";
 
 const callBeep = () => {
   let myAudio = new Audio(BeepSound);
   myAudio.volume = 0.03;
-  myAudio.play();
+  try {
+    myAudio.play();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 function Exam(props) {
@@ -40,10 +44,7 @@ function Exam(props) {
   const { startRecording, saveRecording, cancelRecording } = handlers;
   React.useEffect(() => {
     if (timerCount > 0) {
-      const setIntervalVal = setInterval(
-        () => setTimerCount((prev) => prev - 1),
-        1000
-      );
+      const setIntervalVal = setInterval(() => setTimerCount((prev) => prev - 1), 1000);
       return () => clearInterval(setIntervalVal);
     }
     if (timerCount === 0) {
@@ -84,9 +85,7 @@ function Exam(props) {
     <>
       <Grid container spacing={0} className="examContainer">
         <Grid item md={9} xs={12}>
-          <HeaderText
-            text={`${props.currrentQuestion + 1}. ${props.question.title} `}
-          />
+          <HeaderText text={`${props.currrentQuestion + 1}. ${props.question.title} `} />
           {props.currrentQuestion === 0 && props.currentPart === 1 && (
             <>
               <div className="imageBlock">
@@ -104,7 +103,7 @@ function Exam(props) {
                     </div>
                     <div className="listBody">
                       <ul>
-                        {props.question.text1.split(".").map((item, index) => (
+                        {props.question.text1.split('.').map((item, index) => (
                           <li key={index}>{item}</li>
                         ))}
                       </ul>
@@ -116,7 +115,7 @@ function Exam(props) {
                     </div>
                     <div className="listBody">
                       <ul>
-                        {props.question.text2.split(".").map((item, index) => (
+                        {props.question.text2.split('.').map((item, index) => (
                           <li key={index}>{item}</li>
                         ))}
                       </ul>
@@ -146,9 +145,7 @@ function Exam(props) {
                   </div>
                 </div>
                 <div className=" utilitiesBlockItem pauseBlock">
-                  <p className="utilitiesBlockText">
-                    Click to finish icon answering early
-                  </p>
+                  <p className="utilitiesBlockText">Click to finish icon answering early</p>
                   <div className="flexBlock">
                     <Pause
                       disabled={!initRecording}
@@ -169,10 +166,7 @@ function Exam(props) {
 function mapStateToProps(state) {
   return {
     currentPart: state.pagination.currentPart,
-    question:
-      state.exam[`questions${state.pagination.currentPart}`][
-        state.pagination.question
-      ],
+    question: state.exam[`questions${state.pagination.currentPart}`][state.pagination.question],
     currrentQuestion: state.pagination.question,
     time: state.exam.time,
     image: state.exam.image,
@@ -187,8 +181,7 @@ function mapDispatchToProps(dispatch) {
     //timerOn: (id) => dispatch({ type: SET_TIMER, payload: 1 }),
     // resetTimeToggle: (resetTimeState) =>
     // dispatch({ type: SET_RESET_TIMER, payload: resetTimeState }),
-    onResetTime: (timeState) =>
-      dispatch({ type: RESET_TIMER, payload: timeState }),
+    onResetTime: (timeState) => dispatch({ type: RESET_TIMER, payload: timeState }),
     changeQuestion: () => dispatch({ type: SET_QUESTION }),
   };
 }
