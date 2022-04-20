@@ -29,7 +29,6 @@ function Quetions(props) {
     props.getBlock(id);
     props.setSubPage(3);
   };
-  console.log("props.subPage", props.subPage);
   return (
     <div className="questionPage">
       <div className="adminBtn">

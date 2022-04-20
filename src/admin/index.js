@@ -1,34 +1,33 @@
-import React, { useEffect, useMemo } from 'react';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import { connect } from 'react-redux';
-import CustomButton from '../components/UI/customButton/CustomButton';
+import React, { useEffect, useMemo } from "react";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import { connect } from "react-redux";
+import CustomButton from "../components/UI/customButton/CustomButton";
 
-import './style.scss';
+import "./style.scss";
 
-import ContentLayout from '../HOC/layout/contentLayout/ContentLayout';
-import Nav from '../components/UI/nav';
+import ContentLayout from "../HOC/layout/contentLayout/ContentLayout";
+import Nav from "../components/UI/nav";
 import {
   SET_CURRENT_PAGE,
   SET_INITIAL_PAGE_BY_ROLE,
   SET_MODAL,
-} from '../store/actions/actionTypes';
+} from "../store/actions/actionTypes";
 
-import { deleteUser } from '../store/actions/adminActions';
-import { logout } from '../store/actions/authActions';
+import { deleteUser } from "../store/actions/adminActions";
+import { logout } from "../store/actions/authActions";
 
-import Users from './pages/users';
-import Quetions from './pages/quetions';
-import Answers from './pages/answers';
-import Settings from './pages/settings';
+import Users from "./pages/users";
+import Quetions from "./pages/quetions";
+import Answers from "./pages/answers";
+import Settings from "./pages/settings";
 function Admin(props) {
   React.useEffect(() => {
-    if (props.role === 'operator') props.checkPageByRole('quetions');
+    if (props.role === "operator") props.checkPageByRole("quetions");
   }, [props.checkPageByRole]);
   const logOutHandle = () => {
     props.logout();
   };
-  console.log('modal', props.modal);
   return (
     <>
       <ContentLayout isVisablePagination={false}>
@@ -38,22 +37,23 @@ function Admin(props) {
           role={props.role}
           logOutHandle={logOutHandle}
         />
-        {props.currentPage == 'users' && (props.role === 'operator' || props.role === 'admin') && (
-          <Users />
+        {props.currentPage == "users" &&
+          (props.role === "operator" || props.role === "admin") && <Users />}
+        {props.currentPage == "quetions" &&
+          (props.role === "operator" || props.role === "admin") && <Quetions />}
+        {props.currentPage == "answers" &&
+          (props.role === "teacher" || props.role === "admin") && <Answers />}
+        {props.currentPage == "settings" && props.role === "admin" && (
+          <Settings />
         )}
-        {props.currentPage == 'quetions' &&
-          (props.role === 'operator' || props.role === 'admin') && <Quetions />}
-        {props.currentPage == 'answers' && (props.role === 'teacher' || props.role === 'admin') && (
-          <Answers />
-        )}
-        {props.currentPage == 'settings' && props.role === 'admin' && <Settings />}
       </ContentLayout>
       <Modal
         open={props.modal.open}
         onClose={props.closeModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className="modalDelete">
+        className="modalDelete"
+      >
         <Box className="modalBox">
           <div className="modalDeleteBlock">
             <div className="modalHeader">
@@ -68,7 +68,10 @@ function Admin(props) {
                   name="Delete"
                   type="warning"
                   onClick={() => {
-                    props.deleteUserHandle(props.modal.userType.id, props.modal.userType.type);
+                    props.deleteUserHandle(
+                      props.modal.userType.id,
+                      props.modal.userType.type
+                    );
                     props.closeModal();
                   }}
                 />
@@ -90,8 +93,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeCurrentPage: (pageName) => dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
-    checkPageByRole: (page) => dispatch({ type: SET_INITIAL_PAGE_BY_ROLE, payload: page }),
+    onChangeCurrentPage: (pageName) =>
+      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
+    checkPageByRole: (page) =>
+      dispatch({ type: SET_INITIAL_PAGE_BY_ROLE, payload: page }),
     logout: () => dispatch(logout()),
     closeModal: () =>
       dispatch({

@@ -13,8 +13,6 @@ export function getBlock(blockId) {
       .get(`/api/get_block?id=${blockId}`)
       .then((response) => {
         const data = response.data;
-        console.log(data, "ffdf");
-        //ls.setItems({ username, token, userId: id });
         dispatch({
           ...data,
           type: SET_BLOCK,
@@ -44,7 +42,6 @@ export function sendAudio(audiofile, partId, questionId) {
   const formData = new FormData();
   formData.append("audio", audioFile);
   formData.append([`part${partId}_id`], JSON.stringify(questionId));
-  //console.log('hhhh', audioFile.size, 'ggg', audiofile.size);
   return iaxios.post("/api/store_answer", formData, {
     headers: {
       "Content-Type": "multipart/form-data",

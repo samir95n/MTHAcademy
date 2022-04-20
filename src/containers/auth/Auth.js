@@ -23,7 +23,6 @@ function Auth(props) {
     },
     [buttonClickHandler]
   );
-  console.log("eee", props.error);
   return (
     <Container maxWidth="sm" className="authContainer" sx={{ p: 0 }}>
       <div className="authBlock">

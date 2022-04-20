@@ -16,7 +16,6 @@ const initialState = {
 };
 
 const setBlock = (state, action) => {
-  console.log(action, "ffdfdfdf");
   return {
     ...state,
     part1: action.part1.description,

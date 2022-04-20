@@ -18,7 +18,6 @@ function CreateQuestions(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
   const [question, setQuestion] = React.useState(initialState);
   const [image, setImage] = React.useState(null);
-  // console.log('question', props.updatedBlock, question, initialState);
   React.useEffect(() => {
     if (props.updatedBlock) {
       setQuestion(props.updatedBlock.block);
@@ -48,7 +47,6 @@ function CreateQuestions(props) {
     question.part3.description.some(
       (item) => item.title.length < 1 || item.text.length < 1
     );
-  console.log("image", image);
   return (
     <div className="createQuestions">
       <h5 className="createQuestionsHead">

@@ -27,9 +27,7 @@ export function getStudents(page = 1, rows = 10) {
     iaxios
       .get(`/api/get_students?page=${page}&rows=${rows}`)
       .then((response) => {
-        // console.log(response.data.students);
         const data = response.data.students;
-        //ls.setItems({ username, token, userId: id });s
         dispatch({
           type: SET_STUDENTS,
           payload: data,
@@ -125,7 +123,6 @@ export function getAllBlocks() {
     iaxios
       .get("/api/get_all_blocks")
       .then((response) => {
-        //console.log(response.data.block);
         const data = response.data.block;
         //ls.setItems({ username, token, userId: id });s
         dispatch({
@@ -196,7 +193,6 @@ export function createUser(newUser) {
         dispatch({ type: SET_LOADER, payload: false });
       })
       .catch((error) => {
-        console.log("eer", error.response);
         dispatch({
           type: SET_USER_CREATE_ERROR,
           payload: error.response.data.message,
@@ -230,7 +226,6 @@ export function createBlock(block, image) {
       .post("/api/create_block", block)
       .then((response) => {
         if (response.data.status) {
-          // console.log("response.block_id", response);
           dispatch({ type: ADD_BLOCK, payload: response.data.block_id });
           addImage(image, response.data.block_id);
         }
