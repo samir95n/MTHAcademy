@@ -1,14 +1,14 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import HeaderText from "../../../components/UI/headerText/HeaderText";
-import CustomButton from "../../../components/UI/customButton/CustomButton";
-import { useDispatch, connect } from "react-redux";
-import { SET_CANGE_MAIN_PAGE } from "../../../store/actions/actionTypes";
-import "./start.scss";
+import React from 'react';
+import { Grid } from '@mui/material';
+import HeaderText from '../../../components/UI/headerText/HeaderText';
+import CustomButton from '../../../components/UI/customButton/CustomButton';
+import { useDispatch, connect } from 'react-redux';
+import { SET_CANGE_MAIN_PAGE } from '../../../store/actions/actionTypes';
+import './start.scss';
 
 function Start(props) {
   React.useEffect(() => {
-    const setTimeoutVal = setTimeout(() => props.startExam(), 3000);
+    const setTimeoutVal = setTimeout(() => props.startExam(), 30000);
     return () => clearTimeout(setTimeoutVal);
   }, []);
   return (
@@ -21,7 +21,7 @@ function Start(props) {
               props.part.map((item, index) => (
                 <div key={index} className="startTextItem">
                   <h4 className="startTextHead">{item.title}</h4>
-                  {item.text.split(".").map((paragraph, key) => (
+                  {item.text.split('.').map((paragraph, key) => (
                     <p key={key} className="startTextParagraph">
                       {paragraph}
                     </p>
@@ -44,7 +44,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    startExam: () => dispatch({ type: SET_CANGE_MAIN_PAGE, payload: "exam" }),
+    startExam: () => dispatch({ type: SET_CANGE_MAIN_PAGE, payload: 'exam' }),
   };
 }
 

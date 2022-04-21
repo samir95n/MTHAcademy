@@ -33,12 +33,7 @@ function AnswersList(props) {
               <div className="answersVoiceItem">
                 <p>Answer {++index}</p>
                 <div className="answersVoice">
-                  <audio
-                    controls
-                    preload="none"
-                    src={
-                      'https://file-examples.com/storage/fe2356939c62607a6a1903b/2017/11/file_example_MP3_700KB.mp3'
-                    }></audio>
+                  <audio controls preload="none" src={item.answer}></audio>
                 </div>
               </div>
             ))}
