@@ -25,6 +25,9 @@ function CreateUser(props) {
       if (type === 'role' && (target === 'operator' || target === 'teacher' || !target)) {
         return { ...prev, [type]: target, block_id: null, teacher_id: null };
       }
+      if (type === 'username') {
+        return { ...prev, [type]: target.trim() };
+      }
       return { ...prev, [type]: target };
     });
   };

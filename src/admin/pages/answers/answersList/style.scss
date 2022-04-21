@@ -8,7 +8,7 @@
     padding: 16px 19px;
     margin-bottom: 28px;
     .answersDateText {
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-style: normal;
       font-weight: 500;
       font-size: 18px;
@@ -25,14 +25,14 @@
       align-items: center;
       text-align: center;
       letter-spacing: 0.05em;
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       color: #010004;
     }
   }
   .answersListHeader {
     margin-bottom: 20px;
     h3 {
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-style: normal;
       font-weight: 600;
       font-size: 24px;
@@ -54,7 +54,7 @@
           margin-bottom: 0 !important;
         }
         p {
-          font-family: "Poppins", sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-style: normal;
           font-weight: 500;
           font-size: 18px;
@@ -92,6 +92,13 @@
             }
             & .-internal-media-controls-overflow-button {
               background-color: #fff;
+            }
+            &::-webkit-media-controls-volume-slider-container {
+             // background-color: #fff;
+            }
+            &::-webkit-media-controls-volume-slider {
+              background-color: #fff;
+              padding-left:5px ;
             }
           }
         }
