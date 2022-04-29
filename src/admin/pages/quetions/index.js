@@ -1,29 +1,27 @@
-import React from "react";
-import { connect } from "react-redux";
-import CustomButton from "../../../components/UI/customButton/CustomButton";
+import React from 'react';
+import { connect } from 'react-redux';
+import CustomButton from '../../../components/UI/customButton/CustomButton';
 
 import {
   createBlock,
   updateBlock,
   getBlock,
   deleteBlock,
-} from "../../../store/actions/adminActions";
-import { SET_SUB_PAGE } from "../../../store/actions/actionTypes";
+} from '../../../store/actions/adminActions';
+import { SET_SUB_PAGE, SET_INITIAL_ERROR } from '../../../store/actions/actionTypes';
 
-import CreateQuestions from "./createQuestions";
-import QuetionsList from "./questionsList";
+import CreateQuestions from './createQuestions';
+import QuetionsList from './questionsList';
 
-import "./style.scss";
+import './style.scss';
 
 function Quetions(props) {
-  const [page, setPage] = React.useState("list");
+  const [page, setPage] = React.useState('list');
   const createQuestionHandle = (question, image) => {
     props.createBlock(question, image);
-    props.setSubPage(1);
   };
   const updateQuestionHandle = (question, image) => {
     props.updateBlock(props.updatedBlock.id, question, image);
-    props.setSubPage(1);
   };
   const getBlockHandle = (id) => {
     props.getBlock(id);
@@ -33,19 +31,17 @@ function Quetions(props) {
     <div className="questionPage">
       <div className="adminBtn">
         <CustomButton
-          name={props.subPage === 1 ? "Create Block" : "< Back"}
-          onClick={() => props.setSubPage(props.subPage == 1 ? 2 : 1)}
+          name={props.subPage === 1 ? 'Create Block' : '< Back'}
+          onClick={() => {
+            props.setSubPage(props.subPage == 1 ? 2 : 1);
+            props.setInitialEror();
+          }}
         />
       </div>
       {props.subPage === 1 && (
-        <QuetionsList
-          getBlock={getBlockHandle}
-          deleteBlock={props.deleteBlock}
-        />
+        <QuetionsList getBlock={getBlockHandle} deleteBlock={props.deleteBlock} />
       )}
-      {props.subPage === 2 && (
-        <CreateQuestions saveHandle={createQuestionHandle} />
-      )}
+      {props.subPage === 2 && <CreateQuestions saveHandle={createQuestionHandle} />}
       {props.subPage === 3 && (
         <CreateQuestions
           saveHandle={updateQuestionHandle}
@@ -70,6 +66,7 @@ function mapDispatchToProps(dispatch) {
     getBlock: (id) => dispatch(getBlock(id)),
     deleteBlock: (id) => dispatch(deleteBlock(id)),
     setSubPage: (page) => dispatch({ type: SET_SUB_PAGE, payload: page }),
+    setInitialEror: () => dispatch({ type: SET_INITIAL_ERROR }),
   };
 }
 

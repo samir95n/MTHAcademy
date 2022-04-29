@@ -11,7 +11,7 @@ function QuetionsList(props) {
   React.useEffect(() => {
     props.getAllBlocks();
   }, []);
-  // console.log("allBlock", props.allBlock);
+  console.log('allBlock', props.allBlock);
   return (
     <div className="quetionsList">
       <div className="quetionsListBlock">
@@ -19,7 +19,10 @@ function QuetionsList(props) {
           {props.allBlock?.map((item, index) => (
             <Grid item md={2} xs={6} key={index}>
               <div className="questionsItem">
-                <span className="questionsItemName">Blok {item.id}</span>
+                <div className="questionsItemName">
+                  <p>Blok</p>
+                  <span>{item.name}</span>
+                </div>
                 <span className="questionsItemIcon">
                   <Edit
                     style={{ color: '#336b88', fontSize: '33px', marginRight: '5px' }}
@@ -35,12 +38,14 @@ function QuetionsList(props) {
           ))}
         </Grid>
       </div>
+      <div className="errors">{props.bloksError && <p>{props.bloksError}</p>}</div>
     </div>
   );
 }
 function mapStateToProps(state) {
   return {
     allBlock: state.admin.allBlock,
+    bloksError: state.errors.deleteBlokError,
   };
 }
 

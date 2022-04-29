@@ -191,7 +191,7 @@ function CreateUser(props) {
                     <option></option>
                     {props.allBlock?.map((block, index) => (
                       <option key={index} value={block.id}>
-                        {block.id}
+                        {block.name}
                       </option>
                     ))}
                   </select>

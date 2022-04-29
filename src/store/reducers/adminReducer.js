@@ -10,15 +10,16 @@ import {
   SET_ALL_BLOCK,
   UPDATE_USERS,
   ADD_BLOCK,
+  UPDATE_BLOCK,
   DELETE_BLOCK,
   GET_BLOCK,
   SET_SUB_PAGE,
   ADD_USER_IN_TABLE,
   SET_MODAL,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 const initialState = {
-  currentPage: "answers",
+  currentPage: 'answers',
   subPage: 1,
   students: null,
   totalPages: null,
@@ -100,6 +101,18 @@ const getBlock = (state, action) => {
     },
   };
 };
+const updateBlock = (state, action) => {
+  const allBlock = state.allBlock;
+
+  const newAllBlock = allBlock.map((item) => {
+    if (item.id === action.id) {
+      return { ...item, name: action.name };
+    }
+    return item;
+  });
+  console.log(newAllBlock, 'dfdf');
+  return { ...state, allBlock: newAllBlock };
+};
 const addUser = (state, action) => {
   return { ...state, subPage: 1 };
 };
@@ -129,12 +142,15 @@ function adminReducer(state = initialState, action) {
     case ADD_BLOCK:
       return {
         ...state,
-        allBlock: [...state.allBlock, { id: action.payload }],
+        subPage: 1,
+        allBlock: [...state.allBlock, { id: action.payload.block_id, name: action.payload.name }],
       };
+    case UPDATE_BLOCK:
+      return updateBlock(state, action.payload);
     case GET_BLOCK:
       return getBlock(state, action.payload);
     case DELETE_BLOCK:
-      return updateUsers(state, { type: "allBlock", id: action.payload });
+      return updateUsers(state, { type: 'allBlock', id: action.payload });
     case SET_INITIAL_ADMIN:
       return { ...initialState };
     case SET_SUB_PAGE:

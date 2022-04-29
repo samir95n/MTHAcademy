@@ -51,7 +51,7 @@ function StudentsList(props) {
         item.name + " " + item.surname,
         item.teacher_name + " " + item.teacher_surname,
         item.email,
-        <span>{item.block_id}</span>,
+        <span>{item.block_name}</span>,
         <span>{item.exam_date ? item.exam_date?.split(" ")[0] : "-"}</span>,
         <span className="answersIcon">
           <AssignmentTurnedIn

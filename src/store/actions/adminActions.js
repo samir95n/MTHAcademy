@@ -1,5 +1,5 @@
-import { LocalStorageAuthUtil } from "./utils";
-import iaxios from "./../../iaxios";
+import { LocalStorageAuthUtil } from './utils';
+import iaxios from './../../iaxios';
 
 import {
   SET_STUDENTS,
@@ -10,13 +10,16 @@ import {
   SET_ALL_BLOCK,
   UPDATE_USERS,
   ADD_BLOCK,
+  UPDATE_BLOCK,
   GET_BLOCK,
   DELETE_BLOCK,
   SET_USER_CREATE_ERROR,
+  SET_BLOK_CREATE_ERROR,
+  SET_BLOK_DELETE_ERROR,
   ADD_USER_IN_TABLE,
   SET_INITIAL_ERROR,
   SET_SUB_PAGE,
-} from "./actionTypes";
+} from './actionTypes';
 
 // get instance of LocalStorageAuthUtil to using for storage operations
 const ls = new LocalStorageAuthUtil();
@@ -44,7 +47,7 @@ export function getTeachers() {
   return (dispatch) => {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .get("/api/get_teachers")
+      .get('/api/get_teachers')
       .then((response) => {
         const data = response.data.teachers;
         //ls.setItems({ username, token, userId: id });
@@ -64,7 +67,7 @@ export function getOperators() {
   return (dispatch) => {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .get("/api/get_operators")
+      .get('/api/get_operators')
       .then((response) => {
         const data = response.data.operators;
         //ls.setItems({ username, token, userId: id });
@@ -121,7 +124,7 @@ export function getAllBlocks() {
   return (dispatch) => {
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .get("/api/get_all_blocks")
+      .get('/api/get_all_blocks')
       .then((response) => {
         const data = response.data.block;
         //ls.setItems({ username, token, userId: id });s
@@ -167,10 +170,14 @@ export function deleteBlock(id) {
           type: DELETE_BLOCK,
           payload: id,
         });
+        dispatch({ type: SET_INITIAL_ERROR });
         dispatch({ type: SET_LOADER, payload: false });
       })
-      .catch((err) => {
-        //dispatch({ type: SET_AUTH_ERROR, payload: true });
+      .catch((error) => {
+        dispatch({
+          type: SET_BLOK_DELETE_ERROR,
+          payload: error.response.data.message,
+        });
         dispatch({ type: SET_LOADER, payload: false });
       });
   };
@@ -186,7 +193,7 @@ export function createUser(newUser) {
     // let body = JSON.stringify(newUser);
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .post("/api/auth/register", formData)
+      .post('/api/auth/register', formData)
       .then((response) => {
         dispatch({ type: ADD_USER_IN_TABLE, payload: response.data });
         dispatch({ type: SET_INITIAL_ERROR });
@@ -223,16 +230,20 @@ export function createBlock(block, image) {
     // let body = JSON.stringify(newUser);
     dispatch({ type: SET_LOADER, payload: true });
     iaxios
-      .post("/api/create_block", block)
+      .post('/api/create_block', block)
       .then((response) => {
         if (response.data.status) {
-          dispatch({ type: ADD_BLOCK, payload: response.data.block_id });
+          dispatch({ type: ADD_BLOCK, payload: response.data });
           addImage(image, response.data.block_id);
         }
+        dispatch({ type: SET_INITIAL_ERROR });
         dispatch({ type: SET_LOADER, payload: false });
       })
-      .catch((err) => {
-        //dispatch({ type: SET_AUTH_ERROR, payload: true });
+      .catch((error) => {
+        dispatch({
+          type: SET_BLOK_CREATE_ERROR,
+          payload: error.response.data.message.name[0],
+        });
         dispatch({ type: SET_LOADER, payload: false });
       });
   };
@@ -246,21 +257,26 @@ export function updateBlock(id, block, image) {
       .put(`/api/edit_block?id=${id}`, block)
       .then((response) => {
         if (response.data.status) {
-          // console.log("response.block_id", response);
-          //dispatch({ type: ADD_BLOCK, payload: response.data.block_id });
+          console.log('response.block_id', block);
+          dispatch({ type: UPDATE_BLOCK, payload: { id: id, name: block.name } });
           image && addImage(image, id);
         }
+        dispatch({ type: SET_INITIAL_ERROR });
+        dispatch({ type: SET_SUB_PAGE, payload: 1 });
         dispatch({ type: SET_LOADER, payload: false });
       })
-      .catch((err) => {
-        //dispatch({ type: SET_AUTH_ERROR, payload: true });
+      .catch((error) => {
+        dispatch({
+          type: SET_BLOK_CREATE_ERROR,
+          payload: error.response.data.message.name[0],
+        });
         dispatch({ type: SET_LOADER, payload: false });
       });
   };
 }
 export function addImage(image, id) {
   const formData = new FormData();
-  formData.append("image", image);
-  formData.append("block_id", JSON.stringify(id));
+  formData.append('image', image);
+  formData.append('block_id', JSON.stringify(id));
   iaxios.post(`/api/upload_img`, formData);
 }

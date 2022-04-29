@@ -3,11 +3,15 @@ import {
   SET_USER_CREATE_ERROR,
   SET_LOADER,
   SET_INITIAL_ERROR,
-} from "../actions/actionTypes";
+  SET_BLOK_CREATE_ERROR,
+  SET_BLOK_DELETE_ERROR,
+} from '../actions/actionTypes';
 
 const initialState = {
   authError: false,
   creatreUserError: null,
+  creatreBlokError: null,
+  deleteBlokError: null,
   loader: false,
 };
 
@@ -39,6 +43,16 @@ function authReducer(state = initialState, action) {
       return setAuthError(state, action);
     case SET_USER_CREATE_ERROR:
       return setUserCreateError(state, action.payload);
+    case SET_BLOK_CREATE_ERROR:
+      return {
+        ...state,
+        creatreBlokError: action.payload,
+      };
+    case SET_BLOK_DELETE_ERROR:
+      return {
+        ...state,
+        deleteBlokError: action.payload,
+      };
     case SET_LOADER:
       return setLoader(state, action);
     case SET_INITIAL_ERROR:

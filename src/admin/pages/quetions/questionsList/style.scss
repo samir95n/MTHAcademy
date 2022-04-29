@@ -4,6 +4,7 @@
     margin-bottom: 30px;
   }
   .quetionsListBlock {
+    margin-bottom: 20px;
     .quetionsListRow {
       .questionsItem {
         border: 1px solid #336b88;
@@ -19,12 +20,22 @@
           font-family: 'Poppins', sans-serif;
           font-style: normal;
           font-weight: 600;
-          font-size: 20px;
-          line-height: 27px;
           text-align: center;
           text-transform: uppercase;
-          color: #336b88;
           transition: all 0.3s ease;
+          word-wrap: break-word;
+
+          p {
+            font-size: 20px;
+            line-height: 27px;
+            color: #336b88;
+            margin: 0 0 5px 0;
+          }
+          span {
+            color: #100a30;
+            font-size: 14px;
+            line-height: 17px;
+          }
         }
         .questionsItemIcon {
           display: none;
