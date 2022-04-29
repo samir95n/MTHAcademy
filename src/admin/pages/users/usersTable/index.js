@@ -10,7 +10,7 @@ import { SET_MODAL } from "../../../../store/actions/actionTypes";
 
 import "./style.scss";
 
-function UsersTable({ teachers, operators, role, setModal }) {
+function UsersTable({ teachers, operators, role, setModal, getUser }) {
   const thead = React.useMemo(() => {
     return [
       { name: "id", class: "" },
@@ -31,13 +31,13 @@ function UsersTable({ teachers, operators, role, setModal }) {
         <span className="answersIcon">
           <Edit
             style={{ color: "#100a30", fontSize: "22px" }}
-            onClick={() => setModal(item.id, "teachers")}
+            onClick={() => getUser(item.user_id)}
           />
         </span>,
         <span className="answersIcon">
           <Delete
             style={{ color: "red", fontSize: "22px" }}
-            onClick={() => setModal(item.id, "teachers")}
+            onClick={() => setModal(item.user_id, "teachers")}
           />
         </span>,
       ];
@@ -53,7 +53,7 @@ function UsersTable({ teachers, operators, role, setModal }) {
         <span className="answersIcon">
           <Edit
             style={{ color: "#100a30", fontSize: "22px" }}
-            onClick={() => setModal(item.id, "operators")}
+            onClick={() => getUser(item.id)}
           />
         </span>,
         <span className="answersIcon">

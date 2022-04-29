@@ -27,11 +27,8 @@ import "./exam.scss";
 const callBeep = () => {
   let myAudio = new Audio(BeepSound);
   myAudio.volume = 0.03;
-  try {
-    myAudio.play();
-  } catch (err) {
-    console.log(err);
-  }
+
+  myAudio.play();
 };
 
 function Exam(props) {

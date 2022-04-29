@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Grid } from '@mui/material';
-import { Edit, Delete } from '@material-ui/icons';
+import React from "react";
+import { connect } from "react-redux";
+import { Grid } from "@mui/material";
+import { Edit, Delete } from "@material-ui/icons";
 
-import { getAllBlocks } from '../../../../store/actions/adminActions';
+import { getAllBlocks } from "../../../../store/actions/adminActions";
 
-import './style.scss';
+import "./style.scss";
 
 function QuetionsList(props) {
   React.useEffect(() => {
     props.getAllBlocks();
   }, []);
-  console.log('allBlock', props.allBlock);
+  // console.log('allBlock', props.allBlock);
   return (
     <div className="quetionsList">
       <div className="quetionsListBlock">
@@ -20,16 +20,20 @@ function QuetionsList(props) {
             <Grid item md={2} xs={6} key={index}>
               <div className="questionsItem">
                 <div className="questionsItemName">
-                  <p>Blok</p>
+                  <p>Name:</p>
                   <span>{item.name}</span>
                 </div>
                 <span className="questionsItemIcon">
                   <Edit
-                    style={{ color: '#336b88', fontSize: '33px', marginRight: '5px' }}
+                    style={{
+                      color: "#336b88",
+                      fontSize: "33px",
+                      marginRight: "5px",
+                    }}
                     onClick={() => props.getBlock(item.id)}
                   />
                   <Delete
-                    style={{ color: 'red', fontSize: '33px' }}
+                    style={{ color: "red", fontSize: "33px" }}
                     onClick={() => props.deleteBlock(item.id)}
                   />
                 </span>
@@ -38,7 +42,9 @@ function QuetionsList(props) {
           ))}
         </Grid>
       </div>
-      <div className="errors">{props.bloksError && <p>{props.bloksError}</p>}</div>
+      <div className="errors">
+        {props.bloksError && <p>{props.bloksError}</p>}
+      </div>
     </div>
   );
 }

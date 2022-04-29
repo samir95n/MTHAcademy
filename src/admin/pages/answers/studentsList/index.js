@@ -6,10 +6,13 @@ import { connect } from "react-redux";
 import {
   getStudents,
   getAnswers,
+  getUser,
 } from "../../../../store/actions/adminActions";
 import {
   SET_STUDENTS_ID,
   SET_MODAL,
+  SET_SUB_PAGE,
+  SET_CURRENT_PAGE,
 } from "../../../../store/actions/actionTypes";
 
 import Table from "../../../../components/UI/table/Table";
@@ -24,6 +27,11 @@ function StudentsList(props) {
     props.getStudents(page, rowsPerPage);
   }, [page, rowsPerPage]);
   // console.log("props.currentPart", page, rowsPerPage);
+  const getUserHandle = (id) => {
+    props.getUser(id);
+    props.onChangeCurrentPage("users");
+    props.setSubPage(3);
+  };
   const tHead = React.useMemo(() => {
     const head = [
       { name: "id", class: "" },
@@ -68,7 +76,7 @@ function StudentsList(props) {
         <span className="answersIcon">
           <Edit
             style={{ color: "#100a30", fontSize: "22px" }}
-            onClick={() => props.setModal(item.id, "students")}
+            onClick={() => getUserHandle(item.id)}
           />
         </span>,
         <span className="answersIcon">
@@ -101,6 +109,7 @@ function StudentsList(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(1);
   };
+
   return (
     <div className="answersPage">
       <div className="answerTable">
@@ -150,6 +159,10 @@ function mapDispatchToProps(dispatch) {
         type: SET_MODAL,
         payload: { open: true, type: { id: id, type: type } },
       }),
+    getUser: (id) => dispatch(getUser(id)),
+    setSubPage: (page) => dispatch({ type: SET_SUB_PAGE, payload: page }),
+    onChangeCurrentPage: (pageName) =>
+      dispatch({ type: SET_CURRENT_PAGE, payload: pageName }),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(StudentsList);

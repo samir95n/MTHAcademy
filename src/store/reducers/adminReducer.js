@@ -16,10 +16,11 @@ import {
   SET_SUB_PAGE,
   ADD_USER_IN_TABLE,
   SET_MODAL,
-} from '../actions/actionTypes';
+  GET_USER,
+} from "../actions/actionTypes";
 
 const initialState = {
-  currentPage: 'answers',
+  currentPage: "answers",
   subPage: 1,
   students: null,
   totalPages: null,
@@ -31,6 +32,7 @@ const initialState = {
   allBlock: [],
   updatedBlock: null,
   modal: { open: false, userType: null },
+  user: null,
 };
 
 const setCurrentPage = (state, action) => {
@@ -110,7 +112,6 @@ const updateBlock = (state, action) => {
     }
     return item;
   });
-  console.log(newAllBlock, 'dfdf');
   return { ...state, allBlock: newAllBlock };
 };
 const addUser = (state, action) => {
@@ -118,6 +119,24 @@ const addUser = (state, action) => {
 };
 const setModal = (state, action) => {
   return { ...state, modal: { open: action.open, userType: action.type } };
+};
+const getUser = (state, action) => {
+  return {
+    ...state,
+    user: {
+      data: {
+        name: action.data.name,
+        surname: action.data.surname,
+        email: action.data.email,
+        username: action.data.username,
+        password: "",
+        role: action.data.role,
+        teacher_id: action.data.teacher_id,
+        block_id: action.data.block_id,
+      },
+      id: action.id,
+    },
+  };
 };
 function adminReducer(state = initialState, action) {
   switch (action.type) {
@@ -143,14 +162,17 @@ function adminReducer(state = initialState, action) {
       return {
         ...state,
         subPage: 1,
-        allBlock: [...state.allBlock, { id: action.payload.block_id, name: action.payload.name }],
+        allBlock: [
+          ...state.allBlock,
+          { id: action.payload.block_id, name: action.payload.name },
+        ],
       };
     case UPDATE_BLOCK:
       return updateBlock(state, action.payload);
     case GET_BLOCK:
       return getBlock(state, action.payload);
     case DELETE_BLOCK:
-      return updateUsers(state, { type: 'allBlock', id: action.payload });
+      return updateUsers(state, { type: "allBlock", id: action.payload });
     case SET_INITIAL_ADMIN:
       return { ...initialState };
     case SET_SUB_PAGE:
@@ -159,6 +181,8 @@ function adminReducer(state = initialState, action) {
       return addUser(state, action.payload);
     case SET_MODAL:
       return setModal(state, action.payload);
+    case GET_USER:
+      return getUser(state, action.payload);
     default:
       return state;
   }

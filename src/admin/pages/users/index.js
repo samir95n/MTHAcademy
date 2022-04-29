@@ -11,7 +11,13 @@ import {
   SET_INITIAL_ERROR,
 } from "../../../store/actions/actionTypes";
 
-import { getTeachers, getOperators } from "../../../store/actions/adminActions";
+import {
+  getTeachers,
+  getOperators,
+  getUser,
+  createUser,
+  updateUser,
+} from "../../../store/actions/adminActions";
 
 import "./style.scss";
 
@@ -22,9 +28,13 @@ function Users(props) {
     props.role === "admin" && props.getOperators();
   }, [props.subPage]);
   const getUserHandle = (id) => {
-    props.getBlock(id);
+    props.getUser(id);
     props.setSubPage(3);
   };
+  const updateUserHandle = (user) => {
+    props.updateUser(props.user.id, user);
+  };
+
   return (
     <div className="usersPage">
       <div className="adminBtn">
@@ -37,13 +47,27 @@ function Users(props) {
         />
       </div>
       {props.subPage === 1 && props.role === "admin" && (
-        <UsersTable teachers={props.teachers} operators={props.operators} />
+        <UsersTable
+          teachers={props.teachers}
+          operators={props.operators}
+          getUser={getUserHandle}
+        />
       )}
       {props.subPage === 2 && (
-        <CreateUser teachers={props.teachers} role={props.role} />
+        <CreateUser
+          saveHandle={props.createUser}
+          teachers={props.teachers}
+          role={props.role}
+        />
       )}
       {props.subPage === 3 && (
-        <CreateUser teachers={props.teachers} role={props.role} />
+        <CreateUser
+          saveHandle={updateUserHandle}
+          page={props.subPage}
+          teachers={props.teachers}
+          role={props.role}
+          updatedUser={props.user}
+        />
       )}
     </div>
   );
@@ -55,6 +79,7 @@ function mapStateToProps(state) {
     operators: state.admin.operators,
     role: state.auth.role,
     subPage: state.admin.subPage,
+    user: state.admin.user,
   };
 }
 
@@ -62,8 +87,11 @@ function mapDispatchToProps(dispatch) {
   return {
     getTeachers: () => dispatch(getTeachers()),
     getOperators: () => dispatch(getOperators()),
+    getUser: (id) => dispatch(getUser(id)),
     setSubPage: (page) => dispatch({ type: SET_SUB_PAGE, payload: page }),
     setInitialEror: () => dispatch({ type: SET_INITIAL_ERROR }),
+    createUser: (user) => dispatch(createUser(user)),
+    updateUser: (id, user) => dispatch(updateUser(id, user)),
   };
 }
 
