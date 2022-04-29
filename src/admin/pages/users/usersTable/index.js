@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Grid } from "@mui/material";
-import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
+import { Edit, Delete } from "@material-ui/icons";
 
 import Table from "../../../../components/UI/table/Table";
 import CustomButton from "../../../../components/UI/customButton/CustomButton";
@@ -17,6 +17,7 @@ function UsersTable({ teachers, operators, role, setModal }) {
       { name: "Name", class: "" },
       { name: "surname", class: "" },
       { name: "Email", class: "" },
+      { name: "edit", class: "answerTableCenter" },
       { name: "delete", class: "answerTableCenter" },
     ];
   }, []);
@@ -27,6 +28,12 @@ function UsersTable({ teachers, operators, role, setModal }) {
         item.name,
         item.surname,
         item.email,
+        <span className="answersIcon">
+          <Edit
+            style={{ color: "#100a30", fontSize: "22px" }}
+            onClick={() => setModal(item.id, "teachers")}
+          />
+        </span>,
         <span className="answersIcon">
           <Delete
             style={{ color: "red", fontSize: "22px" }}
@@ -43,6 +50,12 @@ function UsersTable({ teachers, operators, role, setModal }) {
         item.name,
         item.surname,
         item.email,
+        <span className="answersIcon">
+          <Edit
+            style={{ color: "#100a30", fontSize: "22px" }}
+            onClick={() => setModal(item.id, "operators")}
+          />
+        </span>,
         <span className="answersIcon">
           <Delete
             style={{ color: "red", fontSize: "22px" }}

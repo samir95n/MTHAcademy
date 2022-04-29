@@ -20,9 +20,12 @@ function CreateQuestions(props) {
   const [image, setImage] = React.useState(null);
   React.useEffect(() => {
     if (props.updatedBlock) {
+      console.log(props.updatedBlock);
       setQuestion(props.updatedBlock.block);
     }
   }, [props.updatedBlock]);
+  //console.log(question);
+  const checkBlokName = false;
   const checkPart1 =
     question.part1.question.some(
       (item) => item.title.length < 1 || !item.timer
@@ -55,6 +58,33 @@ function CreateQuestions(props) {
       <div className="createQuestionsNav">
         <PartNav onClick={setCurrentPart} active={currentPart} />
       </div>
+      <div className="blockName">
+        <p className="blockNameP">Blok Name</p>
+        <TextField
+          className="blockNameInput"
+          placeholder="Enter Name"
+          variant="outlined"
+          value={question.name}
+          onChange={(e) => {
+            let target = e.target.value;
+            setQuestion((prev) => {
+              return {
+                ...prev,
+                name: target.length > 15 ? question.name : target,
+              };
+            });
+          }}
+          // onKeyPress={handleKeyPress}
+          inputProps={{
+            style: {
+              height: 50,
+              fontSize: 16,
+              fontFamily: "Poppins",
+              padding: "0 12px",
+            },
+          }}
+        />
+      </div>
       <div className="createQuestionsForm">
         {currentPart == 1 && (
           <Part1
@@ -85,6 +115,7 @@ function CreateQuestions(props) {
         <CustomButton
           name={props.page == 3 ? "Update" : "Create"}
           disabled={
+            checkBlokName ||
             checkPart1 ||
             checkPart2 ||
             checkPart3 ||
@@ -107,6 +138,7 @@ const time = [
   { value: 360, name: 6 },
 ];
 const initialState = {
+  name: "",
   part1: {
     question: [
       { title: "", timer: null, question_number: 1 },

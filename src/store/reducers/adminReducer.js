@@ -85,6 +85,7 @@ const getBlock = (state, action) => {
     ...state,
     updatedBlock: {
       block: {
+        name: action.data.block[0].name,
         part1: action.data.part1,
         part2: {
           ...action.data.part2,

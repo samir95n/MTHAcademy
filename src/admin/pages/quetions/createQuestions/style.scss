@@ -1,4 +1,21 @@
 .createQuestions {
+  .blockName {
+    margin-bottom: 20px;
+    .blockNameP {
+      font-family: "Poppins", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 19px;
+      line-height: 25px;
+      color: #100a30;
+      margin: 0;
+      margin-bottom: 20px;
+    }
+    .blockNameInput {
+      max-width: 300px;
+      width: 100%;
+    }
+  }
   h5.createQuestionsHead {
     font-family: "Poppins", sans-serif;
     font-style: normal;

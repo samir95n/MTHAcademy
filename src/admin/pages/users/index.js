@@ -21,7 +21,10 @@ function Users(props) {
     props.getTeachers();
     props.role === "admin" && props.getOperators();
   }, [props.subPage]);
-
+  const getUserHandle = (id) => {
+    props.getBlock(id);
+    props.setSubPage(3);
+  };
   return (
     <div className="usersPage">
       <div className="adminBtn">
@@ -37,6 +40,9 @@ function Users(props) {
         <UsersTable teachers={props.teachers} operators={props.operators} />
       )}
       {props.subPage === 2 && (
+        <CreateUser teachers={props.teachers} role={props.role} />
+      )}
+      {props.subPage === 3 && (
         <CreateUser teachers={props.teachers} role={props.role} />
       )}
     </div>

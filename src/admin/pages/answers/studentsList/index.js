@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AssignmentTurnedIn, Delete } from "@material-ui/icons";
+import { AssignmentTurnedIn, Delete, Edit } from "@material-ui/icons";
 import { connect } from "react-redux";
 
 import {
@@ -33,10 +33,15 @@ function StudentsList(props) {
       { name: "Question blok", class: "answerTableCenter" },
       { name: "Exam date", class: "answerTableCenter" },
       { name: "answers", class: "answerTableCenter" },
+      { name: "edit", class: "answerTableCenter" },
       { name: "delete", class: "answerTableCenter" },
     ];
     return head.filter(
-      (item) => !(props.role !== "admin" && item.name === "teacher")
+      (item) =>
+        props.role === "admin" ||
+        (props.role === "teacher" &&
+          !(item.name === "teacher" || item.name === "edit")) ||
+        (props.role === "operator" && item.name !== "answers")
     );
   }, []);
   const tBody = React.useMemo(() => {
@@ -61,6 +66,12 @@ function StudentsList(props) {
           />
         </span>,
         <span className="answersIcon">
+          <Edit
+            style={{ color: "#100a30", fontSize: "22px" }}
+            onClick={() => props.setModal(item.id, "students")}
+          />
+        </span>,
+        <span className="answersIcon">
           <Delete
             style={{ color: "red", fontSize: "22px" }}
             onClick={() => props.setModal(item.id, "students")}
@@ -68,9 +79,16 @@ function StudentsList(props) {
         </span>,
       ];
     });
-    if (props.role !== "admin") {
+    if (props.role === "teacher") {
       return body?.map((item) => {
         item.splice(2, 1);
+        item.splice(6, 1);
+        return item;
+      });
+    }
+    if (props.role === "operator") {
+      return body?.map((item) => {
+        item.splice(6, 1);
         return item;
       });
     }

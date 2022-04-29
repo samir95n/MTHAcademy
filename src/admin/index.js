@@ -22,9 +22,9 @@ import Quetions from "./pages/quetions";
 import Answers from "./pages/answers";
 import Settings from "./pages/settings";
 function Admin(props) {
-  React.useEffect(() => {
-    if (props.role === "operator") props.checkPageByRole("quetions");
-  }, [props.checkPageByRole]);
+  // React.useEffect(() => {
+  //   if (props.role === "operator") props.checkPageByRole("quetions");
+  // }, [props.checkPageByRole]);
   const logOutHandle = () => {
     props.logout();
   };
@@ -39,10 +39,9 @@ function Admin(props) {
         />
         {props.currentPage == "users" &&
           (props.role === "operator" || props.role === "admin") && <Users />}
-        {props.currentPage == "quetions" &&
+        {props.currentPage == "questions" &&
           (props.role === "operator" || props.role === "admin") && <Quetions />}
-        {props.currentPage == "answers" &&
-          (props.role === "teacher" || props.role === "admin") && <Answers />}
+        {props.currentPage == "answers" && <Answers />}
         {props.currentPage == "settings" && props.role === "admin" && (
           <Settings />
         )}

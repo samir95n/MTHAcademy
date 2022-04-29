@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import "./style.scss";
-const pageName = ["users", "quetions", "answers", "settings"];
+const pageName = ["users", "questions", "answers", "settings"];
 function Nav({ role, active, onClick, logOutHandle }) {
   return (
     <div className="navBlock">
@@ -8,7 +8,8 @@ function Nav({ role, active, onClick, logOutHandle }) {
         {pageName.map((item, index) => {
           if (
             (role == "teacher" && item == "answers") ||
-            (role == "operator" && (item == "users" || item == "quetions")) ||
+            (role == "operator" &&
+              (item == "users" || item == "questions" || item == "answers")) ||
             role == "admin"
           )
             return (
