@@ -1,6 +1,16 @@
+@import "../media.scss";
 .adminBtn {
   max-width: 250px;
   margin-bottom: 30px;
+  @include media("max", "lg") {
+    max-width: 200px;
+    button {
+      padding: 5px 10px !important;
+      font-size: 17px !important;
+      line-height: 25px !important;
+      height: 40px !important;
+    }
+  }
 }
 .modalDelete {
   .modalBox {

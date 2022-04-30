@@ -13,7 +13,7 @@ function AnswersList(props) {
   const examDate = props.answers?.exam_date?.split(" ");
   return (
     <div className="answersList">
-      <div className="answersListBtn">
+      <div className="adminBtn">
         <CustomButton name="< Back" onClick={() => props.setSubPage()} />
       </div>
       <div className="answersListDate">
