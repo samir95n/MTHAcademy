@@ -1,18 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Container, TextField, Grid } from '@mui/material';
-import { Fab } from '@material-ui/core';
-import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import React from "react";
+import { connect } from "react-redux";
+import { Container, TextField, Grid } from "@mui/material";
+import { Fab } from "@material-ui/core";
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
-import CustomButton from '../../../../components/UI/customButton/CustomButton';
-import PartNav from '../../../../components/UI/partNav';
+import CustomButton from "../../../../components/UI/customButton/CustomButton";
+import PartNav from "../../../../components/UI/partNav";
 
 // import { createBlock } from "../../../../store/actions/adminActions";
-import Part1 from './parts/Part1';
-import Part2 from './parts/Part2';
-import Part3 from './parts/Part3';
+import Part1 from "./parts/Part1";
+import Part2 from "./parts/Part2";
+import Part3 from "./parts/Part3";
 
-import './style.scss';
+import "./style.scss";
 
 function CreateQuestions(props) {
   const [currentPart, setCurrentPart] = React.useState(1);
@@ -27,8 +27,12 @@ function CreateQuestions(props) {
   //console.log(question);
   const checkBlokName = false;
   const checkPart1 =
-    question.part1.question.some((item) => item.title.length < 1 || !item.timer) ||
-    question.part1.description.some((item) => item.title.length < 1 || item.text.length < 1);
+    question.part1.question.some(
+      (item) => item.title.length < 1 || !item.timer
+    ) ||
+    question.part1.description.some(
+      (item) => item.title.length < 1 || item.text.length < 1
+    );
 
   const checkPart2 =
     question.part2.question.title.length < 1 ||
@@ -37,14 +41,27 @@ function CreateQuestions(props) {
     question.part2.question.title2.length < 1 ||
     question.part2.question.text2.length < 1 ||
     !question.part2.question.timer ||
-    question.part2.description?.some((item) => item.title.length < 1 || item.text.length < 1);
+    question.part2.description?.some(
+      (item) => item.title.length < 1 || item.text.length < 1
+    );
   const checkPart3 =
     question.part3.question.title.length < 1 ||
     !question.part3.question.timer ||
-    question.part3.description.some((item) => item.title.length < 1 || item.text.length < 1);
+    question.part3.description.some(
+      (item) => item.title.length < 1 || item.text.length < 1
+    );
+
+  const prevPartHandle = () => {
+    setCurrentPart((prev) => prev - 1);
+  };
+  const nextPartHandle = () => {
+    setCurrentPart((prev) => prev + 1);
+  };
   return (
     <div className="createQuestions">
-      <h5 className="createQuestionsHead">{props.page == 3 ? 'Update' : 'Create'} Blok</h5>
+      <h5 className="createQuestionsHead">
+        {props.page == 3 ? "Update" : "Create"} Blok
+      </h5>
       <div className="createQuestionsNav">
         <PartNav onClick={setCurrentPart} active={currentPart} />
       </div>
@@ -69,8 +86,8 @@ function CreateQuestions(props) {
             style: {
               height: 50,
               fontSize: 16,
-              fontFamily: 'Poppins',
-              padding: '0 12px',
+              fontFamily: "Poppins",
+              padding: "0 12px",
             },
           }}
         />
@@ -87,22 +104,54 @@ function CreateQuestions(props) {
           />
         )}
         {currentPart == 2 && (
-          <Part2 timer={time} question={question.part2} setQuestion={setQuestion} />
+          <Part2
+            timer={time}
+            question={question.part2}
+            setQuestion={setQuestion}
+          />
         )}
         {currentPart == 3 && (
-          <Part3 timer={time} question={question.part3} setQuestion={setQuestion} />
+          <Part3
+            timer={time}
+            question={question.part3}
+            setQuestion={setQuestion}
+          />
         )}
       </div>
-      <div className="createQuestionsBtn">
-        <CustomButton
-          name={props.page == 3 ? 'Update' : 'Create'}
-          disabled={
-            checkBlokName || checkPart1 || checkPart2 || checkPart3 || (props.page !== 3 && !image)
-          }
-          onClick={() => props.saveHandle(question, image)}
-        />
+      <div className="createQuestionsBtnRow">
+        {currentPart !== 1 && (
+          <div className="createQuestionsBtn prev">
+            <CustomButton name="Prev" onClick={prevPartHandle} />
+          </div>
+        )}
+        <div className="createQuestionsBtn next">
+          <CustomButton
+            name={
+              currentPart === 3
+                ? props.page == 3
+                  ? "Update"
+                  : "Create"
+                : "Next"
+            }
+            disabled={
+              currentPart === 3 &&
+              (checkBlokName ||
+                checkPart1 ||
+                checkPart2 ||
+                checkPart3 ||
+                (props.page !== 3 && !image))
+            }
+            onClick={() =>
+              currentPart === 3
+                ? props.saveHandle(question, image)
+                : nextPartHandle()
+            }
+          />
+        </div>
       </div>
-      <div className="errors">{props.blokError && <p>{props.blokError}</p>}</div>
+      <div className="errors">
+        {props.blokError && <p>{props.blokError}</p>}
+      </div>
     </div>
   );
 }
@@ -121,77 +170,77 @@ const time = [
   { value: 360, name: 6 },
 ];
 const initialState = {
-  name: '',
+  name: "",
   part1: {
     question: [
-      { title: '', timer: null, question_number: 1 },
-      { title: '', timer: null, question_number: 2 },
-      { title: '', timer: null, question_number: 3 },
+      { title: "", timer: null, question_number: 1 },
+      { title: "", timer: null, question_number: 2 },
+      { title: "", timer: null, question_number: 3 },
     ],
     description: [
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 1,
       },
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 2,
       },
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 3,
       },
     ],
   },
   part2: {
     question: {
-      title: '',
+      title: "",
       timer: null,
-      title1: '',
-      text1: '',
-      title2: '',
-      text2: '',
+      title1: "",
+      text1: "",
+      title2: "",
+      text2: "",
     },
     description: [
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 1,
       },
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 2,
       },
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 3,
       },
     ],
   },
   part3: {
     question: {
-      title: '',
+      title: "",
       timer: null,
     },
     description: [
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 1,
       },
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 2,
       },
       {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
         description_number: 3,
       },
     ],

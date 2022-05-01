@@ -231,6 +231,10 @@ export function createUser(newUser) {
   };
 }
 export function updateUser(id, user) {
+  if (!user.password.length) {
+    delete user.password;
+  }
+  console.log(user);
   return (dispatch) => {
     // let body = JSON.stringify(newUser);
     dispatch({ type: SET_LOADER, payload: true });

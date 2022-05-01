@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { TextField } from "@mui/material";
+import { Checkbox, TextField } from "@mui/material";
 import CustomButton from "../../../../components/UI/customButton/CustomButton";
 
 import { getAllBlocks } from "../../../../store/actions/adminActions";
@@ -9,6 +9,7 @@ import "./style.scss";
 
 function CreateUser(props) {
   const [checkEmail, setCheckEmail] = React.useState(false);
+  const [checkBox, setCheckBox] = React.useState(false);
   const [user, setUser] = React.useState({
     name: "",
     surname: "",
@@ -52,6 +53,14 @@ function CreateUser(props) {
     }
   };
   const checkMail = checkMailHandle(user.email);
+  const checkPassword =
+    props.page == 3
+      ? checkBox && user.password.length < 8
+      : user.password.length < 8;
+  const checkBoxHandle = () => {
+    setCheckBox(!checkBox);
+    setUser((prev) => ({ ...prev, password: "" }));
+  };
   return (
     <div className="settingsPage">
       <div className="settingsBlock">
@@ -139,8 +148,18 @@ function CreateUser(props) {
             />
           </div>
           <div className="settingsItem">
-            <p className="settingsP">Password</p>
+            <p className="settingsP">
+              {props.page == 3 ? "Chage Password" : "Password"}
+              {props.page == 3 && (
+                <Checkbox
+                  checked={checkBox}
+                  onChange={checkBoxHandle}
+                  //inputProps={{ "aria-label": "controlled" }}
+                />
+              )}
+            </p>
             <TextField
+              disabled={props.page == 3 && !checkBox}
               className="settingsInput"
               placeholder="Enter password"
               variant="outlined"
@@ -152,10 +171,12 @@ function CreateUser(props) {
                   height: 50,
                   fontFamily: "Poppins",
                   padding: "0 12px",
+                  cursor: props.page == 3 && !checkBox ? "not-allowed" : "",
                 },
               }}
             />
           </div>
+
           <div className="settingsItem">
             <p className="settingsP">Choose Role</p>
             <div className="settingsItemSelect">
@@ -224,7 +245,7 @@ function CreateUser(props) {
               user.name.length < 3 ||
               user.surname.length < 3 ||
               user.username.length < 4 ||
-              user.password.length < 8 ||
+              checkPassword ||
               !checkMail ||
               !user.role ||
               (user.role === "student" && (!user.teacher_id || !user.block_id))

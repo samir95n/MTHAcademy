@@ -135,10 +135,21 @@
       }
     }
   }
-  .createQuestionsBtn {
-    max-width: 250px;
-    margin: 20px 0;
+  .createQuestionsBtnRow {
     display: flex;
-    justify-content: right;
+    .createQuestionsBtn {
+      width: 100%;
+      max-width: 250px;
+      margin: 20px 0;
+      display: flex;
+      justify-content: right;
+      &.prev {
+        margin-right: 10px;
+      }
+      &.next {
+        justify-self: end;
+        margin-left: auto;
+      }
+    }
   }
 }

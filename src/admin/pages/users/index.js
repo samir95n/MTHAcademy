@@ -56,6 +56,7 @@ function Users(props) {
       {props.subPage === 2 && (
         <CreateUser
           saveHandle={props.createUser}
+          page={props.subPage}
           teachers={props.teachers}
           role={props.role}
         />

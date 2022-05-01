@@ -27,7 +27,6 @@ import "./exam.scss";
 const callBeep = () => {
   let myAudio = new Audio(BeepSound);
   myAudio.volume = 0.03;
-
   myAudio.play();
 };
 
@@ -60,7 +59,7 @@ function Exam(props) {
   React.useEffect(() => {
     if (resetTimer) {
       const setTimeOut = setTimeout(() => {
-        // callBeep();
+        callBeep();
         setTimerCount(props.question.timer);
         startRecording();
       }, 3000);
